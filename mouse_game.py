@@ -23,6 +23,15 @@ class Mouse(Character):
     def __init__(self, name, description, inventory, health=100):
         super().__init__(name, description, inventory, health=100)
 
+    def take_food(self, my_food):
+        choice = input("Add to health(h) or inventory(i)?")
+        if choice == "h":
+            self.health += my_food.score
+            return self.health
+        elif choice == "i":
+            self.inventory.append(my_food)
+            return self.inventory
+
 
 class Rat(Character):
     def __init__(self, description, inventory, aggression=random.randrange(1, 2)):
@@ -52,16 +61,16 @@ class Item:
 class Food(Item):
     def __init__(self, name, score):
         self.name = name
-        self.description = description
+        # self.description = description
         self.score = score
 
-    def take_food(self):
-        choice = input("Add to health(h) or inventory(i)?")
-            if choice == "h":
-                self.health += self.score
-            elif choice == "i":
-                self.inventory.append(name)
-            print(self.health, self.inventory)
+    def __str__(self):
+        return "{}".format(self.name)
+        #this puts those values into a string, which you need
+    def __repr__(self):
+        #this is what the representation will be when it's in a list
+        return self.__str__()
+
 
 class Spell(Item):
     def __init__(self, name, description):
@@ -69,31 +78,16 @@ class Spell(Item):
         self.description = description
 
     def take_spell(self):
+        pass
 
 
-
-foods = {"bread": 20, ""}
-        if name == "bread":
-            choice = input("Add to health(h) or inventory(i)?")
-            if choice == "h":
-                self.health += 20
-            elif choice == "i":
-                self.inventory.append(name)
-            print(self.health, self.inventory)
-
-    # elif name == "cheese":
-    #     character.health += 30
-    #     character.inventory[0] += 30
-    # elif name == "cake":
-    #     character.health += 50
-    #     character.inventory[0] += 20
-    #
     # elif name == "fish":
-    #
-    #
     # elif name == "scare":
     # elif name == "hide":
     # elif name == "befriend":
 
 horace = Mouse("Rasputin", "A wise mouse.", ["befriend"])
-horace.find_item("bread")
+# horace.find_item("bread")
+bread = Food("bread", 20)
+horace.take_food(bread)
+print(horace.inventory[1].name)
