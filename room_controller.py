@@ -92,19 +92,28 @@ current_room = nest
 characters = []
 
 while not game_over:
-    current_room.look()
+    current_room.surroundings()
     user_input = (input('What is  your command?')).split(' ')
-    first = user_input[0]
-    second = user_input[1]
+    user_input = user_input.lower()
+    input_strings = user_input.split()
 
-    if first == 'open':
-        current_room = current_room.open_door(door_dict[second])
-    if first == 'look':
-        if second == 'room':
-            current_room.look()
-        if second in current_room.doors:
-            print("it is a door")
-        if second in current_room.characters:
-            print('this is a character')
-    if first == 'peek':
-        current_room.peek_room(door_dict[second])
+    if 'open' in input_strings:
+        for door in current_room.doors.name
+
+
+
+
+
+
+
+    # if first == 'open':
+    #     current_room = current_room.open_door(door_dict[second])
+    # if first == 'look':
+    #     if second == 'room':
+    #         current_room.look()
+    #     if second in current_room.doors:
+    #         print("it is a door")
+    #     if second in current_room.characters:
+    #         print('this is a character')
+    # if first == 'peek':
+    #     current_room.peek_room(door_dict[second])

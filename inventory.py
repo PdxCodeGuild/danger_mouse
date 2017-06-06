@@ -20,7 +20,7 @@ class Inventory:
         return is_there
 
     def list_inventory(self):
-        print('You\'re inventory contains:')
+        print("You're inventory contains: ")
         for item in self.bag_of_holding:
             print(item)
 
