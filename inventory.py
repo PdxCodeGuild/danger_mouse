@@ -1,10 +1,13 @@
 class Inventory:
     def __init__(self):
+        """The most complex object in this game is the inventory object as seen below.
+        a full description of it's characteristics and functions can be found in the read
+        me"""
         self.bag_of_holding = []
         pass
 
     def put_in(self, item):
-        '''This method will add an item object to inventory, although'''
+        """This method will add an item object to inventory, although"""
         try:
             self.bag_of_holding.append(item)
             print("You have added {} to your inventory.".format(item))
@@ -13,6 +16,8 @@ class Inventory:
 
 
     def check_inventory(self, check_word):
+        """Quick method to check if an item exists in inventory, returns boolean
+        value to call."""
         is_there = False
         if check_word in self.bag_of_holding:
             is_there = True
@@ -21,10 +26,14 @@ class Inventory:
 
     def list_inventory(self):
         print("You're inventory contains: ")
+        """Displays inventory of object to console, excludes spells that have been cast."""
+
         for item in self.bag_of_holding:
-            print(item)
+            if 'casted' not in item:
+                print(str(item))
 
     def poplar(self, item_to_be_popped):
+        """Checks for existence of item in inventory, if item exists poplar pops that item."""
         if self.check_inventory(item_to_be_popped) == True:
             als_lament = item_to_be_popped     # ;P
             self.bag_of_holding.remove(item_to_be_popped)
