@@ -11,12 +11,14 @@ spell_list = ["scare", "hide", "befriend"]
 
 
 class Character:
-    def __init__(self, name, description, health=100):
+    def __init__(self, name, description, char_inv, health=100):
         """
         Initiates a Character object.
         """
         self.description = description
         self.name = name
+        self.inventory = inventory.Inventory()
+        self.inventory.put_in(char_inv)
         self.inventory = Inventory()
         self.health = health
 
