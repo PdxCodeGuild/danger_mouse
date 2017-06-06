@@ -25,8 +25,9 @@ class Inventory:
         return is_there
 
     def list_inventory(self):
+        print("You're inventory contains: ")
         """Displays inventory of object to console, excludes spells that have been cast."""
-        print('You\'re inventory contains:')
+
         for item in self.bag_of_holding:
             if 'casted' not in item:
                 print(str(item))

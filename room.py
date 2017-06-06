@@ -19,6 +19,23 @@ class Room():
                 return door.front
         return self
 
+    def add_item(self, item):
+        self.inventoy.put_in(item)
+
+    def remove_item(self, item):
+        self.inventory.poplar(item)
+
+    def check_inventory(self, item):
+        self.inventory.check_inventory(item)
+
+    def surroundings(self):
+        for character in self.characters:
+            print(character.name + " is in the room")
+        for item in self.inventory.bag_of_holding
+            print(item + " is in the room")
+        for door in self.doors:
+            print("You can exit through " + door)
+
     def use_key(self, door, player):
         if door.is_locked == True and player.check_inventory(door.key):
             print('The door is unlocked.')
