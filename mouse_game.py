@@ -16,8 +16,8 @@ class Character:
         """Allows a user to choose to leave / enter rooms."""
         pass
 
-    def auto_move(self):
-        """Computer automatically chooses a move."""
+    def activate(self, room):
+        """Runs the ai of a character so it can move and act"""
         pass
 
 
@@ -36,7 +36,7 @@ class Mouse(Character):
 
 
 class Rat(Character):
-    def __init__(self, description, inventory, aggression=randrange(1, 2)):
+    def __init__(self, description, inventory, aggression=randrange(0, 2)):
         super().__init__(self, description, inventory)
         aggression = self.agression
 
@@ -47,11 +47,11 @@ class Rat(Character):
         # stop nibbling food and will distract a cat for a turn
         #
         # if rat not friend:
-        #   if room contains food and random.randrange(0,2) == 0:
+        #   if room contains food and random.randrange(agression, 3) == 2:
         #       nibble on food
         #   else:
         #       move to adjacent room
-        # if rat is a friend:
+        # if rat is a friend and mouse isn't in same room:
         #   move rat to mouse
         pass
 
@@ -74,6 +74,7 @@ class Cat(Character):
         #   turns_until_move == 0
         # elif room had a fish in it:
         #   turns_until_move += 3
+        #   remove fish
         # elif room contains rat:
         #   rat dies
         # elif room contains unhidden mouse:
@@ -124,10 +125,10 @@ class Person(Character):
         home_room = ""
 
     def activate(self, room):
-        # Humans mostly stand still and mind their own business, but are still
-        # dangerous, either attacking hard or calling other characters nearby
-        # once a mouse leaves a room the human has seen the mouse, a trap will
-        # be laid
+        # Humans mostly stand still and mind their own business but are still
+        # dangerous, either attacking hard or calling other characters nearby.
+        # once a mouse leaves a room where the human has seen the mouse, a trap
+        # will be laid
         # Humans will also be summoned by barking dogs, if not interrupted by
         # seeing the mouse, they will go to where the dog barked and then back
         #
