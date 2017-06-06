@@ -3,6 +3,7 @@ This document contains Classes for the Characters and Items in our Danger Mouse 
 """
 
 from random import randrange
+from inventory import Inventory
 
 spell_list = ["scare", "hide", "befriend"]
 
@@ -10,13 +11,13 @@ spell_list = ["scare", "hide", "befriend"]
 
 
 class Character:
-    def __init__(self, name, description, inventory, health=100):
+    def __init__(self, name, description, health=100):
         """
         Initiates a Character object.
         """
         self.description = description
         self.name = name
-        self.inventory = list(inventory)
+        self.inventory = Inventory()
         self.health = health
 
     def move(self):
@@ -34,10 +35,11 @@ class Mouse(Character):
     """
     Instantiates a Mouse or player character.
     """
-    def __init__(self, name, description, inventory, start_location, health=100):
+    def __init__(self, name, description, start_location, health=100):
         """Initiates a Mouse object."""
-        super().__init__(name, description, inventory, health)
+        super().__init__(name, description, health)
         self.location = start_location
+        self.inventory = Inventory()
 
     def take_food(self, my_food):
 
@@ -77,12 +79,9 @@ class Rat(Character):
     Instanties a Rat character.
     """
 
-    def __init__(self, description, inventory, aggression=random.randrange(1, 2)):
-        pass
-
     def __init__(self, description, inventory, aggression=randrange(0, 2)):
         super().__init__(self, description, inventory)
-        aggression = self.agression
+        self.agression = aggression
 
     def activate(self, room):
         """
@@ -108,7 +107,7 @@ class Rat(Character):
 
 
 class Cat(Character):
-    def __init__(self, description, aggression=random.randrange(2, 3)):
+    def __init__(self, description, aggression=randrange(2, 3)):
         """
         Instantiates a Cat character.
         """
@@ -152,12 +151,12 @@ class Dog(Character):
     searching = 0
     resting = False
 
-    def __init__(self, description, aggression=random.randrange(1, 4)):
+    def __init__(self, description, aggression=randrange(1, 4)):
         """
         Instantiates a Dog character.
         """
         super().__init__(self, description, inventory)
-        aggression = self.agression
+        self.agression = aggression
 
     def activate(self, room):
         """
