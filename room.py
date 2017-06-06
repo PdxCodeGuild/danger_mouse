@@ -10,18 +10,19 @@ class Room():
 
 
     def open_door(self, door): #character.inventory
-        if door.is_locked == True and not self.inventory.check_inventory(door.key):
+        if door.is_locked == True:
             print('Door is locked.')
         else:
-            print('The door is unlocked.')
             if self.name == door.front.name:
                 return door.back
             if self.name == door.back.name:
                 return door.front
 
-
-
-
+    def use_key(self, door):
+        if door.is_locked == True and self.inventory.check_inventory(door.key):
+            print('The door is unlocked.')
+            door.is_locked = False
+            
     def peek_room(self, door):
         '''Look around/examine/search room'''
         print(door.back.description)
@@ -49,30 +50,3 @@ class Door():
 
     def look(self):
         print(self.name + '/n' + self.description)
-
-
-#This dictionary is the begining of a graph. The rooms would be the nodes and the doors the edges.
-#
-room_map = {'nest': ['library'],
-            'library': ['east_hall', 'nest'],
-            'east_hall': ['library', 'serv_camber', 'gallery', 'guest_bedroom', 'master_bedroom', 'grand_hall'],
-            'serv_chamber': ['east_hall', 'servant_hall'],
-            'gallery': ['east_hall'],
-            'guest_bedroom': ['east_hall'],
-            'master_bedroom': ['east_hall', 'chest_one', 'dresser'],
-            'grand_hall': ['east_hall', 'living_room', 'outside'],
-            'living_room': ['grand_hall', 'chapel'],
-            'chapel': ['living_room', 'west_hall'],
-            'west_hall': ['chapel', 'kitchen'],
-            'kitchen': ['west_hall', 'buttery', 'servant_hall'],
-            'servant_hall': ['serv_chamber', 'kitchen'],
-            'dresser': ['master_bedroom'],
-            'buttery': ['kitchen']
-            }
-
-# def generate_doors(room_map):
-#     door = []
-#     for room in room_map:
-#         for neighbour in room_map[room]:
-#             door.append((room, neighbour))
-#     return door

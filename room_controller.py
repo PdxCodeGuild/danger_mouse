@@ -89,6 +89,8 @@ room_dict ={'nest': nest,
 
 game_over = False
 current_room = nest
+characters = []
+
 while not game_over:
     current_room.look()
     user_input = (input('What is  your command?')).split(' ')
