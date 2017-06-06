@@ -19,20 +19,8 @@ class Room():
             if self.name == door.back.name:
                 return door.front
 
-    def add_item(self, item):
-        self.inventoy.put_in(item)
 
-    def remove_item(self, item):
-        self.inventory.poplar(item)
 
-    def check_inventory(self, item):
-        self.inventory.check_inventory(item)
-
-    def surroundings(self):
-        for character in self.characters:
-            print(character.name + " is in the room")
-        for item in self.inventory.bag_of_holding
-            print(item.name + " is in the room)
 
     def peek_room(self, door):
         '''Look around/examine/search room'''
@@ -65,7 +53,7 @@ class Door():
 
 #This dictionary is the begining of a graph. The rooms would be the nodes and the doors the edges.
 #
-room_map =  {'nest': ['library'],
+room_map = {'nest': ['library'],
             'library': ['east_hall', 'nest'],
             'east_hall': ['library', 'serv_camber', 'gallery', 'guest_bedroom', 'master_bedroom', 'grand_hall'],
             'serv_chamber': ['east_hall', 'servant_hall'],
@@ -79,7 +67,7 @@ room_map =  {'nest': ['library'],
             'kitchen': ['west_hall', 'buttery', 'servant_hall'],
             'servant_hall': ['serv_chamber', 'kitchen'],
             'dresser': ['master_bedroom'],
-             'buttery': ['kitchen']
+            'buttery': ['kitchen']
             }
 
 # def generate_doors(room_map):

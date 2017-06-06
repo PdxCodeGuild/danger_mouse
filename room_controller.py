@@ -92,7 +92,6 @@ current_room = nest
 while not game_over:
     current_room.look()
     user_input = (input('What is  your command?')).split(' ')
-    print(user_input)
     first = user_input[0]
     second = user_input[1]
 
@@ -106,4 +105,4 @@ while not game_over:
         if second in current_room.characters:
             print('this is a character')
     if first == 'peek':
-        current_room.peek(room_dict[second])
+        current_room.peek_room(door_dict[second])
