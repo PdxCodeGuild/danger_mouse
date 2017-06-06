@@ -10,14 +10,15 @@ class Room():
 
 
     def open_door(self, door): #character.inventory
-        if door.is_locked == True and not self.inventory.check_inventory(door.key):
-            print('Door is locked.')
+        if door.is_locked == True:
+            print('Door is locked. \n')
         else:
-            print('The door is unlocked.')
+            print('The door is unlocked. \n')
             if self.name == door.front.name:
                 return door.back
             if self.name == door.back.name:
                 return door.front
+        return self
 
 
 
@@ -31,7 +32,7 @@ class Room():
         print(self.name + '\n' +self.description + '\n')
         print('Exits \n')
         for door in self.doors:
-            print(door + '\n')
+            print(door)
 
 
 #We can add time to add a dificulty to some doors, say like the one to the treasure chest.
