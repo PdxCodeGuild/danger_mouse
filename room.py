@@ -14,7 +14,10 @@ class Room():
             print('Door is locked.')
         else:
             print('The door is unlocked.')
-            return door.path
+            if self.name == door.front:
+                return door.back
+            if self.name == door.back:
+                return door.front
 
 
 
@@ -42,7 +45,7 @@ class Door():
         self.front = room1
         self.back = room2
         self.is_locked = is_locked
-        self.key
+        # self.key
 
     def look(self):
         print(self.name + '/n' + self.description)
