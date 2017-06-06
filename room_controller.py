@@ -26,7 +26,9 @@ west_hall = room.Room('west_hall', 'creeky hallway', room.room_map['west_hall'],
 kitchen = room.Room('kitchen', 'There must be cheese somewhere', room.room_map['kitchen'], [])
 servant_hall = room.Room('servant_hall', 'A shortcut', room.room_map['servant_hall'], [])
 dresser = room.Room('dresser', 'Filled with clothes', room.room_map['dresser'], [])
-buttery = room.Room('buttery', 'Filled with cheese', room.room_map['butter'], [])
+buttery = room.Room('buttery', 'Filled with cheese', room.room_map['buttery'], [])
+
+
 home_door = room.Door('home_door', 'Sign says Welcome', nest, library, False)
 library_door = room.Door('library_door', 'A crack under the door', library, east_hall, False)
 swinging_door = room.Door('swinging_door', 'A swinging door', east_hall, grand_hall, False)
@@ -38,7 +40,23 @@ grand_arch = room.Door('grand_arch', 'A large archway', grand_hall, living_room,
 chapel_door = room.Door('chapel_door', 'A thick door', living_room, chapel, False)
 fsm_door = room.Door('fsm_door', 'The flying speghetti monster rests on the door', chapel, west_hall, False)
 kitchen_entry = room.Door('kitchen_entry', 'A swinging double door', west_hall, kitchen, False)
-buttery_entry = room.Door('butter_entry', 'One more door', kitchen, buttery,)
+buttery_entry = room.Door('butter_entry', 'One more door', kitchen, buttery, True)
+serv_kitchen = room.Door('serv_kitchen', 'Servants kitchen entrance', kitchen, servant_hall, False)
+servant_passage = room.Door('servant_passage', 'Secret door', serv_chamber, servant_hall, True)
+door_dict ={'home_door': home_door,
+            'library_door': library_door,
+            'swinging_door': swinging_door,
+            'servant_door': servant_door,
+            'gallery_door': gallery_door,
+            'guest_door': guest_door,
+            'master_door': master_door,
+            'grand_arch': grand_arch,
+            'chapel_door': chapel_door,
+            'fsm_door': fsm_door,
+            'kitchen_entry': kitchen_entry,
+            'buttery_entry': buttery_entry,
+            'serv_kitchen': serv_kitchen,
+            'servant_passage': servant_passage}
 
 room_dict ={'nest': nest,
             'library': library,
@@ -56,6 +74,23 @@ room_dict ={'nest': nest,
             'dresser': dresser
             }
 
+room_map =  {'nest': [home_door],
+            'library': [home_door, library_door],
+            'east_hall': [library_door, swinging_door, servant_door, master_door, guest_door],
+            'serv_chamber': [servant_door, servant_passage],
+            'gallery': [gallery_door],
+            'guest_bedroom': [guest_door],
+            'master_bedroom': [master_door],
+            'grand_hall': [],
+            'living_room': ['grand_hall', 'chapel'],
+            'chapel': ['living_room', 'west_hall'],
+            'west_hall': ['chapel', 'kitchen'],
+            'kitchen': ['west_hall', 'buttery', 'servant_hall'],
+            'servant_hall': ['serv_chamber', 'kitchen'],
+            'dresser': ['master_bedroom'],
+             'buttery': ['kitchen']
+            }
+
 
 game_over = False
 current_room = room_dict['nest']
@@ -67,7 +102,7 @@ while not game_over:
     second = user_input[1]
 
     if first == 'open':
-        current_room = current_room.open_door(room_dict[second])
+        current_room = current_room.open_door(door_dict[second])
     if first == 'look':
         if second == 'room':
             current_room.look()
