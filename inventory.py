@@ -25,7 +25,7 @@ class Inventory:
             print(item)
 
     def poplar(self, item_to_be_popped):
-        if item_to_be_popped in self.bag_of_holding:
+        if self.check_inventory(item_to_be_popped) == True:
             als_lament = item_to_be_popped     # ;P
             self.bag_of_holding.remove(item_to_be_popped)
         else:

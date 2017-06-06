@@ -4,13 +4,8 @@ class Room():
     def __init__(self, name,  description, doors, characters = None):
         self.name = name
         self.description = description
-<<<<<<< HEAD
         self.doors = room_map[name]
         self.characters = list(characters)
-=======
-        self.doors = doors
-        self.characters = characters
->>>>>>> b302079047625cb8384849f8bd6cbe5a0c99977f
         self.inventory = Inventory()
 
 
