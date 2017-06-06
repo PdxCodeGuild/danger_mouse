@@ -17,12 +17,13 @@ class Room():
                 return door.back
             if self.name == door.back.name:
                 return door.front
+        return self
 
     def use_key(self, door):
         if door.is_locked == True and self.inventory.check_inventory(door.key):
             print('The door is unlocked.')
             door.is_locked = False
-            
+
     def peek_room(self, door):
         '''Look around/examine/search room'''
         print(door.back.description)
@@ -32,7 +33,7 @@ class Room():
         print(self.name + '\n' +self.description + '\n')
         print('Exits \n')
         for door in self.doors:
-            print(door + '\n')
+            print(door)
 
 
 #We can add time to add a dificulty to some doors, say like the one to the treasure chest.
