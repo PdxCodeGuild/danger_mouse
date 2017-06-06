@@ -19,8 +19,8 @@ class Room():
                 return door.front
         return self
 
-    def use_key(self, door):
-        if door.is_locked == True and self.inventory.check_inventory(door.key):
+    def use_key(self, door, player):
+        if door.is_locked == True and player.check_inventory(door.key):
             print('The door is unlocked.')
             door.is_locked = False
 
@@ -41,13 +41,13 @@ class Room():
 #and create doors that go more than three places. A teleporter maybe?
 
 class Door():
-    def __init__(self,name, description, room1, room2, is_locked):
+    def __init__(self,name, description, room1, room2, is_locked, key):
         self.name = name
         self.description = description
         self.front = room1
         self.back = room2
         self.is_locked = is_locked
-        # self.key
+        self.key = key
 
     def look(self):
         print(self.name + '/n' + self.description)
