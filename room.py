@@ -14,9 +14,9 @@ class Room():
             print('Door is locked.')
         else:
             print('The door is unlocked.')
-            if self.name == door.front:
+            if self.name == door.front.name:
                 return door.back
-            if self.name == door.back:
+            if self.name == door.back.name:
                 return door.front
 
 

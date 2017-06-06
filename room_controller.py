@@ -1,33 +1,38 @@
 import room
 import csv
 
-#This dictionary is the begining of a graph. The rooms would be the nodes and the doors the edges.
-#
-# print(room.generate_doors(room.room_map))
+room_map = {'nest': ['home_door'],
+            'library': ['home_door', 'library_door'],
+            'east_hall': ['library_door', 'swinging_door', 'servant_door', 'master_door', 'guest_door'],
+            'serv_chamber': ['servant_door', 'servant_passage'],
+            'gallery': ['gallery_door'],
+            'guest_bedroom': ['guest_door'],
+            'master_bedroom': ['master_door'],
+            'grand_hall': ['swinging_door', 'grand_arch'],
+            'living_room': ['grand_arch', 'chapel_door'],
+            'chapel': ['chapel_door', 'fsm_door'],
+            'west_hall': ['fsm_door', 'kitchen_entry'],
+            'kitchen': ['west_hall', 'servant_hall', 'buttery_entry'],
+            'servant_hall': ['serv_chamber', 'serv_kitchen'],
+            'dresser': ['dresser_drawer'],
+            'buttery': ['buttery_entry']
+            }
 
-
-# with open('rooms_sheet.csv') as csvfile:
-#     room_importer = csv.reader(csvfile, delimiter = ',')
-#     room_dict = {}
-#     for row in room_importer:
-#         temp = room.Room(row[0], row[1], room.room_map[row[0]], row[2])
-#         room_dict[row[0]] = temp
-nest = room.Room('nest', 'Home sweet home', room.room_map['nest'], [])
-library = room.Room('library', 'Lots of books', room.room_map['library'], [])
-east_hall = room.Room('east_hall', 'Dark Hallway', room.room_map['east_hall'], [])
-serv_chamber = room.Room('serv_chamber', 'The room for the help', room.room_map['serv_chamber'], [])
-gallery = room.Room('gallery', 'Pretty Art', room.room_map['gallery'], [])
-guest_bedroom = room.Room('guest_bedroom', 'A small room', room.room_map['guest_bedroom'], [])
-master_bedroom = room.Room('master_bedroom', 'A bedroom with a large bed', room.room_map['master_bedroom'], [])
-grand_hall = room.Room('grand_hall', 'A large Atrium', room.room_map['grand_hall'], [])
-living_room = room.Room('living_room', 'Couches and stuff', room.room_map['living_room'], [])
-chapel = room.Room('chapel', 'Flying Spaghetti Monster', room.room_map['chapel'], [])
-west_hall = room.Room('west_hall', 'creeky hallway', room.room_map['west_hall'], [])
-kitchen = room.Room('kitchen', 'There must be cheese somewhere', room.room_map['kitchen'], [])
-servant_hall = room.Room('servant_hall', 'A shortcut', room.room_map['servant_hall'], [])
-dresser = room.Room('dresser', 'Filled with clothes', room.room_map['dresser'], [])
-buttery = room.Room('buttery', 'Filled with cheese', room.room_map['buttery'], [])
-
+nest = room.Room('nest', 'Home sweet home', room_map['nest'], [])
+library = room.Room('library', 'Lots of books', room_map['library'], [])
+east_hall = room.Room('east_hall', 'Dark Hallway', room_map['east_hall'], [])
+serv_chamber = room.Room('serv_chamber', 'The room for the help', room_map['serv_chamber'], [])
+gallery = room.Room('gallery', 'Pretty Art', room_map['gallery'], [])
+guest_bedroom = room.Room('guest_bedroom', 'A small room', room_map['guest_bedroom'], [])
+master_bedroom = room.Room('master_bedroom', 'A bedroom with a large bed', room_map['master_bedroom'], [])
+grand_hall = room.Room('grand_hall', 'A large Atrium', room_map['grand_hall'], [])
+living_room = room.Room('living_room', 'Couches and stuff', room_map['living_room'], [])
+chapel = room.Room('chapel', 'Flying Spaghetti Monster', room_map['chapel'], [])
+west_hall = room.Room('west_hall', 'creeky hallway', room_map['west_hall'], [])
+kitchen = room.Room('kitchen', 'There must be cheese somewhere', room_map['kitchen'], [])
+servant_hall = room.Room('servant_hall', 'A shortcut', room_map['servant_hall'], [])
+dresser = room.Room('dresser', 'Filled with clothes', room_map['dresser'], [])
+buttery = room.Room('buttery', 'Filled with cheese', room_map['buttery'], [])
 
 home_door = room.Door('home_door', 'Sign says Welcome', nest, library, False)
 library_door = room.Door('library_door', 'A crack under the door', library, east_hall, False)
@@ -43,6 +48,10 @@ kitchen_entry = room.Door('kitchen_entry', 'A swinging double door', west_hall, 
 buttery_entry = room.Door('butter_entry', 'One more door', kitchen, buttery, True)
 serv_kitchen = room.Door('serv_kitchen', 'Servants kitchen entrance', kitchen, servant_hall, False)
 servant_passage = room.Door('servant_passage', 'Secret door', serv_chamber, servant_hall, True)
+dresser_drawer = room.Door('dresser_drawer', 'A dresser drawer', master_bedroom, dresser, False)
+
+
+
 door_dict ={'home_door': home_door,
             'library_door': library_door,
             'swinging_door': swinging_door,
@@ -56,7 +65,8 @@ door_dict ={'home_door': home_door,
             'kitchen_entry': kitchen_entry,
             'buttery_entry': buttery_entry,
             'serv_kitchen': serv_kitchen,
-            'servant_passage': servant_passage}
+            'servant_passage': servant_passage,
+            'dresser_drawer': dresser_drawer}
 
 room_dict ={'nest': nest,
             'library': library,
@@ -74,26 +84,11 @@ room_dict ={'nest': nest,
             'dresser': dresser
             }
 
-room_map =  {'nest': [home_door],
-            'library': [home_door, library_door],
-            'east_hall': [library_door, swinging_door, servant_door, master_door, guest_door],
-            'serv_chamber': [servant_door, servant_passage],
-            'gallery': [gallery_door],
-            'guest_bedroom': [guest_door],
-            'master_bedroom': [master_door],
-            'grand_hall': [],
-            'living_room': ['grand_hall', 'chapel'],
-            'chapel': ['living_room', 'west_hall'],
-            'west_hall': ['chapel', 'kitchen'],
-            'kitchen': ['west_hall', 'buttery', 'servant_hall'],
-            'servant_hall': ['serv_chamber', 'kitchen'],
-            'dresser': ['master_bedroom'],
-             'buttery': ['kitchen']
-            }
+
 
 
 game_over = False
-current_room = room_dict['nest']
+current_room = nest
 while not game_over:
     current_room.look()
     user_input = (input('What is  your command?')).split(' ')
