@@ -3,6 +3,7 @@ This document contains Classes for the Characters in our Danger Mouse game.
 """
 
 from random import randrange
+from inventory import Inventory
 
 spell_list = ["scare", "hide", "befriend"]
 
@@ -10,13 +11,15 @@ spell_list = ["scare", "hide", "befriend"]
 
 
 class Character:
-    def __init__(self, name, description, inventory, health=100):
+    def __init__(self, name, description, char_inv, health=100):
         """
         Initiates a Character object.
         """
         self.description = description
         self.name = name
-        self.inventory = list(inventory)
+        self.inventory = inventory.Inventory()
+        self.inventory.put_in(char_inv)
+        self.inventory = Inventory()
         self.health = health
 
     def move(self):
@@ -34,10 +37,11 @@ class Mouse(Character):
     """
     Instantiates a Mouse or player character.
     """
-    def __init__(self, name, description, inventory, start_location, health=100):
+    def __init__(self, name, description, start_location, health=100):
         """Initiates a Mouse object."""
-        super().__init__(name, description, inventory, health)
+        super().__init__(name, description, health)
         self.location = start_location
+        self.inventory = Inventory()
 
     def take_food(self, my_food):
 
@@ -78,12 +82,10 @@ class Rat(Character):
     Instanties a Rat character.
     """
 
-    def __init__(self, description, inventory, aggression=randrange(1, 2)):
-        self.friend = False
-
     def __init__(self, description, inventory, aggression=randrange(0, 2)):
         super().__init__(self, description, inventory)
-        aggression = self.agression
+        self.agression = aggression
+        self.friend = False
 
     def activate(self, room):
         """
