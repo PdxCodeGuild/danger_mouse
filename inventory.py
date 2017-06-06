@@ -33,7 +33,7 @@ class Inventory:
 
     def poplar(self, item_to_be_popped):
         """Checks for existence of item in inventory, if item exists poplar pops that item."""
-        if self.check_inventory(item_to_be_popped) == True:
+        if self.check_inventory(item_to_be_popped):
             als_lament = item_to_be_popped     # ;P
             self.bag_of_holding.remove(item_to_be_popped)
         else:
