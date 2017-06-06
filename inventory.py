@@ -4,7 +4,7 @@ class Inventory:
         pass
 
     def put_in(self, item):
-        '''This method will add an item object to inventory, although  '''
+        '''This method will add an item object to inventory, although'''
         try:
             self.bag_of_holding.append(item)
             print("You have added {} to your inventory.".format(item))
@@ -26,4 +26,9 @@ class Inventory:
 
     def poplar(self, item_to_be_popped):
         if item_to_be_popped in self.bag_of_holding:
+            als_lament = item_to_be_popped     # ;P
             self.bag_of_holding.remove(item_to_be_popped)
+        else:
+            # for testing porpoises if the item is not in dah bag, remove later.
+            print(" {} was not found in bag of holding.".format(item_to_be_popped))
+        return als_lament
