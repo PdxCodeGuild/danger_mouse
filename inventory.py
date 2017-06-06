@@ -29,7 +29,7 @@ class Inventory:
         print('You\'re inventory contains:')
         for item in self.bag_of_holding:
             if 'casted' not in item:
-                print(item)
+                print(str(item))
 
     def poplar(self, item_to_be_popped):
         """Checks for existence of item in inventory, if item exists poplar pops that item."""
