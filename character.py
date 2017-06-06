@@ -1,5 +1,5 @@
 """
-This document contains Classes for the Characters and Items in our Danger Mouse game.
+This document contains Classes for the Characters in our Danger Mouse game.
 """
 
 from random import randrange
@@ -64,7 +64,8 @@ class Mouse(Character):
     def cast_spell(self, my_spell):
         """
         Casts spell by placing a casted spell in the room inventory.
-        Charters in room will then be affected by casted_spells in room inventory.
+        Charters in room will then be affected by casted_spells in
+        room inventory.
         """
         my_spell.name = "casted_" + my_spell.name
         # Name is an attribute of object that is a string.
@@ -77,8 +78,8 @@ class Rat(Character):
     Instanties a Rat character.
     """
 
-    def __init__(self, description, inventory, aggression=random.randrange(1, 2)):
-        pass
+    def __init__(self, description, inventory, aggression=randrange(1, 2)):
+        self.friend = False
 
     def __init__(self, description, inventory, aggression=randrange(0, 2)):
         super().__init__(self, description, inventory)
@@ -86,29 +87,30 @@ class Rat(Character):
 
     def activate(self, room):
         """
-        Determines how rat interacts with rooms, room inventories (casted spells), and mouse in room.
+        Determines how rat interacts with rooms, room inventories
+        (casted spells), and mouse in room.
         """
-        # if casted_befriend in room and self.aggression < 3:
-        #     self.friend = True
-        # elif room contains mouse and casted_hide is not in room:
-        #
+
         # Rats nibble on food and move around randomly, if a cat is in the same
         # room, they will eat the rat and ignore the mouse if its there
         # befriending a rat will have it follow you, beneficial in that it will
         # stop nibbling food and will distract a cat for a turn
         #
-        # if rat not friend:
-        #   if room contains food and random.randrange(agression, 3) == 2:
-        #       nibble on food
+        # if room.inventory.check_inventory("casted_befriend") and self.agression < 3:
+        #     self.friend = True
+        #
+        # if not self.friend:
+        #   if room.inventory.check_inventory("food") and random.randrange(agression, 3) == 2:
+        #       (get a piece of food from inventory).rat_nibbling()
         #   else:
-        #       move to adjacent room
-        # if rat is a friend and mouse isn't in same room:
+        #       move to room.doors[randrange(0, len(room.doors))]
+        # elif mouse isn't in same room:
         #   move rat to mouse
         pass
 
 
 class Cat(Character):
-    def __init__(self, description, aggression=random.randrange(2, 3)):
+    def __init__(self, description, aggression=randrange(2, 3)):
         """
         Instantiates a Cat character.
         """
@@ -119,32 +121,36 @@ class Cat(Character):
 
     def activate(self, room):
         """
-        Determines how cat interacts with rooms, inventories in rooms (casted spells), and mouse in room.
+        Determines how cat interacts with rooms, inventories in rooms (casted
+        spells), and mouse in room.
         """
         if not destination:
             # generate destination
             pass
 
-        # if room contains dog:
+        # if room.inventory.check_inventory(casted_scare) and aggression < 3:
+        #   turns_until_move = 0
+        # elif a dog in room.characters:
         #   print(Dog chases cat away)
         #   dog stops following and starts resting
-        #   turns_until_move == 0
-        # elif room had a fish in it:
+        #   turns_until_move = 0
+        # elif room.inventory.check_inventory(a fish):
         #   turns_until_move += 3
-        #   remove fish
-        # elif room contains rat:
+        #   room.inventory.poplar(a fish)
+        # elif rat in room.characters:
         #   rat dies
-        # elif room contains mouse and casted_hide is not in room:
+        # elif mouse in room.characters and not room.inventory.check_inventory(casted_hide):
         #   attack mouse
-        # if casted_scare in room.inventroy and aggression < 3:
-        #   cat leaves room
-        if turns_until_move == 1 and False:  # And inventory includes bell
+        # else:
+        #   turns_until_move -= 1
+
+        if turns_until_move == 1 and self.inventory.check_inventory("bell"):  # And inventory includes bell
             # If the destination room is the room with mouse, alert player
             pass
         if turns_until_move == 0:
             # Move to destination room
             # Generate new destination from list of possible destinations
-            turns_until_move = random.randrange(3, 6)
+            turns_until_move = randrange(3, 6)
             pass
 
 
@@ -152,36 +158,39 @@ class Dog(Character):
     searching = 0
     resting = False
 
-    def __init__(self, description, aggression=random.randrange(1, 4)):
+    def __init__(self, description, aggression=randrange(1, 4)):
         """
         Instantiates a Dog character.
         """
         super().__init__(self, description, inventory)
-        aggression = self.agression
+        self.aggression = aggression
+        self.friend = False
+        self.resting = False
+        self.searching = 0
 
     def activate(self, room):
         """
-        Determines how Dog character interacts with room, inventory in room (casted spells), and mouse in room.
+        Determines how Dog character interacts with room, inventory in room
+        (casted spells), and mouse in room.
         """
         # The dog naps until alerted to a mouse, then alerts nearby human and
         # randomly searches for 5 turns after the mosue escapes
         # If its a friend, it will chase off a cat once before stopping to rest
         #
-        # if dog not a friend:
-        #   if mouse in same room:
+        # if not self.friend:
+        #   if room contains mouse and not room.check_inventory(casted_hide):
         #       if searching:
         #           atack mouse
         #       bark and alert a nearby human (possibly useful to distract)
-        #       searching = 5
+        #       searching = 1 + aggression
         #   elif searching:
         #       searching -= 1
-        #       dog moves to adjacent room
-        # elif not resting and mouse not in room:
+        #       dog moves to room.doors[random unlocked door]
+        # elif not self.resting and mouse not in room:
         #   move to mouse
         #
-        # if casted_befriend in room and self.aggression < 2:
+        # if room.inventory.check_inventory(casted_befriend) and self.aggression < 2:
         #     self.friend = True
-        # elif room contains mouse and casted_hide is not in room:
         pass
 
 
@@ -198,12 +207,9 @@ class Person(Character):
 
     def activate(self, room):
         """
-        Determines how Person interacts with rooms, room invenstories (casted spells), and mouse in room.
+        Determines how Person interacts with rooms, room invenstories
+        (casted spells), and mouse in room.
         """
-        # if casted_scare in room and aggression < 3:
-        #     leave room
-        # elif room contains mouse and casted_hide is not in room:
-        #
         # Humans mostly stand still and mind their own business but are still
         # dangerous, either attacking hard or calling other characters nearby.
         # once a mouse leaves a room where the human has seen the mouse, a trap
@@ -211,15 +217,17 @@ class Person(Character):
         # Humans will also be summoned by barking dogs, if not interrupted by
         # seeing the mouse, they will go to where the dog barked and then back
         #
-        # if mouse in room:
+        # if room.inventory.check_inventory(casted_scare) and aggression < 3:
+        #     set a random destination
+        # elif room contains mouse and not room.inventory.check_inventory(casted_hide):
         #   either scream to alert others or attack depending on aggression
-        #   set destination to current room
-        # elif destination is current room:
+        #   set destination = room
+        # elif destination == room:
         #   if seen_mouse:
         #       set trap
         #       seen_mouse = False
         #   else:
         #   destination = home_room
-        # if destination is not current room:
+        # if destination != room:
         #   move towards destination
         pass
