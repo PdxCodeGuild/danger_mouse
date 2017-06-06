@@ -1,3 +1,8 @@
+"""
+This document contains Classes for the items in our Danger Mouse game.
+"""
+
+
 class Item:
     def __init__(self, name):
         """
@@ -37,7 +42,8 @@ class Food(Item):
         if score <= 0:
             del self
 
-# TODO:  The inventory still needs a way to calculate the total store to win the game.
+# TODO:  The inventory still needs a way to calculate
+#        the total store to win the game.
 
 
 class Spell(Item):
