@@ -34,15 +34,16 @@ class Mouse(Character):
     """
     Instantiates a Mouse or player character.
     """
-    def __init__(self, name, description, inventory, health=100):
+    def __init__(self, name, description, inventory, start_location, health=100):
         """Initiates a Mouse object."""
         super().__init__(name, description, inventory, health)
-
+        self.location = start_location
 
     def take_food(self, my_food):
 
         """
-        This function works on food items and allows you to eat them and gain health or put them in inventory.
+        This function works on food items and allows you to eat them and gain
+        health or put them in inventory.
         """
 
         choice = input("Add to health(h) or inventory(i)?")
@@ -60,27 +61,28 @@ class Mouse(Character):
         self.inventory.append(str(my_item))
         return self.inventory
 
-
     def cast_spell(self, my_spell):
         """
         Casts spell by placing a casted spell in the room inventory.
         Charters in room will then be affected by casted_spells in room inventory.
         """
         my_spell.name = "casted_" + my_spell.name
-        #Name is an attribute of object that is a string.
-        #Add my_spell to the room inventory,
-        #Remove my_spell from the mouse inventory.
+        # Name is an attribute of object that is a string.
+        # Add my_spell to the room inventory,
+        # Remove my_spell from the mouse inventory.
 
 
 class Rat(Character):
     """
     Instanties a Rat character.
     """
+
     def __init__(self, description, inventory, aggression=random.randrange(1, 2)):
+        pass
+
     def __init__(self, description, inventory, aggression=randrange(0, 2)):
         super().__init__(self, description, inventory)
         aggression = self.agression
-
 
     def activate(self, room):
         """
@@ -103,7 +105,6 @@ class Rat(Character):
         # if rat is a friend and mouse isn't in same room:
         #   move rat to mouse
         pass
-
 
 
 class Cat(Character):
@@ -135,8 +136,8 @@ class Cat(Character):
         #   rat dies
         # elif room contains mouse and casted_hide is not in room:
         #   attack mouse
-        # if casted_scare in room and aggression < 3:
-        #   leave room
+        # if casted_scare in room.inventroy and aggression < 3:
+        #   cat leaves room
         if turns_until_move == 1 and False:  # And inventory includes bell
             # If the destination room is the room with mouse, alert player
             pass
@@ -222,52 +223,3 @@ class Person(Character):
         # if destination is not current room:
         #   move towards destination
         pass
-
-
-class Item:
-    def __init__(self, name):
-        """
-        Instantiates new Item.
-        """
-        self.name = name
-
-    def __str__(self):
-        """
-        Overloads print function.
-        """
-        return "{}".format(self.name)
-        # this puts those values into a string, which you need
-
-    def __repr__(self):
-        """
-        Determines what the representation will be when it's in a list.
-        """
-        return self.__str__()
-
-#Fish will be instantiated from the Item class, rather than being a class.
-
-class Food(Item):
-    """
-    Instantiates a Food Item.
-    """
-    def __init__(self, score,  *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.score = score
-
-    def rat_nibbling(self):
-        """
-        Allows a rat to nibble on food in a room.
-        """
-        score -= 2
-        if score <= 0:
-            del self
-
-# TODO:  The inventory still needs a way to calculate the total store to win the game.
-
-
-class Spell(Item):
-    def __init__(self, name):
-        """
-        Instantiates a spell item.
-        """
-        super().__init__(name)
