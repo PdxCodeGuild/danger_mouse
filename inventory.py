@@ -31,4 +31,5 @@ class Inventory:
         else:
             # for testing porpoises if the item is not in dah bag, remove later.
             print(" {} was not found in bag of holding.".format(item_to_be_popped))
+            return None
         return als_lament
