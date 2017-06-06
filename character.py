@@ -2,7 +2,7 @@
 This document contains Classes for the Characters and Items in our Danger Mouse game.
 """
 
-import random
+import random, inventory
 
 spell_list = ["scare", "hide", "befriend"]
 
@@ -16,7 +16,7 @@ class Character:
         """
         self.description = description
         self.name = name
-        self.inventory = list(inventory)
+        self.inventory = Inventory()
         self.health = health
 
     def move(self):
