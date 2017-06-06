@@ -77,7 +77,3 @@ while not game_over:
             print('this is a character')
     if first == 'peek':
         current_room.peek(room_dict[second])
-
-
-
-

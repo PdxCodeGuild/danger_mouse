@@ -16,8 +16,20 @@ class Room():
             print('The door is unlocked.')
             return door.path
 
+    def add_item(self, item):
+        self.inventoy.put_in(item)
 
+    def remove_item(self, item):
+        self.inventory.poplar(item)
 
+    def check_inventory(self, item):
+        self.inventory.check_inventory(item)
+
+    def surroundings(self):
+        for character in self.characters:
+            print(character.name + " is in the room")
+        for item in self.inventory.bag_of_holding
+            print(item.name + " is in the room)
 
     def peek_room(self, door):
         '''Look around/examine/search room'''
