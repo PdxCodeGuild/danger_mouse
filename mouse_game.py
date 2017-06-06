@@ -4,6 +4,8 @@ import random
 
 aggression=random.randrange(1, 5)
 
+spell_list = ["scare", "hide", "befriend"]
+
 class Character:
     def __init__(self, name, description, inventory, health=100):
         self.description = description
@@ -24,6 +26,7 @@ class Mouse(Character):
     def __init__(self, name, description, inventory, health=100):
         super().__init__(name, description, inventory, health)
 
+
     def take_food(self, my_food):
         choice = input("Add to health(h) or inventory(i)?")
         if choice == "h":
@@ -32,6 +35,14 @@ class Mouse(Character):
         elif choice == "i":
             self.inventory.append(my_food)
             return self.inventory
+
+
+    def take_spell(self), my_spell:
+        if my_spell in spell_list:
+            self.inventory.append(my_spell)
+
+        elif my_spell == "fish":
+            pass
 
 
 class Rat(Character):
@@ -103,14 +114,6 @@ class Food(Item):
         # self.description = description
         self.score = score
 
-    def take_food(self):
-        choice = input("Add to health(h) or inventory(i)?")
-        if choice == "h":
-            self.health += self.score
-        elif choice == "i":
-            self.inventory.append(name)
-        print(self.health, self.inventory)
-
     def __str__(self):
         return "{}".format(self.name)
         # this puts those values into a string, which you need
@@ -120,20 +123,14 @@ class Food(Item):
         return self.__str__()
 
 
+#The inventory still needs a way to calculate the total store to win the game.
+
+
 class Spell(Item):
-
-    def __init__(self, name, description):
-        self.name = name
-        self.description = description
-
-    def take_spell(self):
-        pass
+    def __init__(self, name):
+        super().__init__(self, name)
 
 
-    # elif name == "fish":
-    # elif name == "scare":
-    # elif name == "hide":
-    # elif name == "befriend":
 
 horace = Mouse("Rasputin", "A wise mouse.", ["befriend"])
 # horace.find_item("bread")
