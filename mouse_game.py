@@ -37,12 +37,14 @@ class Mouse(Character):
             return self.inventory
 
 
-    def take_spell(self), my_spell:
-        if my_spell in spell_list:
-            self.inventory.append(my_spell)
+    def take_spell(self, my_spell):
+        # if my_spell in spell_list:
+        self.inventory.append(my_spell)
+        return self.inventory
 
-        elif my_spell == "fish":
-            pass
+        # elif my_spell == "fish":
+        #     #This will add fish to room inventory
+        #     pass
 
 
 class Rat(Character):
@@ -96,7 +98,7 @@ class Dog(Character):
 class Person(Character):
     def __init__(self, description, inventory, aggression=random.randrange(1, 5)):
         super().__init__(self, description, inventory)
-        aggression = self.agression
+        self.agression = aggression
 
     def activate(self, room):
         pass
@@ -104,19 +106,21 @@ class Person(Character):
 
 class Item:
     def __init__(self, name):
-        name = self.name
-        value = self.value
+        self.name = name
 
 
 class Food(Item):
-    def __init__(self, name, score):
-        self.name = name
-        # self.description = description
+
+
+    def __init__(self, score,  *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.score = score
+
 
     def __str__(self):
         return "{}".format(self.name)
         # this puts those values into a string, which you need
+
 
     def __repr__(self):
         # this is what the representation will be when it's in a list
@@ -128,12 +132,7 @@ class Food(Item):
 
 class Spell(Item):
     def __init__(self, name):
-        super().__init__(self, name)
+        super().__init__(name)
 
 
 
-horace = Mouse("Rasputin", "A wise mouse.", ["befriend"])
-# horace.find_item("bread")
-bread = Food("bread", 20)
-horace.take_food(bread)
-print(horace.inventory[1].name)
