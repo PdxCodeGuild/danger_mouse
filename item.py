@@ -4,12 +4,12 @@ This document contains Classes for the items in our Danger Mouse game.
 
 
 class Item:
-    def __init__(self, name):
+    def __init__(self, name, description):
         """
         Instantiates new Item.
         """
         self.name = name
-
+        self.description = description
     def __str__(self):
         """
         Overloads print function.
@@ -23,6 +23,8 @@ class Item:
         """
         return self.__str__()
 
+    def look(self):
+        print(self.description)
 # Fish will be instantiated from the Item class, rather than being a class.
 
 

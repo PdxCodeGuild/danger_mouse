@@ -27,6 +27,7 @@ class Room():
     def peek_room(self, door):
         '''Look around/examine/search room'''
         print(door.back.description)
+        print(self.characters)
 
     def look(self):
         '''Singular/specific inspection for items, doors, etc'''

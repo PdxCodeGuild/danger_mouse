@@ -17,7 +17,7 @@ class Character:
         """
         self.description = description
         self.name = name
-        self.inventory = inventory.Inventory()
+        self.inventory = Inventory()
         self.inventory.put_in(char_inv)
         self.inventory = Inventory()
         self.health = health
@@ -31,6 +31,9 @@ class Character:
     def activate(self, room):
         """Runs the ai of a character so it can move and act"""
         pass
+
+    def look(self):
+        print(self.description)
 
 
 class Mouse(Character):
