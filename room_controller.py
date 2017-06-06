@@ -1,21 +1,37 @@
 import room
+import csv
+
 #This dictionary is the begining of a graph. The rooms would be the nodes and the doors the edges.
 #
-room_map = dict{'nest': ['library'],
-                'library': ['east_hall', 'nest'],
-                'east_hall': ['library', 'serv_camber', 'gallery', 'guest_bedroom', 'master_bedroom', 'main_hall'],
-                'serv_chamber': ['east_hall', 'servant_hall'],
-                'gallery': ['east_hall'],
-                'guest_bedroom': ['east_hall'],
-                'master_bedroom': ['east_hall', 'chest_one'],
-                'main_hall': ['east_hall', 'living_room', 'outside'],
-                'living_room': ['main_hall', 'chapel'],
-                'chapel': ['living_room', 'west_hall'],
-                'west_hall': ['chapel', 'kitchen'],
-                'kitchen': ['west_hall', 'buttery', 'servant_hall'],
-                'servant_hall': ['serv_chamber', 'kitchen']
-                }
+# print(room.generate_doors(room.room_map))
 
+
+with open('rooms_sheet.csv') as csvfile:
+    room_importer = csv.reader(csvfile, delimiter = ',')
+    room_dict = {}
+    for row in room_importer:
+        temp = room.Room(row[0], row[1], room.room_map[row[0], row[2])
+        room_dict[row[0]] = temp
+
+game_over = False
+current_room = room_dict['nest']
+while not game_over:
+    current_room.look()
+    user_input = ' '.split(input('What is  your command?'))
+    first = user_input[0]
+    second = user_input[1]
+
+    if first == 'Open':
+        current_room = current_room.open_door(second)
+    if first == 'look':
+        if second == 'room':
+            current_room.look()
+        if second in current_room.doors:
+            print("it is a door")
+        if second in current_room.characters:
+            print('this is a character')
+    if first == 'peek':
+        current_room.peek(room_dict[second])
 
 
 
