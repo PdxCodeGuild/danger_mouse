@@ -4,15 +4,15 @@ from character import Rat
 from item import Food
 
 
-kitchen = Room("kitchen", "The kitchen", "kitchen", [])
+#kitchen = Room("kitchen", "The kitchen", "kitchen", [])
 #should have instantiated a room inventory
-mouse = Mouse("Horace", "A wise, old mouse.", kitchen)
+mouse = Mouse("Horace", "A wise, old mouse.", 'a herp')
 #should have instantiated a character inventory
-cheese = Food("cheese", 20)
+#cheese = Food("cheese", 20)
 
-print(kitchen.characters)
-kitchen.characters.append(Rat("a rat", []))
-print(kitchen.characters)
-kitchen.inventory.put_in(cheese)
-print(kitchen.inventory)
+# print(kitchen.characters)
+# kitchen.characters.append(Rat("a rat", []))
+# print(kitchen.characters)
+# kitchen.inventory.put_in(cheese)
+# print(kitchen.inventory)
 

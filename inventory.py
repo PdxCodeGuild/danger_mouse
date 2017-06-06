@@ -10,7 +10,7 @@ class Inventory:
         """This method will add an item object to inventory, although"""
         try:
             self.bag_of_holding.append(item)
-            print("You have added {} to your inventory.".format(item))
+            print("You have added {} to your inventory.".format(str(item)))
         except:
             print('Error in Inventory method: put_in')
 

@@ -11,15 +11,15 @@ spell_list = ["scare", "hide", "befriend"]
 
 
 class Character:
-    def __init__(self, name, description, char_inv, health=100):
+    def __init__(self, name, description, char_inv='', health=100):
         """
         Initiates a Character object.
         """
         self.description = description
         self.name = name
-        self.inventory = inventory.Inventory()
-        self.inventory.put_in(char_inv)
         self.inventory = Inventory()
+        self.inventory.put_in(char_inv)
+       # self.inventory = Inventory()
         self.health = health
 
     def move(self):
@@ -39,9 +39,8 @@ class Mouse(Character):
     """
     def __init__(self, name, description, start_location, health=100):
         """Initiates a Mouse object."""
-        super().__init__(name, description, health)
+        super().__init__(name, description)
         self.location = start_location
-        self.inventory = Inventory()
 
     def take_food(self, my_food):
 
