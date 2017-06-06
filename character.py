@@ -10,13 +10,13 @@ spell_list = ["scare", "hide", "befriend"]
 
 
 class Character:
-    def __init__(self, name, description, inventory, health=100):
+    def __init__(self, name, description, char_inv, health=100):
         """
         Initiates a Character object.
         """
         self.description = description
         self.name = name
-        self.inventory = Inventory()
+        self.inventory = inventory.Inventory(char_inv)
         self.health = health
 
     def move(self):
