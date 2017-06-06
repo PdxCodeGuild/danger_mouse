@@ -1,17 +1,19 @@
 from inventory import Inventory
 
 class Room():
-    def __init__(self, name,  description, doors, characters):
+    def __init__(self, name,  description, doors, characters = None):
         self.name = name
         self.description = description
         self.doors = room_map[name]
-        self.characters = characters
+        self.characters = list(characters)
         self.inventory = Inventory()
 
+
     def open_door(self, door): #character.inventory
-        if door.is_locked == True and 'door_key' not in inventory:
-            print('Door is locked')
+        if door.is_locked == True and not self.inventory.check_inventory(door.key):
+            print('Door is locked.')
         else:
+            print('The door is unlocked.')
             return door.path
 
 
@@ -39,6 +41,7 @@ class Door():
         self.front = room1
         self.back = room2
         self.is_locked = is_locked
+        self.key
 
     def look(self):
         print(self.name + '/n' + self.description)
@@ -46,7 +49,7 @@ class Door():
 
 #This dictionary is the begining of a graph. The rooms would be the nodes and the doors the edges.
 #
-room_map = dict{'nest': ['library'],
+room_map = {    'nest': ['library'],
                 'library': ['east_hall', 'nest'],
                 'east_hall': ['library', 'serv_camber', 'gallery', 'guest_bedroom', 'master_bedroom', 'main_hall'],
                 'serv_chamber': ['east_hall', 'servant_hall'],
