@@ -1,11 +1,11 @@
 from inventory import Inventory
 
 class Room():
-    def __init__(self, name,  description, doors, characters = None):
+    def __init__(self, name,  description, doors, characters):
         self.name = name
         self.description = description
-        self.doors = room_map[name]
-        self.characters = list(characters)
+        self.doors = doors
+        self.characters = characters
         self.inventory = Inventory()
 
 
@@ -18,16 +18,17 @@ class Room():
 
 
 
+
     def peek_room(self, door):
         '''Look around/examine/search room'''
-        print(door.room2.description)
+        print(door.back.description)
 
     def look(self):
         '''Singular/specific inspection for items, doors, etc'''
         print(self.name + '\n' +self.description + '\n')
         print('Exits \n')
         for door in self.doors:
-            print(door.name + '\n')
+            print(door + '\n')
 
 
 #We can add time to add a dificulty to some doors, say like the one to the treasure chest.
@@ -49,18 +50,26 @@ class Door():
 
 #This dictionary is the begining of a graph. The rooms would be the nodes and the doors the edges.
 #
-room_map = {    'nest': ['library'],
-                'library': ['east_hall', 'nest'],
-                'east_hall': ['library', 'serv_camber', 'gallery', 'guest_bedroom', 'master_bedroom', 'main_hall'],
-                'serv_chamber': ['east_hall', 'servant_hall'],
-                'gallery': ['east_hall'],
-                'guest_bedroom': ['east_hall'],
-                'master_bedroom': ['east_hall', 'chest_one', 'dresser'],
-                'main_hall': ['east_hall', 'living_room', 'outside'],
-                'living_room': ['main_hall', 'chapel'],
-                'chapel': ['living_room', 'west_hall'],
-                'west_hall': ['chapel', 'kitchen'],
-                'kitchen': ['west_hall', 'buttery', 'servant_hall'],
-                'servant_hall': ['serv_chamber', 'kitchen'],
-                'dresser': ['master_bedroom']
-                }
+room_map =  {'nest': ['library'],
+            'library': ['east_hall', 'nest'],
+            'east_hall': ['library', 'serv_camber', 'gallery', 'guest_bedroom', 'master_bedroom', 'grand_hall'],
+            'serv_chamber': ['east_hall', 'servant_hall'],
+            'gallery': ['east_hall'],
+            'guest_bedroom': ['east_hall'],
+            'master_bedroom': ['east_hall', 'chest_one', 'dresser'],
+            'grand_hall': ['east_hall', 'living_room', 'outside'],
+            'living_room': ['grand_hall', 'chapel'],
+            'chapel': ['living_room', 'west_hall'],
+            'west_hall': ['chapel', 'kitchen'],
+            'kitchen': ['west_hall', 'buttery', 'servant_hall'],
+            'servant_hall': ['serv_chamber', 'kitchen'],
+            'dresser': ['master_bedroom'],
+             'buttery': ['kitchen']
+            }
+
+# def generate_doors(room_map):
+#     door = []
+#     for room in room_map:
+#         for neighbour in room_map[room]:
+#             door.append((room, neighbour))
+#     return door
