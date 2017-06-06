@@ -1,5 +1,7 @@
 import room
-room_map = dict{'nest': ['library']
+#This dictionary is the begining of a graph. The rooms would be the nodes and the doors the edges.
+#
+room_map = dict{'nest': ['library'],
                 'library': ['east_hall', 'nest'],
                 'east_hall': ['library', 'serv_camber', 'gallery', 'guest_bedroom', 'master_bedroom', 'main_hall'],
                 'serv_chamber': ['east_hall', 'servant_hall'],
@@ -13,6 +15,7 @@ room_map = dict{'nest': ['library']
                 'kitchen': ['west_hall', 'buttery', 'servant_hall'],
                 'servant_hall': ['serv_chamber', 'kitchen']
                 }
+
 
 
 
