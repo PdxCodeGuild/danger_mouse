@@ -2,7 +2,7 @@
 This document contains Classes for the Characters and Items in our Danger Mouse game.
 """
 
-from random import randrange
+import random
 
 spell_list = ["scare", "hide", "befriend"]
 
@@ -80,7 +80,7 @@ class Rat(Character):
     def __init__(self, description, inventory, aggression=random.randrange(1, 2)):
         pass
 
-    def __init__(self, description, inventory, aggression=randrange(0, 2)):
+    def __init__(self, description, inventory, aggression=random.randrange(0, 2)):
         super().__init__(self, description, inventory)
         aggression = self.agression
 
@@ -186,7 +186,7 @@ class Dog(Character):
 
 
 class Person(Character):
-    def __init__(self, description, inventory, aggression=randrange(1, 5)):
+    def __init__(self, description, inventory, aggression=random.randrange(1, 5)):
         """
         Instantiates a Person character.
         """
