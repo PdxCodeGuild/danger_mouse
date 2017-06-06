@@ -14,9 +14,9 @@ class Room():
             print('Door is locked.')
         else:
             print('The door is unlocked.')
-            if self.name == door.front:
+            if self.name == door.front.name:
                 return door.back
-            if self.name == door.back:
+            if self.name == door.back.name:
                 return door.front
 
     def add_item(self, item):
@@ -65,7 +65,7 @@ class Door():
 
 #This dictionary is the begining of a graph. The rooms would be the nodes and the doors the edges.
 #
-room_map =  {'nest': ['library'],
+room_map = {'nest': ['library'],
             'library': ['east_hall', 'nest'],
             'east_hall': ['library', 'serv_camber', 'gallery', 'guest_bedroom', 'master_bedroom', 'grand_hall'],
             'serv_chamber': ['east_hall', 'servant_hall'],
@@ -79,7 +79,7 @@ room_map =  {'nest': ['library'],
             'kitchen': ['west_hall', 'buttery', 'servant_hall'],
             'servant_hall': ['serv_chamber', 'kitchen'],
             'dresser': ['master_bedroom'],
-             'buttery': ['kitchen']
+            'buttery': ['kitchen']
             }
 
 # def generate_doors(room_map):

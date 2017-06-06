@@ -17,8 +17,8 @@ class Character:
         """
         self.description = description
         self.name = name
-        self.inventory = inventory.Inventory()
         self.inventory.put_in(char_inv)
+        self.inventory = Inventory()
         self.health = health
 
     def move(self):
