@@ -3,7 +3,7 @@ import inventory
 import character
 import item
 import room
-
+import types
 game_over = False
 
 # current_room = room.Room('Test Room', 'This is only a test', test_doors, test_characters)
@@ -20,14 +20,18 @@ def pretty_print_dict(dict):
         print('{}. {}'.format(k, v))
 
 
+map = item.Item('map', 'You found the map')
 current_room = room_controller.nest
 current_room.inventory.put_in(spoon)
+danger_mouse = character.Mouse('Ralph', 'Test Character', current_room)
+danger_mouse.inventory.put_in(map)
 while not game_over:
     current_room.look()
     action_select = input('1. Look \n'
                           '2. Move \n'
                           '3. Peek through a door \n'
-                          '4. Interact \n')
+                          '4. Inventory \n'
+                          '5. Interact')
 
     if action_select == '1':
         i = 1
@@ -64,4 +68,33 @@ while not game_over:
         current_room.peek_room(room_controller.door_dict[peek_dict[peek_select]])
 
     if action_select == '4':
-        print('Option not implemented')
+        inv_dict = danger_mouse.inventory.list_inventory()
+        pretty_print_dict(inv_dict)
+        item_select = input('Select an item')
+        item_action = input('What do you wish to do with this item? \n'
+                            '1. Look at item \n'
+                            '2. Use item \n'
+                            '3. Drop item')
+        if item_action == '1':
+            inv_dict[item_select].look()
+            print('\n')
+        if item_action == '2':
+            print('You attempt to use the {}, but nothing happens'.format(inv_dict[item_select]))
+        if item_action == '3':
+            current_room.inventory.put_in(inv_dict[item_select])
+
+    if action_select == '5':
+        action_dict = {}
+        i = 1
+        for door in current_room.doors:
+            action_dict[str(i)] = room_controller.door_dict[door]
+            i += 1
+        for item in current_room.inventory.bag_of_holding:
+            action_dict[str(i)] = item
+            i += 1
+        for character in current_room.characters:
+            action_dict[str(i)] = character
+            i += 1
+        pretty_print_dict(action_dict)
+        action_item = input('What do you want to interact with?')
+        action_dict[action_item].action(current_room, danger_mouse)

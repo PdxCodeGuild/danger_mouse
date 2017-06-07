@@ -1,3 +1,5 @@
+import character
+import inventory
 """
 This document contains Classes for the items in our Danger Mouse game.
 """
@@ -24,9 +26,10 @@ class Item:
         return self.__str__()
 
     def look(self):
-        print(self.description)
+        print('{}: {}'.format(self.name, self.description))
 # Fish will be instantiated from the Item class, rather than being a class.
-
+    def action(self, room, character):
+        character.inventory.put_in(room.inventory.poplar(self))
 
 class Food(Item):
     """
