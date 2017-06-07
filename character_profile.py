@@ -61,9 +61,9 @@ if choice == '3':
     char_list = ['Aster', 'Your physical appearance is not notable, but you act with confidence that leaves others intimidated.', 'chapel', [scare_1, scare_2]]
 
 player = character.Mouse(char_list[0], char_list[1], char_list[2])
-#player.take_item(char_list[3][0])
-#player.take_item(char_list[3][1])
-#player.list_inventory()
+player.take_item(char_list[3][0])
+# player.take_item(char_list[3][1])
+# player.list_inventory()
 
 
 
