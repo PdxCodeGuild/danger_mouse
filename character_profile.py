@@ -1,4 +1,5 @@
 import character, item
+import room
 run_again = True
 while run_again == True:
     print("""
@@ -40,22 +41,24 @@ while run_again == True:
 
 
 if choice == '1':
-    befriend_1 = Spell('Befriend')
-    befriend_2 = Spell('Befriend')
-    char_list = ['Mortimer', 'You are an elderly mouse who\'s body is worn, but who\'s smile is genuine.', [befriend_1, befriend_2]]
-if choice == '2':
-    hide_1 = Spell('Hide')
-    hide_2 = Spell('Hide')
-    char_list = ['Sydney', 'You try to look at yourself, but you quickly dodge your own gaze and hide in the shadows.', [hide_1, hide_2] ]
-if choice == '3':
-    scare_1 = Spell('Scare')
-    scare_2 = Spell('Scare')
-    char_list = ['Aster', 'Your physical appearance is not notable, but you act with confidence that leaves others intimidated.', [scare_1, scare_2]]
-player = character.Mouse(char_list[0], char_list[1])
-player.take_item(char_list[2][0])
-player.take_item(char_list[2][1])
+    befriend_1 = item.Spell('Befriend')
+    befriend_2 = item.Spell('Befriend')
+    char_list = ['Mortimer', 'You are an elderly mouse who\'s body is worn, but who\'s smile is genuine.', 'library', [befriend_1, befriend_2]]
 
-player.list_inventory()
+if choice == '2':
+    hide_1 = item.Spell('Hide')
+    hide_2 = item.Spell('Hide')
+    char_list = ['Sydney', 'You try to look at yourself, but you quickly dodge your own gaze and hide in the shadows.', 'nest', [hide_1, hide_2] ]
+
+if choice == '3':
+    scare_1 = item.Spell('Scare')
+    scare_2 = item.Spell('Scare')
+    char_list = ['Aster', 'Your physical appearance is not notable, but you act with confidence that leaves others intimidated.', 'chapel', [scare_1, scare_2]]
+
+player = character.Mouse(char_list[0], char_list[1], char_list[2])
+#player.take_item(char_list[3][0])
+#player.take_item(char_list[3][1])
+#player.list_inventory()
 
 
 
