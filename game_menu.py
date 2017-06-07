@@ -76,13 +76,13 @@ while not game_over:
                             '1. Look at item \n'
                             '2. Use item \n'
                             '3. Drop item')
-        if '1' in action_select:
+        if '1' in item_action:
             inv_dict[item_select].look()
             print('\n')
-        if '2' in action_select:
+        if '2' in item_action:
             print('You attempt to use the {}, but nothing happens'.format(inv_dict[item_select]))
-        if '3' in action_select:
-            current_room.inventory.put_in(inv_dict[item_select])
+        if '3' in item_action:
+            current_room.inventory.put_in(danger_mouse.inventory.poplar(inv_dict[item_select]))
 
     elif '5' in action_select:
         action_dict = {}

@@ -36,14 +36,14 @@ class Room():
     def check_inventory(self, item):
         self.inventory.check_inventory(item)
 
-    def surroundings(self):
+    def look(self):
         print(self.description)
         for character in self.characters:
-            print(character.name + " is in the room")
+            print("{} is in the room".format(character))
         for item in self.inventory.bag_of_holding:
-            print(item + " is in the room")
+            print("{} is in the room".format(item))
         for door in self.doors:
-            print("You can exit through " + door)
+            print("You can exit through {}".format(door))
 
     def use_key(self, door, player):
         if door.is_locked == True and player.check_inventory(door.key):
@@ -54,15 +54,16 @@ class Room():
 
     def peek_room(self, door):
         '''Look around/examine/search room'''
-        print(door.back.description)
-        print(self.characters)
+        print(door.back.name)
+        for character in self.characters:
+            print('characters in room: {}'.format(character))
 
-    def look(self):
-        '''Singular/specific inspection for items, doors, etc'''
-        print(self.name + '\n' +self.description + '\n')
-        print('Exits')
-        for door in self.doors:
-            print(door)
+    # def look(self):
+    #     '''Singular/specific inspection for items, doors, etc'''
+    #     print(self.name + '\n' +self.description + '\n')
+    #     print('Exits')
+    #     for door in self.doors:
+    #         print(door)
 
 
 #We can add time to add a dificulty to some doors, say like the one to the treasure chest.
