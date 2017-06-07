@@ -62,6 +62,60 @@ class Room():
         for door in self.doors:
             print(door)
 
+    def find_path(self, destination, door_dict):
+        # generate dict tree
+        nav_tree = {}
+        checked = [self]
+        level = []
+        next_level = []
+        nav_tree, checked = self.generate_tree_level(nav_tree, self, door_dict, checked)
+        for t in nav_tree[self]:
+            level.append(t)
+
+        while level:
+            for r in level:
+                nav_tree, checked = self.generate_tree_level(nav_tree, r, door_dict, checked)
+                for t in nav_tree[r]:
+                    next_level.append(t)
+
+            level = next_level
+            next_level = []
+        print(nav_tree)
+        result = self.look_for_destination(nav_tree, self, destination)
+        if result:
+            return result
+        else:
+            return "No Path"
+
+    def look_for_destination(self, tree, location, destination):
+        if location in tree.keys():
+            for r in tree[location]:
+                if r == destination:
+                    return destination
+                else:
+                    t = self.look_for_destination(tree, r, destination)
+                    if t:
+                        path = [r]
+                        try:
+                            path.extend(t)
+                        except TypeError:
+                            path.append(t)
+                        return path
+
+    def generate_tree_level(self, tree, room, door_dict, checked):
+        temp = room.get_adjacent(door_dict, checked)
+        for t in temp:
+            checked.append(t)
+        tree[room] = temp
+        return tree, checked
+
+    def get_adjacent(self, door_dict, ignore=[]):
+        results = []
+        for door in self.doors:
+            result = self.open_door(door_dict[door])
+            if result != self and result not in ignore:
+                results.append(result)
+        return results
 
 #We can add time to add a dificulty to some doors, say like the one to the treasure chest.
 #and opening size, maybe the cat can't fit through some. We could also change the front and back room
