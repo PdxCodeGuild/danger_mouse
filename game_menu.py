@@ -10,19 +10,20 @@ game_over = False
 # next_room = room.Room('next room', 'You have made it to the second room', test_doors, test_characters)
 spoon = item.Item('spoon', 'There is no spoon')
 
-
+baby_mouse = character.Character('baby', 'little rodent', room_controller.nest,)
 # red = room.Door('red', 'A door', current_room, next_room , False, 'no')
 # test_doors = [red]
 # cat = character.Character('cat', 'Putty Tat', [])
 # test_characters = [cat]
 def pretty_print_dict(dict):
     for k in dict:
-        print(k + '. ' + dict[k])
+        print('{}. {}'.format(k, dict[k]))
 
 
 map = item.Item('map', 'You found the map')
 current_room = room_controller.nest
 current_room.inventory.put_in(spoon)
+current_room.characters.append(baby_mouse)
 danger_mouse = character.Mouse('Ralph', 'Test Character', current_room)
 danger_mouse.inventory.put_in(map)
 print("You are a 🐭")
