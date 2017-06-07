@@ -24,6 +24,27 @@ class Room():
                 return door.front
         return self
 
+    def add_item(self, item):
+        self.inventory.put_in(item)
+
+    def update_characters(self, characters):
+        self.characters = list(characters)
+
+    def remove_item(self, item):
+        self.inventory.poplar(item)
+
+    def check_inventory(self, item):
+        self.inventory.check_inventory(item)
+
+    def surroundings(self):
+        print(self.description)
+        for character in self.characters:
+            print(character.name + " is in the room")
+        for item in self.inventory.bag_of_holding:
+            print(item + " is in the room")
+        for door in self.doors:
+            print("You can exit through " + door)
+
     def use_key(self, door, player):
         if door.is_locked == True and player.check_inventory(door.key):
             print('The door is unlocked.')
@@ -39,7 +60,7 @@ class Room():
     def look(self):
         '''Singular/specific inspection for items, doors, etc'''
         print(self.name + '\n' +self.description + '\n')
-        print('Exits \n')
+        print('Exits')
         for door in self.doors:
             print(door)
 

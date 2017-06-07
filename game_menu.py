@@ -38,7 +38,7 @@ while not game_over:
         i = 1
         look_dict = {}
         for door in current_room.doors:
-            look_dict[str(i)] = door
+            look_dict[str(i)] = room_controller.door_dict[door]
             i += 1
         for item in current_room.inventory.bag_of_holding:
             look_dict[str(i)] = item
