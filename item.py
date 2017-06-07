@@ -59,7 +59,7 @@ class Scare(Spell):
     This class represents the Scare Spell.
     """
     def cast_spell(self, target):
-        if target.aggression <= 2:  # if character's aggression level is low, it escapes
+        if target.aggression <= 2:  # if the target's aggression level is low, it escapes
             target.move(destination)
         else:
             self.inventory.owner.health -= target.agression * 3  # if character's aggression level is high, mouse loses health points.
@@ -67,11 +67,22 @@ class Scare(Spell):
 
 class Hide(Spell):
     """
-    This class represents Hide Spell. Mouse escapes into another room.
+    This class represents Hide Spell.
     """
+    def cast_spell(self, character):
+        character.move(destination)
+
 
 
 class Befriend(Spell):
     """
     This class represents Befriend Spell.
     """
+    def cast_spell(self, target):
+        if target.agression <= 2:
+            self.inventory.owner.health += target.agression * 3  # if character's aggression level is low, mouse gains health points.
+        else:
+            print("{} is not in the mood to make friends".format(target))
+
+
+
