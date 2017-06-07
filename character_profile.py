@@ -16,8 +16,8 @@ while run_again == True:
         Please choose a character to play:
         
         1. Mortimer - a wise mouse with a
-        keen understanding of the dogs
-        and people who occupy the castle.  
+        keen understanding of the rats
+        and dogs who occupy the castle.  
         
         2. Sydney - a clever mouse skilled
         at hiding and evasion from the rats,
@@ -25,7 +25,7 @@ while run_again == True:
         the castle.  
         
         3. Aster - a brave mouse quick to
-        cause fright in rats and people
+        cause fright in cats and people
         who occupy the castle.  
         
         """)
@@ -36,7 +36,7 @@ while run_again == True:
             run_again = False
 
     except:
-        pass
+        continue
 
 
 if choice == '1':
@@ -56,3 +56,7 @@ player.take_item(char_list[2][0])
 player.take_item(char_list[2][1])
 
 player.list_inventory()
+
+
+
+
