@@ -15,9 +15,9 @@ spoon = item.Item('spoon', 'There is no spoon')
 # test_doors = [red]
 # cat = character.Character('cat', 'Putty Tat', [])
 # test_characters = [cat]
-def pretty_print_dict(dict):
-    for k, v in dict.items():
-        print('{}. {}'.format(k, v))
+# def pretty_print_dict(dict):
+    for k in dict:
+        print(k + '. ' + dict[k])
 
 
 map = item.Item('map', 'You found the map')
@@ -48,7 +48,9 @@ while not game_over:
         valid_input = False
         while not valid_input:
                 try:
-                    look_select = input(pretty_print_dict(look_dict))
+                    for k in look_dict:
+                        print(k + '. ' + look_dict[k])
+                    look_select = input()
                     look_dict[look_select].look()
                     valid_input = True
                 except KeyError:
@@ -63,7 +65,9 @@ while not game_over:
         valid_input = False
         while not valid_input:
                 try:
-                    move_select = input(pretty_print_dict(move_dict))
+                    for k in move_dict:
+                        print(k + '. ' + move_dict[k])
+                    move_select = input()
                     current_room = current_room.open_door(room_controller.door_dict[move_dict[move_select]])
                     valid_input = True
                 except KeyError:
@@ -79,7 +83,9 @@ while not game_over:
         valid_input = False
         while not valid_input:
                 try:
-                    peek_select = input(pretty_print_dict(peek_dict))
+                    for k in peek_dict:
+                        print(k + '. ' + peek_dict[k])
+                    peek_select = input()
                     current_room.peek_room(room_controller.door_dict[peek_dict[peek_select]])
                     valid_input = True
                 except KeyError:
