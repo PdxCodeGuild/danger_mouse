@@ -47,25 +47,21 @@ def create_character():
     
     
     if choice == '1':
-        befriend_1 = item.Spell('Befriend')
-        befriend_2 = item.Spell('Befriend')
+        befriend_1 = item.Befriend()
+        befriend_2 = item.Befriend()
         char_list = ['Mortimer', 'You are an elderly mouse who\'s body is worn, but who\'s smile is genuine.', 'library', [befriend_1, befriend_2]]
     
     if choice == '2':
-        hide_1 = item.Spell('Hide')
-        hide_2 = item.Spell('Hide')
+        hide_1 = item.Hide()
+        hide_2 = item.Hide()
         char_list = ['Sydney', 'You try to look at yourself, but you quickly dodge your own gaze and hide in the shadows.', 'nest', [hide_1, hide_2] ]
     
     if choice == '3':
-        scare_1 = item.Spell('Scare')
-        scare_2 = item.Spell('Scare')
+        scare_1 = item.Scare()
+        scare_2 = item.Scare()
         char_list = ['Aster', 'Your physical appearance is not notable, but you act with confidence that leaves others intimidated.', 'chapel', [scare_1, scare_2]]
     
     player = character.Mouse(char_list[0], char_list[1], char_list[2])
     player.take_item_quiet(char_list[3][0])
     player.take_item_quiet(char_list[3][1])
     return player
-
-
-
-

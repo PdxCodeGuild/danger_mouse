@@ -24,7 +24,7 @@ class Item:
         return self.__str__()
 
     def look(self):
-        print(self.description)
+        return self.description
 # Fish will be instantiated from the Item class, rather than being a class.
 
 
