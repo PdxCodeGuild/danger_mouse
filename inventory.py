@@ -10,7 +10,6 @@ class Inventory:
         """This method will add an item object to inventory, although"""
         try:
             self.bag_of_holding.append(item)
-            item.inventory = self # creates a link between Item and Inventory
             print("You have added {} to your inventory.".format(item))
         except:
             print('Error in Inventory method: put_in')
@@ -30,7 +29,7 @@ class Inventory:
         """Displays inventory of object to console, excludes spells that have been cast."""
 
         for item in self.bag_of_holding:
-            if 'casted' not in item.name:
+            if 'casted' not in item:
                 print(str(item))
 
     def poplar(self, item_to_be_popped):
