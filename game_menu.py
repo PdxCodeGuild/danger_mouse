@@ -93,8 +93,7 @@ while not game_over:
                             '1. Look at item \n'
                             '2. Use item \n'
                             '3. Drop item\n')
-        if '1' in action_select:
-                            '3. Drop item')
+
         if '1' in item_action:
             inv_dict[item_select].look()
             print('\n')
