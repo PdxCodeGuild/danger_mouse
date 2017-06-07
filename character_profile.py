@@ -1,9 +1,11 @@
-
 """
 
 """
 
-while True:
+import character, item
+run_again = True
+while run_again == True:
+
     print("""
         Welcome to the game Danger Mouse!  
         Your goal will be to avoid danger
@@ -34,11 +36,33 @@ while True:
         """)
 
     try:
-        player = input("Please choose your mouse: ")
+        choice = input("Do you choose character 1, 2, or 3?\n:")
+        if choice == '1' or choice == '2' or choice == '3':
+            run_again = False
 
     except:
-        ValueError
         continue
+
+
+if choice == '1':
+    befriend_1 = item.Spell('Befriend')
+    befriend_2 = item.Spell('Befriend')
+    char_list = ['Mortimer', 'You are an elderly mouse who\'s body is worn, but who\'s smile is genuine.', [befriend_1, befriend_2]]
+if choice == '2':
+    hide_1 = item.Spell('Hide')
+    hide_2 = item.Spell('Hide')
+    char_list = ['Sydney', 'You try to look at yourself, but you quickly dodge your own gaze and hide in the shadows.', [hide_1, hide_2] ]
+if choice == '3':
+    scare_1 = item.Spell('Scare')
+    scare_2 = item.Spell('Scare')
+    char_list = ['Aster', 'Your physical appearance is not notable, but you act with confidence that leaves others intimidated.', [scare_1, scare_2]]
+
+
+player = character.Mouse(char_list[0], char_list[1])
+player.take_item(char_list[2][0])
+player.take_item(char_list[2][1])
+
+player.list_inventory()
 
 
 
