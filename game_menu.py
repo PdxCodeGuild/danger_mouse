@@ -45,9 +45,14 @@ while not game_over:
         for character in current_room.characters:
             look_dict[str(i)] = character
             i += 1
-
-        look_select = input(pretty_print_dict(look_dict))
-        look_dict[look_select].look()
+        valid_input = False
+        while not valid_input:
+                try:
+                    look_select = input(pretty_print_dict(look_dict))
+                    look_dict[look_select].look()
+                    valid_input = True
+                except KeyError:
+                    print("Not a valid input")
 
     elif '2' in action_select or 'move' in action_select:
         i = 1
@@ -55,8 +60,14 @@ while not game_over:
         for door in current_room.doors:
             move_dict[str(i)] = door
             i += 1
-        move_select = input(pretty_print_dict(move_dict))
-        current_room = current_room.open_door(room_controller.door_dict[move_dict[move_select]])
+        valid_input = False
+        while not valid_input:
+                try:
+                    move_select = input(pretty_print_dict(move_dict))
+                    current_room = current_room.open_door(room_controller.door_dict[move_dict[move_select]])
+                    valid_input = True
+                except KeyError:
+                    print("Not a valid input")
 
     elif '3' in action_select or 'peek' in action_select:
         i = 1
@@ -64,8 +75,15 @@ while not game_over:
         for door in current_room.doors:
             peek_dict[str(i)] = door
             i += 1
-        peek_select = input(pretty_print_dict(peek_dict))
-        current_room.peek_room(room_controller.door_dict[peek_dict[peek_select]])
+
+        valid_input = False
+        while not valid_input:
+                try:
+                    peek_select = input(pretty_print_dict(peek_dict))
+                    current_room.peek_room(room_controller.door_dict[peek_dict[peek_select]])
+                    valid_input = True
+                except KeyError:
+                    print("Not a valid input")
 
     elif '4' in action_select or 'inventory' in action_select:
         inv_dict = danger_mouse.inventory.list_inventory()
