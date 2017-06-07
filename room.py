@@ -8,6 +8,11 @@ class Room():
         self.characters = characters
         self.inventory = Inventory()
 
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return self.name
 
     def open_door(self, door): #character.inventory
         if door.is_locked == True:
@@ -49,6 +54,12 @@ class Door():
         self.back = room2
         self.is_locked = is_locked
         self.key = key
+
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return self.name
 
     def look(self):
         print(self.name + '/n' + self.description)
