@@ -37,7 +37,7 @@ while not game_over:
         i = 1
         look_dict = {}
         for door in current_room.doors:
-            look_dict[str(i)] = door
+            look_dict[str(i)] = room_controller.door_dict[door]
             i += 1
         for item in current_room.inventory.bag_of_holding:
             look_dict[str(i)] = item
@@ -93,13 +93,14 @@ while not game_over:
                             '1. Look at item \n'
                             '2. Use item \n'
                             '3. Drop item\n')
-        if '1' in action_select:
+
+        if '1' in item_action:
             inv_dict[item_select].look()
             print('\n')
-        if '2' in action_select:
+        if '2' in item_action:
             print('You attempt to use the {}, but nothing happens'.format(inv_dict[item_select]))
-        if '3' in action_select:
-            current_room.inventory.put_in(inv_dict[item_select])
+        if '3' in item_action:
+            current_room.inventory.put_in(danger_mouse.inventory.poplar(inv_dict[item_select]))
 
     elif '5' in action_select or 'interact' in action_select:
         action_dict = {}
