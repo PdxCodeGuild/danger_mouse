@@ -49,6 +49,8 @@ class Room():
         if door.is_locked == True and player.check_inventory(door.key):
             print('The door is unlocked.')
             door.is_locked = False
+        if door.is_locked == False:
+            print('The door is already unlocked')
 
     def peek_room(self, door):
         '''Look around/examine/search room'''
@@ -84,3 +86,7 @@ class Door():
 
     def look(self):
         print(self.name + '/n' + self.description)
+
+    def action(self, room, player):
+        room.use_key(self, player)
+
