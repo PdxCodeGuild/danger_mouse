@@ -1,7 +1,12 @@
+"""
+
+"""
+
 import character, item
 import room
 run_again = True
 while run_again == True:
+
     print("""
         Welcome to the game Danger Mouse!  
         Your goal will be to avoid danger
@@ -59,4 +64,7 @@ player = character.Mouse(char_list[0], char_list[1], char_list[2])
 player.take_item(char_list[3][0])
 player.take_item(char_list[3][1])
 player.list_inventory()
+
+
+
 
