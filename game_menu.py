@@ -26,6 +26,7 @@ current_room.inventory.put_in(spoon)
 current_room.characters.append(baby_mouse)
 danger_mouse = character.Mouse('Ralph', 'Test Character', current_room)
 danger_mouse.inventory.put_in(map)
+print("You are a 🐭")
 while not game_over:
     current_room.look()
     action_select = str(input('1. Look \n'
