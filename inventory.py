@@ -39,6 +39,7 @@ class Inventory:
         for item in self.bag_of_holding:
             if 'casted' not in item.name:
                 inv_dict[str(i)] = item
+                i += 1
         return inv_dict
 
     def poplar(self, item_to_be_popped):
