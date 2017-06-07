@@ -108,29 +108,29 @@ def update_all(characters, castle):
 
 
 
-game_over = False
-current_room = nest
-characters = []
-player = Mouse('Mouse', 'Looks like a mouse', current_room)
-while not game_over:
-    failed_door_open = ''
-    current_room.surroundings()
-    user_input = (input('What is  your command?'))
-    user_input = user_input.lower()
-
-
-    if 'open' in user_input:
-        for door in current_room.doors:
-            if door in user_input:
-                current_room = current_room.open_door(door_dict[door])
-                break
-
-    if 'use' in user_input:
-        for thing in user_input:
-            if 'key' in thing:
-                for door in current_room.doors:
-                    if door.name in user_input:
-                        current_room.use_key(door, player)
+# game_over = False
+# current_room = nest
+# characters = []
+# player = Mouse('Mouse', 'Looks like a mouse', current_room)
+# while not game_over:
+#     failed_door_open = ''
+#     current_room.surroundings()
+#     user_input = (input('What is  your command?'))
+#     user_input = user_input.lower()
+#
+#
+#     if 'open' in user_input:
+#         for door in current_room.doors:
+#             if door in user_input:
+#                 current_room = current_room.open_door(door_dict[door])
+#                 break
+#
+#     if 'use' in user_input:
+#         for thing in user_input:
+#             if 'key' in thing:
+#                 for door in current_room.doors:
+#                     if door.name in user_input:
+#                         current_room.use_key(door, player)
 
 
 

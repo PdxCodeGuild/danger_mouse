@@ -4,6 +4,7 @@ import character
 import item
 import room
 import types
+#comment
 game_over = False
 
 # current_room = room.Room('Test Room', 'This is only a test', test_doors, test_characters)
