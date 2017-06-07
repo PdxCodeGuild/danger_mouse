@@ -41,7 +41,7 @@ buttery = room.Room('buttery', "The buttery, there's wine and cheese everywhere!
 
 # Door initializations
 # name, description, room1, room2, is_locked, key_name
-mouse_hole = room.Door('mouse_hole', 'Sign says Welcome', nest, library, False, 'mouse_hole_key')
+mouse_hole = room.Door('mouse_hole', 'A hole in the baseboard of the castle library, the entry way to your humble home.', nest, library, False, 'mouse_hole_key')
 library_door = room.Door('library_door', 'A crack under the door', library, east_hall, False, 'library_door_key')
 swinging_door = room.Door('swinging_door', 'A swinging door', east_hall, grand_hall, False, 'swinging_door_key')
 servant_door = room.Door('servant_door', 'A wooden door', east_hall, serv_chamber, True, 'servant_door_key')
@@ -106,34 +106,34 @@ def update_all(characters, castle):
 
 
 
-
-
-game_over = False
-current_room = nest
-characters = []
-player = Mouse('Mouse', 'Looks like a mouse', current_room)
-while not game_over:
-    failed_door_open = ''
-    current_room.surroundings()
-    user_input = (input('What is  your command?'))
-    user_input = user_input.lower()
-
-
-    if 'open' in user_input:
-        for door in current_room.doors:
-            if door in user_input:
-                current_room = current_room.open_door(door_dict[door])
-                break
-
-    if 'use' in user_input:
-        for thing in user_input:
-            if 'key' in thing:
-                for door in current_room.doors:
-                    if door.name in user_input:
-                        current_room.use_key(door, player)
-
-
-
+#
+#
+# game_over = False
+# current_room = nest
+# characters = []
+# player = Mouse('Mouse', 'Looks like a mouse', current_room)
+# while not game_over:
+#     failed_door_open = ''
+#     current_room.surroundings()
+#     user_input = (input('What is  your command?'))
+#     user_input = user_input.lower()
+#
+#
+#     if 'open' in user_input:
+#         for door in current_room.doors:
+#             if door in user_input:
+#                 current_room = current_room.open_door(door_dict[door])
+#                 break
+#
+#     if 'use' in user_input:
+#         for thing in user_input:
+#             if 'key' in thing:
+#                 for door in current_room.doors:
+#                     if door.name in user_input:
+#                         current_room.use_key(door, player)
+#
+#
+#
 
 
     # if first == 'open':
