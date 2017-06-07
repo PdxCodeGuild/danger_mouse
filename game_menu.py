@@ -18,7 +18,7 @@ while not game_over:
     current_room.look()
     action_select = input('1. Look \n'
                           '2. Move \n'
-                          '3. Inventory \n'
+                          '3. Peek through a door \n'
                           '4. Interact \n')
 
     if action_select == '1':
@@ -44,5 +44,16 @@ while not game_over:
             move_dict[str(i)] = door
             i += 1
         move_select = input(move_dict)
-        current_room.open_door(room_controller.door_dict[move_dict[move_select]])
+        current_room = current_room.open_door(room_controller.door_dict[move_dict[move_select]])
 
+    if action_select == '3':
+        i = 1
+        peek_dict = {}
+        for door in current_room.doors:
+            peek_dict[str(i)] = door
+            i += 1
+        peek_select = input(peek_dict)
+        current_room.peek_room(room_controller.door_dict[peek_dict[peek_select]])
+
+    if action_select == '4':
+        print('Option not implemented')
