@@ -11,16 +11,28 @@ spell_list = ["scare", "hide", "befriend"]
 
 
 class Character:
-    def __init__(self, name, description, char_inv, health=100):
+    def __init__(self, name, description, loc, health=100):
         """
         Initiates a Character object.
         """
+        self.location = loc
         self.description = description
         self.name = name
-        self.inventory = Inventory()
-        self.inventory.put_in(char_inv)
-        self.inventory = Inventory()
+        self.inventory = Inventory(name)
         self.health = health
+
+    def __str__(self):
+        """
+        Overloads print function.
+        """
+        return "{}".format(self.name)
+        # this puts those values into a string, which you need
+
+    def __repr__(self):
+        """
+        Determines what the representation will be when it's in a list.
+        """
+        return "{}".format(self.name)
 
     def move(self):
         """
@@ -40,11 +52,11 @@ class Mouse(Character):
     """
     Instantiates a Mouse or player character.
     """
-    def __init__(self, name, description, start_location, health=100):
+    def __init__(self, name, description, loc, health=100):
         """Initiates a Mouse object."""
-        super().__init__(name, description, health)
-        self.location = start_location
-        self.inventory = Inventory()
+        super().__init__(name, description, loc, health)
+        self.location = loc
+        self.inventory = Inventory(name)
 
     def take_food(self, my_food):
 
@@ -65,8 +77,7 @@ class Mouse(Character):
         """
         This function works on any non-food item, whether spell or fish.
         """
-        self.inventory.append(str(my_item))
-        return self.inventory
+        self.inventory.put_in(my_item)
 
     def cast_spell(self, my_spell):
         """
@@ -85,8 +96,8 @@ class Rat(Character):
     Instanties a Rat character.
     """
 
-    def __init__(self, description, inventory, aggression=randrange(0, 2)):
-        super().__init__(self, description, inventory)
+    def __init__(self, name, description, aggression=randrange(0, 2)):
+        super().__init__('rat', 'a rat')
         self.agression = aggression
         self.friend = False
 
@@ -115,11 +126,11 @@ class Rat(Character):
 
 
 class Cat(Character):
-    def __init__(self, description, aggression=randrange(2, 3)):
+    def __init__(self, name, description, loc, aggression=randrange(2, 3)):
         """
         Instantiates a Cat character.
         """
-        super().__init__(self, description, inventory)
+        super().__init__("cat", "a cat", inventory, loc)
         self.agression = aggression
         turns_until_move = random.randrange(3, 6)
         destination = ""
@@ -163,12 +174,12 @@ class Dog(Character):
     searching = 0
     resting = False
 
-    def __init__(self, description, aggression=randrange(1, 4)):
+    def __init__(self, name, description, loc, aggression=randrange(1, 4)):
         """
         Instantiates a Dog character.
         """
-        super().__init__(self, description, inventory)
-        self.aggression = aggression
+        super().__init__("dog", "a dog", inventory, loc)
+        self.agression = aggression
         self.friend = False
         self.resting = False
         self.searching = 0
@@ -200,11 +211,11 @@ class Dog(Character):
 
 
 class Person(Character):
-    def __init__(self, description, inventory, aggression=randrange(1, 5)):
+    def __init__(self, name, description, inventory, loc, aggression=randrange(1, 5)):
         """
         Instantiates a Person character.
         """
-        super().__init__(self, description, inventory)
+        super().__init__("person", "a person", inventory, loc)
         self.agression = aggression
         seen_mouse = False
         destination = ""

@@ -10,11 +10,16 @@ class Inventory:
         """This method will add an item object to inventory, although"""
         try:
             self.bag_of_holding.append(item)
-            item.inventory = self # creates a link between Item and Inventory
             print("You have added {} to your inventory.".format(item))
         except:
             print('Error in Inventory method: put_in')
 
+    def put_in_quiet(self, item):
+        """This method will add an item object to inventory, although"""
+        try:
+            self.bag_of_holding.append(item)
+        except:
+            print('Error in Inventory method: put_in')
 
     def check_inventory(self, check_word):
         """Quick method to check if an item exists in inventory, returns boolean
