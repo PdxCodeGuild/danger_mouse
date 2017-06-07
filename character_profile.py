@@ -15,8 +15,8 @@ while True:
         Please choose a character to play:
         
         1. Mortimer - a wise mouse with a
-        keen understanding of the dogs
-        and people who occupy the castle.  
+        keen understanding of the rats
+        and dogs who occupy the castle.  
         
         2. Sydney - a clever mouse skilled
         at hiding and evasion from the rats,
@@ -24,7 +24,7 @@ while True:
         the castle.  
         
         3. Aster - a brave mouse quick to
-        cause fright in rats and people
+        cause fright in cats and people
         who occupy the castle.  
         
         """)
@@ -33,11 +33,9 @@ while True:
         player = input("Please choose your mouse: ")
 
     except:
+        ValueError
+        continue
 
-    if player == "1":
 
-    elif player == "2":
-
-    elif player == "3":
 
 
