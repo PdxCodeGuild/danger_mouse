@@ -17,12 +17,10 @@ class Character:
         """
         self.description = description
         self.name = name
-        self.inventory = inventory.Inventory()
-        self.inventory.put_in(char_inv)
-        self.inventory = Inventory()
+        self.inventory = Inventory(self) # see the 'owner' argument in the Inventory class (inventory.py)
         self.health = health
 
-    def move(self):
+    def move(self, destination):
         """
         Allows a user to choose to leave / enter rooms.
         """
@@ -41,7 +39,6 @@ class Mouse(Character):
         """Initiates a Mouse object."""
         super().__init__(name, description, health)
         self.location = start_location
-        self.inventory = Inventory()
 
     def take_food(self, my_food):
 
