@@ -19,8 +19,6 @@ class Character:
         self.description = description
         self.name = name
         self.inventory = Inventory()
-        self.inventory.put_in(char_inv)
-
         self.health = health
 
     def __str__(self):
@@ -45,6 +43,9 @@ class Character:
     def activate(self, room):
         """Runs the ai of a character so it can move and act"""
         pass
+
+    def look(self):
+        print(self.description)
 
 
 class Mouse(Character):
