@@ -47,6 +47,9 @@ class Character:
     def look(self):
         print(self.description)
 
+    def action(self, room, character):
+        print('You attempt to do something with {} but you fail at your attempt'.format(self))
+
 
 class Mouse(Character):
     """
@@ -77,7 +80,8 @@ class Mouse(Character):
         """
         This function works on any non-food item, whether spell or fish.
         """
-        self.inventory.put_in(my_item)
+        self.inventory.append(str(my_item))
+        return self.inventory
 
     def cast_spell(self, my_spell):
         """
