@@ -1,4 +1,8 @@
 
+"""
+
+"""
+
 while True:
     print("""
         Welcome to the game Danger Mouse!  
