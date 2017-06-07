@@ -5,7 +5,7 @@ from character import Mouse
 
 room_map = {'nest': ['mouse_hole'],
             'library': ['mouse_hole', 'library_door'],
-            'east_hall': ['library_door', 'swinging_door', 'servant_door', 'master_door', 'guest_door'],
+            'east_hall': ['library_door', 'swinging_door', 'servant_door', 'master_door', 'guest_door', 'gallery_door'],
             'serv_chamber': ['servant_door', 'servant_passage'],
             'gallery': ['gallery_door'],
             'guest_bedroom': ['guest_door'],
@@ -14,8 +14,8 @@ room_map = {'nest': ['mouse_hole'],
             'living_room': ['grand_arch', 'chapel_door'],
             'chapel': ['chapel_door', 'fsm_door'],
             'west_hall': ['fsm_door', 'kitchen_entry'],
-            'kitchen': ['west_hall', 'servant_hall', 'buttery_entry'],
-            'servant_hall': ['serv_chamber', 'serv_kitchen'],
+            'kitchen': ['kitchen_entry', 'serv_kitchen', 'buttery_entry'],
+            'servant_hall': ['servant_passage', 'serv_kitchen'],
             'dresser': ['dresser_drawer'],
             'buttery': ['buttery_entry'],
             'front_lawn':['front_door']
@@ -149,4 +149,3 @@ def update_all(characters, castle):
     #         print('this is a character')
     # if first == 'peek':
     #     current_room.peek_room(door_dict[second])
-

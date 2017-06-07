@@ -10,21 +10,23 @@ game_over = False
 # next_room = room.Room('next room', 'You have made it to the second room', test_doors, test_characters)
 spoon = item.Item('spoon', 'There is no spoon')
 
-
+baby_mouse = character.Character('baby', 'little rodent', room_controller.nest,)
 # red = room.Door('red', 'A door', current_room, next_room , False, 'no')
 # test_doors = [red]
 # cat = character.Character('cat', 'Putty Tat', [])
 # test_characters = [cat]
 def pretty_print_dict(dict):
-    for k, v in dict.items():
-        print('{}. {}'.format(k, v))
+    for k in dict:
+        print('{}. {}'.format(k, dict[k]))
 
 
 map = item.Item('map', 'You found the map')
 current_room = room_controller.nest
 current_room.inventory.put_in(spoon)
+current_room.characters.append(baby_mouse)
 danger_mouse = character.Mouse('Ralph', 'Test Character', current_room)
 danger_mouse.inventory.put_in(map)
+print("You are a 🐭")
 while not game_over:
     current_room.look()
     action_select = str(input('1. Look \n'
@@ -47,12 +49,13 @@ while not game_over:
             i += 1
         valid_input = False
         while not valid_input:
-                try:
-                    look_select = input(pretty_print_dict(look_dict))
-                    look_dict[look_select].look()
-                    valid_input = True
-                except KeyError:
-                    print("Not a valid input")
+            try:
+                pretty_print_dict(look_dict)
+                look_select = input('What do you want to look at?')
+                look_dict[look_select].look()
+                valid_input = True
+            except KeyError:
+                print("Not a valid input")
 
     elif '2' in action_select or 'move' in action_select:
         i = 1
@@ -63,7 +66,9 @@ while not game_over:
         valid_input = False
         while not valid_input:
                 try:
-                    move_select = input(pretty_print_dict(move_dict))
+                    for k in move_dict:
+                        print(k + '. ' + move_dict[k])
+                    move_select = input()
                     current_room = current_room.open_door(room_controller.door_dict[move_dict[move_select]])
                     valid_input = True
                 except KeyError:
@@ -79,7 +84,9 @@ while not game_over:
         valid_input = False
         while not valid_input:
                 try:
-                    peek_select = input(pretty_print_dict(peek_dict))
+                    for k in peek_dict:
+                        print(k + '. ' + peek_dict[k])
+                    peek_select = input()
                     current_room.peek_room(room_controller.door_dict[peek_dict[peek_select]])
                     valid_input = True
                 except KeyError:
