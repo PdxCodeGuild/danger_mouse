@@ -34,7 +34,7 @@ while not game_over:
                           '4. Inventory \n'
                           '5. Interact')
 
-    if action_select == '1':
+    if '1' in action_select:
         i = 1
         look_dict = {}
         for door in current_room.doors:
@@ -50,7 +50,7 @@ while not game_over:
         look_select = input(pretty_print_dict(look_dict))
         look_dict[look_select].look()
 
-    if action_select == '2':
+    elif '2' in action_select:
         i = 1
         move_dict = {}
         for door in current_room.doors:
@@ -59,7 +59,7 @@ while not game_over:
         move_select = input(pretty_print_dict(move_dict))
         current_room = current_room.open_door(room_controller.door_dict[move_dict[move_select]])
 
-    if action_select == '3':
+    elif '3' in action_select:
         i = 1
         peek_dict = {}
         for door in current_room.doors:
@@ -68,7 +68,7 @@ while not game_over:
         peek_select = input(pretty_print_dict(peek_dict))
         current_room.peek_room(room_controller.door_dict[peek_dict[peek_select]])
 
-    if action_select == '4':
+    elif '4' in action_select:
         inv_dict = danger_mouse.inventory.list_inventory()
         pretty_print_dict(inv_dict)
         item_select = input('Select an item')
@@ -76,15 +76,15 @@ while not game_over:
                             '1. Look at item \n'
                             '2. Use item \n'
                             '3. Drop item')
-        if item_action == '1':
+        if '1' in action_select:
             inv_dict[item_select].look()
             print('\n')
-        if item_action == '2':
+        if '2' in action_select:
             print('You attempt to use the {}, but nothing happens'.format(inv_dict[item_select]))
-        if item_action == '3':
+        if '3' in action_select:
             current_room.inventory.put_in(inv_dict[item_select])
 
-    if action_select == '5':
+    elif '5' in action_select:
         action_dict = {}
         i = 1
         for door in current_room.doors:
@@ -99,3 +99,6 @@ while not game_over:
         pretty_print_dict(action_dict)
         action_item = input('What do you want to interact with?')
         action_dict[action_item].action(current_room, danger_mouse)
+
+    else:
+        print('Please enter a valid menu option.')
