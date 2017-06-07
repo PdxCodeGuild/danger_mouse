@@ -17,7 +17,8 @@ room_map = {'nest': ['mouse_hole'],
             'kitchen': ['west_hall', 'servant_hall', 'buttery_entry'],
             'servant_hall': ['serv_chamber', 'serv_kitchen'],
             'dresser': ['dresser_drawer'],
-            'buttery': ['buttery_entry']
+            'buttery': ['buttery_entry'],
+            'front_lawn':['front_door']
             }
 
 
@@ -38,10 +39,11 @@ kitchen = room.Room('kitchen', "Kitchen, there must be cheese somewhere.", room_
 servant_hall = room.Room('servant_hall', "The servants hall. You can't just have your servants walking around the castle like they own the place, right?", room_map['servant_hall'], [])
 dresser = room.Room('dresser', "You find yourself in a dresser, and much to your own surprise it's filled with clothes! You make a note to come back during winter.", room_map['dresser'], [])
 buttery = room.Room('buttery', "The buttery, there's wine and cheese everywhere!", room_map['buttery'], [])
+outside = room.Room('front_lawn', "You are on the front lawn. You peer upward towards the sky, into the void of infinity. It's a great big universe and you're just a small part of it. The sheer impact of this realization, of having grasped the nature of the cosmos and the universe has unfortunately so blown your mind that it has left you comatose, your family will surely perish. Game Over.",room_map['front_lawn'],[])
 
 # Door initializations
 # name, description, room1, room2, is_locked, key_name
-mouse_hole = room.Door('mouse_hole', 'Sign says Welcome', nest, library, False, 'mouse_hole_key')
+mouse_hole = room.Door('mouse_hole', 'A hole in the baseboard of the castle library, the entry way to your humble home.', nest, library, False, 'mouse_hole_key')
 library_door = room.Door('library_door', 'A crack under the door', library, east_hall, False, 'library_door_key')
 swinging_door = room.Door('swinging_door', 'A swinging door', east_hall, grand_hall, False, 'swinging_door_key')
 servant_door = room.Door('servant_door', 'A wooden door', east_hall, serv_chamber, True, 'servant_door_key')
@@ -56,7 +58,7 @@ buttery_entry = room.Door('butter_entry', 'One more door', kitchen, buttery, Tru
 serv_kitchen = room.Door('serv_kitchen', 'Servants kitchen entrance', kitchen, servant_hall, False, 'serv_door_key')
 servant_passage = room.Door('servant_passage', 'Secret door', serv_chamber, servant_hall, True, 'servant_passage_key')
 dresser_drawer = room.Door('dresser_drawer', 'A dresser drawer', master_bedroom, dresser, False, 'dresser_drawer_key')
-
+front_door = room.Door('front_door', 'The front entrance to the castle, really quite a beautiful doorway, not that the opinion of a mouse matters.',grand_hall, outside, False, 'front_door_key' )
 
 
 door_dict ={'mouse_hole': mouse_hole,
@@ -107,32 +109,29 @@ def update_all(characters, castle):
 
 
 
-
-game_over = False
-current_room = nest
-characters = []
-player = Mouse('Mouse', 'Looks like a mouse', current_room)
-while not game_over:
-    failed_door_open = ''
-    current_room.surroundings()
-    user_input = (input('What is  your command?'))
-    user_input = user_input.lower()
-
-
-    if 'open' in user_input:
-        for door in current_room.doors:
-            if door in user_input:
-                current_room = current_room.open_door(door_dict[door])
-                break
-
-    if 'use' in user_input:
-        for thing in user_input:
-            if 'key' in thing:
-                for door in current_room.doors:
-                    if door.name in user_input:
-                        current_room.use_key(door, player)
-
-
+# game_over = False
+# current_room = nest
+# characters = []
+# player = Mouse('Mouse', 'Looks like a mouse', current_room)
+# while not game_over:
+#     failed_door_open = ''
+#     current_room.surroundings()
+#     user_input = (input('What is  your command?'))
+#     user_input = user_input.lower()
+#
+#
+#     if 'open' in user_input:
+#         for door in current_room.doors:
+#             if door in user_input:
+#                 current_room = current_room.open_door(door_dict[door])
+#                 break
+#
+#     if 'use' in user_input:
+#         for thing in user_input:
+#             if 'key' in thing:
+#                 for door in current_room.doors:
+#                     if door.name in user_input:
+#                         current_room.use_key(door, player)
 
 
 
