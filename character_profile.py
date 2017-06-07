@@ -38,12 +38,6 @@ while run_again == True:
     except:
         pass
 
-    if player == "1":
-
-    elif player == "2":
-
-    elif player == "3":
-
 
 if choice == '1':
     befriend_1 = Spell('Befriend')
