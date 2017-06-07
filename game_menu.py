@@ -15,9 +15,9 @@ baby_mouse = character.Character('baby', 'little rodent', room_controller.nest,)
 # test_doors = [red]
 # cat = character.Character('cat', 'Putty Tat', [])
 # test_characters = [cat]
-# def pretty_print_dict(dict):
+def pretty_print_dict(dict):
     for k in dict:
-        print(k + '. ' + dict[k])
+        print('{}. {}'.format(k, dict[k]))
 
 
 map = item.Item('map', 'You found the map')
