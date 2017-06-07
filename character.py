@@ -18,7 +18,7 @@ class Character:
         self.location = loc
         self.description = description
         self.name = name
-        self.inventory = Inventory()
+        self.inventory = Inventory(name)
         self.health = health
 
     def __str__(self):
