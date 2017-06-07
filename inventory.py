@@ -10,11 +10,16 @@ class Inventory:
         """This method will add an item object to inventory, although"""
         try:
             self.bag_of_holding.append(item)
-            item.inventory = self # creates a link between Item and Inventory
             print("You have added {} to your inventory.".format(item))
         except:
             print('Error in Inventory method: put_in')
 
+    def put_in_quiet(self, item):
+        """This method will add an item object to inventory, although"""
+        try:
+            self.bag_of_holding.append(item)
+        except:
+            print('Error in Inventory method: put_in')
 
     def check_inventory(self, check_word):
         """Quick method to check if an item exists in inventory, returns boolean
@@ -26,12 +31,16 @@ class Inventory:
         return is_there
 
     def list_inventory(self):
-        print("You're inventory contains: ")
         """Displays inventory of object to console, excludes spells that have been cast."""
 
+        print('You\'re inventory contains:')
+        i = 1
+        inv_dict = {}
         for item in self.bag_of_holding:
-            if 'casted' not in item:
-                print(str(item))
+            if 'casted' not in item.name:
+                inv_dict[str(i)] = item
+                i += 1
+        return inv_dict
 
     def poplar(self, item_to_be_popped):
         """Checks for existence of item in inventory, if item exists poplar pops that item."""

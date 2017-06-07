@@ -4,10 +4,15 @@ class Room():
     def __init__(self, name,  description, doors, characters):
         self.name = name
         self.description = description
-        self.doors = doors
-        self.characters = characters
-        self.inventory = Inventory()
+        self.doors = list(doors)
+        self.characters = list(characters)
+        self.inventory = Inventory(name)
 
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return self.name
 
     def open_door(self, door): #character.inventory
         if door.is_locked == True:
@@ -22,6 +27,9 @@ class Room():
     def add_item(self, item):
         self.inventory.put_in(item)
 
+    def update_characters(self, characters):
+        self.characters = list(characters)
+
     def remove_item(self, item):
         self.inventory.poplar(item)
 
@@ -29,6 +37,7 @@ class Room():
         self.inventory.check_inventory(item)
 
     def surroundings(self):
+        print(self.description)
         for character in self.characters:
             print(character.name + " is in the room")
         for item in self.inventory.bag_of_holding:
@@ -40,15 +49,18 @@ class Room():
         if door.is_locked == True and player.check_inventory(door.key):
             print('The door is unlocked.')
             door.is_locked = False
+        if door.is_locked == False:
+            print('The door is already unlocked')
 
     def peek_room(self, door):
         '''Look around/examine/search room'''
         print(door.back.description)
+        print(self.characters)
 
     def look(self):
         '''Singular/specific inspection for items, doors, etc'''
         print(self.name + '\n' +self.description + '\n')
-        print('Exits \n')
+        print('Exits')
         for door in self.doors:
             print(door)
 
@@ -66,5 +78,15 @@ class Door():
         self.is_locked = is_locked
         self.key = key
 
+    def __str__(self):
+        return self.name
+
+    def __repr__(self):
+        return self.name
+
     def look(self):
         print(self.name + '/n' + self.description)
+
+    def action(self, room, player):
+        room.use_key(self, player)
+
