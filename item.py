@@ -52,3 +52,26 @@ class Spell(Item):
         Instantiates a spell item.
         """
         super().__init__(name)
+
+
+class Scare(Spell):
+    """
+    This class represents the Scare Spell.
+    """
+    def cast_spell(self, target):
+        if target.aggression <= 2:  # if character's aggression level is low, it escapes
+            target.move(destination)
+        else:
+            self.inventory.owner.health -= target.agression * 3  # if character's aggression level is high, mouse loses health points.
+
+
+class Hide(Spell):
+    """
+    This class represents Hide Spell. Mouse escapes into another room.
+    """
+
+
+class Befriend(Spell):
+    """
+    This class represents Befriend Spell.
+    """

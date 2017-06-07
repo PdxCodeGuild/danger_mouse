@@ -20,7 +20,7 @@ class Room():
         return self
 
     def add_item(self, item):
-        self.inventoy.put_in(item)
+        self.inventory.put_in(item)
 
     def remove_item(self, item):
         self.inventory.poplar(item)

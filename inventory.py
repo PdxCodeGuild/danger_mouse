@@ -1,16 +1,17 @@
 class Inventory:
-    def __init__(self):
+    def __init__(self, owner):
         """The most complex object in this game is the inventory object as seen below.
         a full description of it's characteristics and functions can be found in the read
         me"""
         self.bag_of_holding = []
-        pass
+        self.owner = owner
 
     def put_in(self, item):
         """This method will add an item object to inventory, although"""
         try:
             self.bag_of_holding.append(item)
-            print("You have added {} to your inventory.".format(str(item)))
+            item.inventory = self # creates a link between Item and Inventory
+            print("You have added {} to your inventory.".format(item))
         except:
             print('Error in Inventory method: put_in')
 
