@@ -47,6 +47,8 @@ class Character:
     def look(self):
         print(self.description)
 
+    def action(self, room, player):
+        print('You try to do something to {} but nothing happens'.format(self))
 
 class Mouse(Character):
     """

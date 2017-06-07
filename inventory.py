@@ -31,12 +31,16 @@ class Inventory:
         return is_there
 
     def list_inventory(self):
-        print("You're inventory contains: ")
         """Displays inventory of object to console, excludes spells that have been cast."""
 
+        print('You\'re inventory contains:')
+        i = 1
+        inv_dict = {}
         for item in self.bag_of_holding:
             if 'casted' not in item.name:
-                print(str(item))
+                inv_dict[str(i)] = item
+                i += 1
+        return inv_dict
 
     def poplar(self, item_to_be_popped):
         """Checks for existence of item in inventory, if item exists poplar pops that item."""
