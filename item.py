@@ -69,11 +69,16 @@ class Scare(Spell):
         Instantiates a spell item.
         """
         super().__init__("scare", "This spell scares everyone fearful out of the room.")
+
     def cast_spell(self, player, target, destination):
+        """
+        If the target's aggression level is low enough, it escapes into another room.
+        If the target's aggression level is too high, the mouse looses health points.
+        """
         if target.aggression <= 2:  # if the target's aggression level is low, it escapes
             target.move(destination)
         else:
-            player.inventory.owner.health -= target.agression * 3  # if character's aggression level is high, mouse loses health points.
+            player.inventory.owner.health -= target.agression * 3
 
 
 class Hide(Spell):
@@ -85,7 +90,11 @@ class Hide(Spell):
         Instantiates a spell item.
         """
         super().__init__("hide", "This spell allows you to hide from everyone in the room.")
+
     def cast_spell(self, player, destination):
+        """
+        Once this spell is casted, the mouse escapes into another room.
+        """
         player.move(destination)
 
 
@@ -99,9 +108,15 @@ class Befriend(Spell):
         Instantiates a spell item.
         """
         super().__init__("befriend", "This spell allows befriend everyone in the room.")
+
     def cast_spell(self, player, target):
+        """
+        If the target's aggression level is low enough, the mouse and the character both gain health points.
+        If the target's aggression level is too high, the spell will not work.
+        """
         if target.agression <= 2:
-            player.inventory.owner.health += target.agression * 3  # if character's aggression level is low, mouse gains health points.
+            player.inventory.owner.health += target.agression * 2
+            target.inventory.owner.health += target.agression * 2
         else:
             print("{} is not in the mood to make friends".format(target))
 
