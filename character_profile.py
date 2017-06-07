@@ -4,6 +4,7 @@
 
 import character, item
 import room
+import inventory
 def create_character():
     run_again = True
     while run_again == True:
@@ -64,6 +65,4 @@ def create_character():
     player = character.Mouse(char_list[0], char_list[1], char_list[2])
     player.inventory.put_in_quiet(char_list[3][0])
     player.inventory.put_in_quiet(char_list[3][1])
-    player.look()
-    player.inventory.list_inventory()
     return player
