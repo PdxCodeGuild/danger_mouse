@@ -3,8 +3,8 @@ import csv
 import character
 from character import Mouse
 
-room_map = {'nest': ['home_door'],
-            'library': ['home_door', 'library_door'],
+room_map = {'nest': ['mouse_hole'],
+            'library': ['mouse_hole', 'library_door'],
             'east_hall': ['library_door', 'swinging_door', 'servant_door', 'master_door', 'guest_door'],
             'serv_chamber': ['servant_door', 'servant_passage'],
             'gallery': ['gallery_door'],
@@ -41,7 +41,7 @@ buttery = room.Room('buttery', "The buttery, there's wine and cheese everywhere!
 
 # Door initializations
 # name, description, room1, room2, is_locked, key_name
-home_door = room.Door('home_door', 'Sign says Welcome', nest, library, False, 'home_door_key')
+mouse_hole = room.Door('mouse_hole', 'Sign says Welcome', nest, library, False, 'mouse_hole_key')
 library_door = room.Door('library_door', 'A crack under the door', library, east_hall, False, 'library_door_key')
 swinging_door = room.Door('swinging_door', 'A swinging door', east_hall, grand_hall, False, 'swinging_door_key')
 servant_door = room.Door('servant_door', 'A wooden door', east_hall, serv_chamber, True, 'servant_door_key')
@@ -59,7 +59,7 @@ dresser_drawer = room.Door('dresser_drawer', 'A dresser drawer', master_bedroom,
 
 
 
-door_dict ={'home_door': home_door,
+door_dict ={'mouse_hole': mouse_hole,
             'library_door': library_door,
             'swinging_door': swinging_door,
             'servant_door': servant_door,
@@ -108,29 +108,29 @@ def update_all(characters, castle):
 
 
 
-game_over = False
-current_room = nest
-characters = []
-player = Mouse('Mouse', 'Looks like a mouse', current_room)
-while not game_over:
-    failed_door_open = ''
-    current_room.surroundings()
-    user_input = (input('What is  your command?'))
-    user_input = user_input.lower()
-
-
-    if 'open' in user_input:
-        for door in current_room.doors:
-            if door in user_input:
-                current_room = current_room.open_door(door_dict[door])
-                break
-
-    if 'use' in user_input:
-        for thing in user_input:
-            if 'key' in thing:
-                for door in current_room.doors:
-                    if door.name in user_input:
-                        current_room.use_key(door, player)
+# game_over = False
+# current_room = nest
+# characters = []
+# player = Mouse('Mouse', 'Looks like a mouse', current_room)
+# while not game_over:
+#     failed_door_open = ''
+#     current_room.surroundings()
+#     user_input = (input('What is  your command?'))
+#     user_input = user_input.lower()
+#
+#
+#     if 'open' in user_input:
+#         for door in current_room.doors:
+#             if door in user_input:
+#                 current_room = current_room.open_door(door_dict[door])
+#                 break
+#
+#     if 'use' in user_input:
+#         for thing in user_input:
+#             if 'key' in thing:
+#                 for door in current_room.doors:
+#                     if door.name in user_input:
+#                         current_room.use_key(door, player)
 
 
 

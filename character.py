@@ -18,7 +18,7 @@ class Character:
         self.location = loc
         self.description = description
         self.name = name
-        self.inventory = Inventory()
+        self.inventory = Inventory(name)
         self.health = health
 
     def __str__(self):
@@ -77,8 +77,7 @@ class Mouse(Character):
         """
         This function works on any non-food item, whether spell or fish.
         """
-        self.inventory.append(str(my_item))
-        return self.inventory
+        self.inventory.put_in(my_item)
 
     def cast_spell(self, my_spell):
         """
