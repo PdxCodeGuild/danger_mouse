@@ -11,18 +11,19 @@ spell_list = ["scare", "hide", "befriend"]
 
 
 class Character:
-    def __init__(self, name, description, char_inv, health=100):
+    def __init__(self, name, description, char_inv, loc, health=100):
         """
         Initiates a Character object.
         """
+        self.location = loc
         self.description = description
         self.name = name
         self.inventory = Inventory()
         self.inventory.put_in(char_inv)
-        self.inventory = Inventory()
+
         self.health = health
 
-    def move(self):
+    def move(self, destination):
         """
         Allows a user to choose to leave / enter rooms.
         """
@@ -37,11 +38,10 @@ class Mouse(Character):
     """
     Instantiates a Mouse or player character.
     """
-    def __init__(self, name, description, start_location, health=100):
+    def __init__(self, name, description, loc, health=100):
         """Initiates a Mouse object."""
-        super().__init__(name, description, health)
+        super().__init__(name, description, self.inventory, loc, health)
         self.location = start_location
-        self.inventory = Inventory()
 
     def take_food(self, my_food):
 
@@ -82,8 +82,8 @@ class Rat(Character):
     Instanties a Rat character.
     """
 
-    def __init__(self, description, inventory, aggression=randrange(0, 2)):
-        super().__init__(self, description, inventory)
+    def __init__(self, description, inventory, loc, aggression=randrange(0, 2)):
+        super().__init__(self, description, inventory, loc)
         self.agression = aggression
         self.friend = False
 
@@ -112,11 +112,11 @@ class Rat(Character):
 
 
 class Cat(Character):
-    def __init__(self, description, aggression=randrange(2, 3)):
+    def __init__(self, description, loc, aggression=randrange(2, 3)):
         """
         Instantiates a Cat character.
         """
-        super().__init__(self, description, inventory)
+        super().__init__(self, description, inventory, loc)
         self.agression = aggression
         turns_until_move = random.randrange(3, 6)
         destination = ""
@@ -160,11 +160,11 @@ class Dog(Character):
     searching = 0
     resting = False
 
-    def __init__(self, description, aggression=randrange(1, 4)):
+    def __init__(self, description, loc, aggression=randrange(1, 4)):
         """
         Instantiates a Dog character.
         """
-        super().__init__(self, description, inventory)
+        super().__init__(self, description, inventory, loc)
         self.aggression = aggression
         self.friend = False
         self.resting = False
@@ -197,11 +197,11 @@ class Dog(Character):
 
 
 class Person(Character):
-    def __init__(self, description, inventory, aggression=randrange(1, 5)):
+    def __init__(self, description, inventory, loc, aggression=randrange(1, 5)):
         """
         Instantiates a Person character.
         """
-        super().__init__(self, description, inventory)
+        super().__init__(self, description, inventory, loc)
         self.agression = aggression
         seen_mouse = False
         destination = ""
