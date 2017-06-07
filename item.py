@@ -12,12 +12,12 @@ class Item:
         """
         self.name = name
         self.description = description
+
     def __str__(self):
         """
         Overloads print function.
         """
         return self.name
-        # this puts those values into a string, which you need
 
     def __repr__(self):
         """
@@ -27,6 +27,7 @@ class Item:
 
     def look(self):
         print('{}: {}'.format(self.name, self.description))
+
 # Fish will be instantiated from the Item class, rather than being a class.
     def action(self, room, character):
         character.inventory.put_in(room.inventory.poplar(self))
