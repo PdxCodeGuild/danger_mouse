@@ -29,9 +29,10 @@ class Room():
         self.inventory.check_inventory(item)
 
     def surroundings(self):
+        print(self.description)
         for character in self.characters:
             print(character.name + " is in the room")
-        for item in self.inventory.bag_of_holding
+        for item in self.inventory.bag_of_holding:
             print(item + " is in the room")
         for door in self.doors:
             print("You can exit through " + door)
