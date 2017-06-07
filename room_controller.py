@@ -92,6 +92,20 @@ room_dict ={'nest': nest,
             }
 
 
+# when passed a list of all the characters and rooms, will sort through them and update the locations on each accordingly
+def update_all(characters, castle):
+    for loc in castle:
+        temp_list = []
+        for person in characters:
+            if person.location == loc.name:
+                temp_list.append(person)
+        loc.update_characters(temp_list)
+
+
+
+
+
+
 
 
 game_over = False

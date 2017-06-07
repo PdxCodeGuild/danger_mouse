@@ -5,7 +5,7 @@ class Room():
         self.name = name
         self.description = description
         self.doors = doors
-        self.characters = characters
+        self.characters = list(characters)
         self.inventory = Inventory()
 
 
@@ -21,6 +21,9 @@ class Room():
 
     def add_item(self, item):
         self.inventory.put_in(item)
+
+    def update_characters(self, characters):
+        self.characters = list(characters)
 
     def remove_item(self, item):
         self.inventory.poplar(item)
