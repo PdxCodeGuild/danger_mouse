@@ -30,7 +30,7 @@ class Inventory:
         """Displays inventory of object to console, excludes spells that have been cast."""
 
         for item in self.bag_of_holding:
-            if 'casted' not in item:
+            if 'casted' not in item.name:
                 print(str(item))
 
     def poplar(self, item_to_be_popped):
