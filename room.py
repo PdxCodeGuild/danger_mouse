@@ -58,7 +58,7 @@ class Room():
     def look(self):
         '''Singular/specific inspection for items, doors, etc'''
         print(self.name + '\n' +self.description + '\n')
-        print('Exits \n')
+        print('Exits')
         for door in self.doors:
             print(door)
 

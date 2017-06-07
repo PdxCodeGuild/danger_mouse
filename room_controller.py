@@ -106,8 +106,7 @@ def update_all(characters, castle):
 
 
 
-#
-#
+
 # game_over = False
 # current_room = nest
 # characters = []
@@ -131,9 +130,7 @@ def update_all(characters, castle):
 #                 for door in current_room.doors:
 #                     if door.name in user_input:
 #                         current_room.use_key(door, player)
-#
-#
-#
+
 
 
     # if first == 'open':
