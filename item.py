@@ -14,7 +14,7 @@ class Item:
         """
         Overloads print function.
         """
-        return "{}".format(self.name)
+        return self.name
         # this puts those values into a string, which you need
 
     def __repr__(self):
