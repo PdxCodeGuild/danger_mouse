@@ -27,11 +27,11 @@ danger_mouse = character.Mouse('Ralph', 'Test Character', current_room)
 danger_mouse.inventory.put_in(map)
 while not game_over:
     current_room.look()
-    action_select = input('1. Look \n'
+    action_select = str(input('1. Look \n'
                           '2. Move \n'
                           '3. Peek through a door \n'
                           '4. Inventory \n'
-                          '5. Interact')
+                          '5. Interact'))
 
     if action_select == '1':
         i = 1
