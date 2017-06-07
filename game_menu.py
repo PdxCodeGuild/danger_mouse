@@ -4,7 +4,6 @@ import character
 import item
 import room
 import types
-#comment
 game_over = False
 
 # current_room = room.Room('Test Room', 'This is only a test', test_doors, test_characters)
@@ -28,13 +27,13 @@ danger_mouse = character.Mouse('Ralph', 'Test Character', current_room)
 danger_mouse.inventory.put_in(map)
 while not game_over:
     current_room.look()
-    action_select = input('1. Look \n'
+    action_select = str(input('1. Look \n'
                           '2. Move \n'
                           '3. Peek through a door \n'
                           '4. Inventory \n'
-                          '5. Interact')
+                          '5. Interact\n')).lower()
 
-    if '1' in action_select:
+    if '1' in action_select or 'look' in action_select:
         i = 1
         look_dict = {}
         for door in current_room.doors:
@@ -46,35 +45,55 @@ while not game_over:
         for character in current_room.characters:
             look_dict[str(i)] = character
             i += 1
+        valid_input = False
+        while not valid_input:
+                try:
+                    look_select = input(pretty_print_dict(look_dict))
+                    look_dict[look_select].look()
+                    valid_input = True
+                except KeyError:
+                    print("Not a valid input")
 
-        look_select = input(pretty_print_dict(look_dict))
-        look_dict[look_select].look()
-
-    elif '2' in action_select:
+    elif '2' in action_select or 'move' in action_select:
         i = 1
         move_dict = {}
         for door in current_room.doors:
             move_dict[str(i)] = door
             i += 1
-        move_select = input(pretty_print_dict(move_dict))
-        current_room = current_room.open_door(room_controller.door_dict[move_dict[move_select]])
+        valid_input = False
+        while not valid_input:
+                try:
+                    move_select = input(pretty_print_dict(move_dict))
+                    current_room = current_room.open_door(room_controller.door_dict[move_dict[move_select]])
+                    valid_input = True
+                except KeyError:
+                    print("Not a valid input")
 
-    elif '3' in action_select:
+    elif '3' in action_select or 'peek' in action_select:
         i = 1
         peek_dict = {}
         for door in current_room.doors:
             peek_dict[str(i)] = door
             i += 1
-        peek_select = input(pretty_print_dict(peek_dict))
-        current_room.peek_room(room_controller.door_dict[peek_dict[peek_select]])
 
-    elif '4' in action_select:
+        valid_input = False
+        while not valid_input:
+                try:
+                    peek_select = input(pretty_print_dict(peek_dict))
+                    current_room.peek_room(room_controller.door_dict[peek_dict[peek_select]])
+                    valid_input = True
+                except KeyError:
+                    print("Not a valid input")
+
+    elif '4' in action_select or 'inventory' in action_select:
         inv_dict = danger_mouse.inventory.list_inventory()
         pretty_print_dict(inv_dict)
         item_select = input('Select an item')
         item_action = input('What do you wish to do with this item? \n'
                             '1. Look at item \n'
                             '2. Use item \n'
+                            '3. Drop item\n')
+        if '1' in action_select:
                             '3. Drop item')
         if '1' in item_action:
             inv_dict[item_select].look()
@@ -84,7 +103,7 @@ while not game_over:
         if '3' in item_action:
             current_room.inventory.put_in(danger_mouse.inventory.poplar(inv_dict[item_select]))
 
-    elif '5' in action_select:
+    elif '5' in action_select or 'interact' in action_select:
         action_dict = {}
         i = 1
         for door in current_room.doors:
@@ -97,7 +116,7 @@ while not game_over:
             action_dict[str(i)] = character
             i += 1
         pretty_print_dict(action_dict)
-        action_item = input('What do you want to interact with?')
+        action_item = input('What do you want to interact with?\n')
         action_dict[action_item].action(current_room, danger_mouse)
 
     else:
