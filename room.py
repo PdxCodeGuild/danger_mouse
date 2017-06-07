@@ -56,11 +56,11 @@ class Room():
         '''Look around/examine/search room'''
         if self.name == door.front.name:
             print(door.back.name)
-            for character in door.front.characters:
+            for character in door.back.characters:
                 print('characters in room: {}'.format(character))
         if self.name == door.back.name:
-            print(door.fron.name)
-            for character in door.back.characters:
+            print(door.front.name)
+            for character in door.front.characters:
                 print('characters in room: {}'.format(character))
 
     # def look(self):
