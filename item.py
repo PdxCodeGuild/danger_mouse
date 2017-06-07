@@ -4,10 +4,11 @@ This document contains Classes for the items in our Danger Mouse game.
 
 
 class Item:
-    def __init__(self, name):
+    def __init__(self, name, description):
         """
         Instantiates new Item.
         """
+        self.description = description
         self.name = name
 
     def __str__(self):
@@ -23,6 +24,8 @@ class Item:
         """
         return self.__str__()
 
+    def look(self):
+        return self.description
 # Fish will be instantiated from the Item class, rather than being a class.
 
 
@@ -83,6 +86,5 @@ class Befriend(Spell):
             self.inventory.owner.health += target.agression * 3  # if character's aggression level is low, mouse gains health points.
         else:
             print("{} is not in the mood to make friends".format(target))
-
 
 
