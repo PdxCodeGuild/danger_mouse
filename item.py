@@ -52,30 +52,41 @@ class Food(Item):
 
 
 class Spell(Item):
-    def __init__(self, name):
+    def __init__(self, name, description):
         """
         Instantiates a spell item.
         """
-        super().__init__(name)
+        super().__init__(name, description)
+
 
 
 class Scare(Spell):
     """
     This class represents the Scare Spell.
     """
-    def cast_spell(self, target):
+    def __init__(self):
+        """
+        Instantiates a spell item.
+        """
+        super().__init__("scare", "This spell scares everyone fearful out of the room.")
+    def cast_spell(self, player, target, destination):
         if target.aggression <= 2:  # if the target's aggression level is low, it escapes
             target.move(destination)
         else:
-            self.inventory.owner.health -= target.agression * 3  # if character's aggression level is high, mouse loses health points.
+            player.inventory.owner.health -= target.agression * 3  # if character's aggression level is high, mouse loses health points.
 
 
 class Hide(Spell):
     """
     This class represents Hide Spell.
     """
-    def cast_spell(self, character):
-        character.move(destination)
+    def __init__(self):
+        """
+        Instantiates a spell item.
+        """
+        super().__init__("hide", "This spell allows you to hide from everyone in the room.")
+    def cast_spell(self, player, destination):
+        player.move(destination)
 
 
 
@@ -83,9 +94,14 @@ class Befriend(Spell):
     """
     This class represents Befriend Spell.
     """
-    def cast_spell(self, target):
+    def __init__(self):
+        """
+        Instantiates a spell item.
+        """
+        super().__init__("befriend", "This spell allows befriend everyone in the room.")
+    def cast_spell(self, player, target):
         if target.agression <= 2:
-            self.inventory.owner.health += target.agression * 3  # if character's aggression level is low, mouse gains health points.
+            player.inventory.owner.health += target.agression * 3  # if character's aggression level is low, mouse gains health points.
         else:
             print("{} is not in the mood to make friends".format(target))
 
