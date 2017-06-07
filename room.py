@@ -4,7 +4,7 @@ class Room():
     def __init__(self, name,  description, doors, characters):
         self.name = name
         self.description = description
-        self.doors = doors
+        self.doors = list(doors)
         self.characters = list(characters)
         self.inventory = Inventory(name)
 
