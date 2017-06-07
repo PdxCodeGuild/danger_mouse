@@ -6,7 +6,7 @@ class Room():
         self.description = description
         self.doors = doors
         self.characters = list(characters)
-        self.inventory = Inventory()
+        self.inventory = Inventory(name)
 
 
     def open_door(self, door): #character.inventory
