@@ -54,9 +54,9 @@ class Mouse(Character):
     """
     def __init__(self, name, description, loc, health=100):
         """Initiates a Mouse object."""
-        super().__init__(name, description, self.inventory, loc, health)
-        self.location = start_location
-        self.inventory = Inventory()
+        super().__init__(name, description, loc, health)
+        self.location = loc
+        self.inventory = Inventory(name)
 
     def take_food(self, my_food):
 
