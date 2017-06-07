@@ -149,4 +149,4 @@ def update_all(characters, castle):
     #         print('this is a character')
     # if first == 'peek':
     #     current_room.peek_room(door_dict[second])
->>>>>>> Temporary merge branch 2
+
