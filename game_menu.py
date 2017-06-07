@@ -15,7 +15,7 @@ spoon = item.Item('spoon', 'There is no spoon')
 # test_doors = [red]
 # cat = character.Character('cat', 'Putty Tat', [])
 # test_characters = [cat]
-# def pretty_print_dict(dict):
+def pretty_print_dict(dict):
     for k in dict:
         print(k + '. ' + dict[k])
 
@@ -25,6 +25,7 @@ current_room = room_controller.nest
 current_room.inventory.put_in(spoon)
 danger_mouse = character.Mouse('Ralph', 'Test Character', current_room)
 danger_mouse.inventory.put_in(map)
+print("You are a 🐭")
 while not game_over:
     current_room.look()
     action_select = str(input('1. Look \n'
