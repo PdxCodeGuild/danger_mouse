@@ -1,5 +1,5 @@
 """
-This document contains Classes for the Characters and Items in our Danger Mouse game.
+This document contains Classes for the Characters in our Danger Mouse game.
 """
 
 from random import randrange
@@ -11,13 +11,14 @@ spell_list = ["scare", "hide", "befriend"]
 
 
 class Character:
-    def __init__(self, name, description, health=100):
+    def __init__(self, name, description, loc, health=100):
         """
         Initiates a Character object.
         """
+        self.location = loc
         self.description = description
         self.name = name
-        self.inventory = Inventory()
+        self.inventory = Inventory(name)
         self.health = health
 
     def __str__(self):
@@ -43,16 +44,19 @@ class Character:
         """Runs the ai of a character so it can move and act"""
         pass
 
+    def look(self):
+        print(self.description)
+
 
 class Mouse(Character):
     """
     Instantiates a Mouse or player character.
     """
-    def __init__(self, name, description, start_location, health=100):
+    def __init__(self, name, description, loc, health=100):
         """Initiates a Mouse object."""
-        super().__init__(name, description, health)
-        self.location = start_location
-        self.inventory = Inventory()
+        super().__init__(name, description, loc, health)
+        self.location = loc
+        self.inventory = Inventory(name)
 
     def take_food(self, my_food):
 
@@ -122,11 +126,11 @@ class Rat(Character):
 
 
 class Cat(Character):
-    def __init__(self, name, description, aggression=randrange(2, 3)):
+    def __init__(self, name, description, loc, aggression=randrange(2, 3)):
         """
         Instantiates a Cat character.
         """
-        super().__init__("cat", "a cat", inventory)
+        super().__init__("cat", "a cat", inventory, loc)
         self.agression = aggression
         turns_until_move = random.randrange(3, 6)
         destination = ""
@@ -170,11 +174,11 @@ class Dog(Character):
     searching = 0
     resting = False
 
-    def __init__(self, name, description, aggression=randrange(1, 4)):
+    def __init__(self, name, description, loc, aggression=randrange(1, 4)):
         """
         Instantiates a Dog character.
         """
-        super().__init__("dog", "a dog", inventory)
+        super().__init__("dog", "a dog", inventory, loc)
         self.agression = aggression
         self.friend = False
         self.resting = False
@@ -207,11 +211,11 @@ class Dog(Character):
 
 
 class Person(Character):
-    def __init__(self, name, description, inventory, aggression=randrange(1, 5)):
+    def __init__(self, name, description, inventory, loc, aggression=randrange(1, 5)):
         """
         Instantiates a Person character.
         """
-        super().__init__("person", "a person", inventory)
+        super().__init__("person", "a person", inventory, loc)
         self.agression = aggression
         seen_mouse = False
         destination = ""

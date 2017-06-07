@@ -7,10 +7,10 @@ aggression=random.randrange(1, 5)
 spell_list = ["scare", "hide", "befriend"]
 
 class Character:
-    def __init__(self, name, description, inventory, health=100):
+    def __init__(self, name, description, health=100):
         self.description = description
         self.name = name
-        self.inventory = list(inventory)
+        self.inventory = Inventory()
         self.health = health
 
     def move(self):

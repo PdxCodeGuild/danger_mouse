@@ -4,12 +4,12 @@ This document contains Classes for the items in our Danger Mouse game.
 
 
 class Item:
-    def __init__(self, name):
+    def __init__(self, name, description):
         """
         Instantiates new Item.
         """
         self.name = name
-
+        self.description = description
     def __str__(self):
         """
         Overloads print function.
@@ -23,6 +23,8 @@ class Item:
         """
         return self.__str__()
 
+    def look(self):
+        print(self.description)
 # Fish will be instantiated from the Item class, rather than being a class.
 
 
@@ -52,3 +54,36 @@ class Spell(Item):
         Instantiates a spell item.
         """
         super().__init__(name)
+
+
+class Scare(Spell):
+    """
+    This class represents the Scare Spell.
+    """
+    def cast_spell(self, target):
+        if target.aggression <= 2:  # if the target's aggression level is low, it escapes
+            target.move(destination)
+        else:
+            self.inventory.owner.health -= target.agression * 3  # if character's aggression level is high, mouse loses health points.
+
+
+class Hide(Spell):
+    """
+    This class represents Hide Spell.
+    """
+    def cast_spell(self, character):
+        character.move(destination)
+
+
+
+class Befriend(Spell):
+    """
+    This class represents Befriend Spell.
+    """
+    def cast_spell(self, target):
+        if target.agression <= 2:
+            self.inventory.owner.health += target.agression * 3  # if character's aggression level is low, mouse gains health points.
+        else:
+            print("{} is not in the mood to make friends".format(target))
+
+
