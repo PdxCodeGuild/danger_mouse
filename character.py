@@ -18,7 +18,9 @@ class Character:
         self.location = loc
         self.description = description
         self.name = name
-        self.inventory = Inventory(self) # see the 'owner' argument in the Inventory class (inventory.py)
+        self.inventory = Inventory()
+        self.inventory.put_in(char_inv)
+
         self.health = health
 
     def move(self, destination):
