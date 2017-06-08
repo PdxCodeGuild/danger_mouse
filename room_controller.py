@@ -10,7 +10,7 @@ room_map = {'nest': ['mouse_hole'],
             'gallery': ['gallery_door'],
             'guest_bedroom': ['guest_door'],
             'master_bedroom': ['master_door'],
-            'grand_hall': ['swinging_door', 'grand_arch'],
+            'grand_hall': ['swinging_door', 'grand_arch','front_door'],
             'living_room': ['grand_arch', 'chapel_door'],
             'chapel': ['chapel_door', 'fsm_door'],
             'west_hall': ['fsm_door', 'kitchen_entry'],
@@ -75,7 +75,9 @@ door_dict ={'mouse_hole': mouse_hole,
             'buttery_entry': buttery_entry,
             'serv_kitchen': serv_kitchen,
             'servant_passage': servant_passage,
-            'dresser_drawer': dresser_drawer}
+            'dresser_drawer': dresser_drawer,
+            'front_door': front_door
+            }
 
 room_dict ={'nest': nest,
             'library': library,
@@ -90,7 +92,8 @@ room_dict ={'nest': nest,
             'west_hall': west_hall,
             'kitchen': kitchen,
             'servant_hall': servant_hall,
-            'dresser': dresser
+            'dresser': dresser,
+            'front_lawn': outside
             }
 
 print(west_hall.find_path(gallery, door_dict))

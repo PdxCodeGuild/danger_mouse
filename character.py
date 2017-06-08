@@ -13,17 +13,28 @@ spell_list = ["scare", "hide", "befriend"]
 
 
 class Character:
-    def __init__(self, name, description, char_inv, loc, health=100):
+    def __init__(self, name, description, loc, health=100):
         """
         Initiates a Character object.
         """
         self.location = loc
         self.description = description
         self.name = name
-        self.inventory = inventory.Inventory()
-        self.inventory.put_in(char_inv)
-        self.inventory = Inventory()
+        self.inventory = Inventory(name)
         self.health = health
+
+    def __str__(self):
+        """
+        Overloads print function.
+        """
+        return "{}".format(self.name)
+        # this puts those values into a string, which you need
+
+    def __repr__(self):
+        """
+        Determines what the representation will be when it's in a list.
+        """
+        return "{}".format(self.name)
 
     def move(self):
         """
@@ -35,9 +46,14 @@ class Character:
         """Runs the ai of a character so it can move and act"""
         pass
 
+    def look(self):
+        print(self.description)
+
     def die(self):
         pass
 
+    def action(self, room, player):
+        print('You try to do something to {} but nothing happens'.format(self))
 
 class Mouse(Character):
     """
@@ -45,9 +61,9 @@ class Mouse(Character):
     """
     def __init__(self, name, description, loc, health=100):
         """Initiates a Mouse object."""
-        self.inventory = Inventory()
-        super().__init__(name, description, self.inventory, loc, health)
-        self.location = start_location
+        super().__init__(name, description, loc, health)
+        self.location = loc
+        self.inventory = Inventory(name)
 
     def take_food(self, my_food):
 
@@ -68,8 +84,7 @@ class Mouse(Character):
         """
         This function works on any non-food item, whether spell or fish.
         """
-        self.inventory.append(str(my_item))
-        return self.inventory
+        self.inventory.put_in(my_item)
 
     def cast_spell(self, my_spell):
         """
@@ -90,8 +105,8 @@ class Rat(Character):
     Instanties a Rat character.
     """
 
-    def __init__(self, description, inventory, loc, aggression=randrange(0, 2)):
-        super().__init__(self, description, inventory, loc)
+    def __init__(self, name, description, aggression=randrange(0, 2)):
+        super().__init__('rat', 'a rat')
         self.aggression = aggression
         self.friend = False
 
@@ -128,13 +143,13 @@ class Rat(Character):
 
 
 class Cat(Character):
-    def __init__(self, description, loc, aggression=randrange(2, 3)):
+    def __init__(self, name, description, loc, aggression=randrange(2, 3)):
         """
         Instantiates a Cat character.
         """
-        super().__init__(self, description, inventory, loc)
+        super().__init__("cat", "a cat", inventory, loc)
         self.aggression = aggression
-        self.turns_until_move = random.randrange(3, 6)
+        self.turns_until_move = randrange(3, 6)
         self.destination = ""
 
     def activate(self, room):
@@ -176,7 +191,7 @@ class Cat(Character):
         if turns_until_move == 0:
             self.location = self.destination
             self.destination = ""
-            turns_until_move = randrange(3, 6)
+            self.turns_until_move = randrange(3, 6)
             pass
 
         room_controller.room_dict[self.location] = room
@@ -186,11 +201,11 @@ class Dog(Character):
     searching = 0
     resting = False
 
-    def __init__(self, description, loc, aggression=randrange(1, 4)):
+    def __init__(self, name, description, loc, aggression=randrange(1, 4)):
         """
         Instantiates a Dog character.
         """
-        super().__init__(self, description, inventory, loc)
+        super().__init__("dog", "a dog", inventory, loc)
         self.aggression = aggression
         self.friend = False
         self.resting = False
@@ -232,15 +247,15 @@ class Dog(Character):
 
 
 class Person(Character):
-    def __init__(self, description, inventory, loc, aggression=randrange(1, 5)):
+    def __init__(self, name, description, inventory, loc, aggression=randrange(1, 5)):
         """
         Instantiates a Person character.
         """
-        super().__init__(self, description, inventory, loc)
+        super().__init__("person", "a person", inventory, loc)
         self.aggression = aggression
         self.seen_mouse = False
         self.path = ""
-        self.home_room = loc
+        self.home_room = ""
 
     def activate(self, room):
         """
