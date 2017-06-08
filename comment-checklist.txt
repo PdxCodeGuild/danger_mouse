@@ -1,0 +1,13 @@
+To do:
+
+character.py
+game_menu.py
+mouse_game.py
+room_controller.py
+room.py
+
+Done:
+item.py
+character_profile.py
+inventory.py
+mouse_battle.py
