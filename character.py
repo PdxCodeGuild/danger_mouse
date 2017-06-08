@@ -231,7 +231,7 @@ class Dog(Character):
                     for key in room_dict.keys():
                         if room_dict[key].get_character_by_type(type(Human)):
                             print("BARK")
-                            room_controller.room_dict[key].get_character_by_type(type(Human)).path = room_dict[key].find_path(room)
+                            room_controller.room_dict[key].get_character_by_type(type(Person)).path = room_dict[key].find_path(room)
                     searching = 1 + self.aggression
             elif self.searching:
                 self.searching -= 1
