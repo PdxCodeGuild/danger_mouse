@@ -57,6 +57,7 @@ while not game_over:
             except KeyError:
                 print("Not a valid input")
 
+
     elif '2' in action_select or 'move' in action_select:
         i = 1
         move_dict = {}
