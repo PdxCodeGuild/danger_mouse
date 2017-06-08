@@ -4,9 +4,7 @@ from inventory import Inventory
 import character
 from random import randrange
 
-def pretty_print_dict(dict):
-    for k in dict:
-        print('{}'.format(dict[k]))
+
 
 def battle(player, npc):
     fighting = True
@@ -20,9 +18,11 @@ def battle(player, npc):
         user_input = user_input.lower()
 
         if "1" in user_input or 'fight' in user_input:
-            inv_dict = danger_mouse.inventory.list_inventory()
-            pretty_print_dict(inv_dict)
-            item_select = input('Select an item:\n')
+            print('Select an item:')
+            for thing in danger_mouse.inventory.bag_of_holding:
+                if thing.name != "befriend" and thing.name != "hide" and thing.name != "scare":
+                    print(thing.name)
+            item_select = input()
             item_select = item_select.lower()
 
             for thing in player.inventory.bag_of_holding:
@@ -43,14 +43,14 @@ def battle(player, npc):
         elif '2' in user_input or 'magic' in user_input:
             pass
         elif '3' in user_input or 'flee' in user_input:
-            pass
+            return 'flee'
 
 
 
 
 
-# danger_mouse = character_profile.create_character()
-danger_mouse = character.Mouse('Ralph', 'Test Character', "nest")
+danger_mouse = character_profile.create_character()
+# danger_mouse = character.Mouse('Ralph', 'Test Character', "nest")
 current_room = danger_mouse.location
 sword = item.Weapon('Sword', 'A dull sword')
 danger_mouse.inventory.put_in(sword)

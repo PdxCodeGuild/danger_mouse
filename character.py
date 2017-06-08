@@ -62,7 +62,6 @@ class Mouse(Character):
     def __init__(self, name, description, loc, health=100):
         """Initiates a Mouse object."""
         super().__init__(name, description, loc, health)
-        self.location = loc
         self.inventory = Inventory(name)
 
     def take_food(self, my_food):
@@ -147,7 +146,7 @@ class Cat(Character):
         """
         Instantiates a Cat character.
         """
-        super().__init__("cat", "a cat", inventory, loc)
+        super().__init__(name, description, loc)
         self.aggression = aggression
         self.turns_until_move = randrange(3, 6)
         self.destination = ""
