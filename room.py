@@ -36,6 +36,12 @@ class Room():
     def check_inventory(self, item):
         self.inventory.check_inventory(item)
 
+    def get_character_by_type(self, character_type):
+        for c in character:
+            if type(c) = character_type:
+                return c
+        return ""
+
     def look(self):
         print(self.description)
         for character in self.characters:
@@ -92,7 +98,7 @@ class Room():
         if result:
             return result
         else:
-            return "No Path"
+            return ""
 
     def look_for_destination(self, tree, location, destination):
         if location in tree.keys():

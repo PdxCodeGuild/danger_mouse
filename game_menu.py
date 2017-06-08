@@ -7,11 +7,25 @@ import types
 from character_profile import create_character
 game_over = False
 
+# current_room = room.Room('Test Room', 'This is only a test', test_doors, test_characters)
+# next_room = room.Room('next room', 'You have made it to the second room', test_doors, test_characters)
+spoon = item.Item('spoon', 'There is no spoon')
 
+baby_mouse = character.Character('baby', 'little rodent', room_controller.nest,)
+# red = room.Door('red', 'A door', current_room, next_room , False, 'no')
+# test_doors = [red]
+# cat = character.Character('cat', 'Putty Tat', [])
+# test_characters = [cat]
 def pretty_print_dict(dict):
     for k in dict:
         print('{}. {}'.format(k, dict[k]))
 
+
+map = item.Item('map', 'You found the map')
+current_room = room_controller.nest
+current_room.inventory.put_in(spoon)
+current_room.characters.append(baby_mouse)
+# danger_mouse = character.Mouse('Ralph', 'Test Character', current_room)
 danger_mouse = create_character()
 current_room = room_controller.nest
 print("You are a 🐭")
@@ -44,6 +58,7 @@ while not game_over:
                 valid_input = True
             except KeyError:
                 print("Not a valid input")
+
 
     elif '2' in action_select or 'move' in action_select:
         i = 1
@@ -87,15 +102,15 @@ while not game_over:
         item_action = input('What do you wish to do with this item? \n'
                             '1. Look at item \n'
                             '2. Use item \n'
-                            )
+                            '3. Drop item\n')
 
         if '1' in item_action:
             inv_dict[item_select].look()
             print('\n')
         if '2' in item_action:
             print('You attempt to use the {}, but nothing happens'.format(inv_dict[item_select]))
-        # if '3' in item_action:
-        #     current_room.inventory.put_in(danger_mouse.inventory.poplar(inv_dict[item_select]))
+        if '3' in item_action:
+            current_room.inventory.put_in(danger_mouse.inventory.poplar(inv_dict[item_select]))
 
     elif '5' in action_select or 'interact' in action_select:
         action_dict = {}
