@@ -52,73 +52,20 @@ class Food(Item):
 #        the total store to win the game.
 
 
+
 class Spell(Item):
-    def __init__(self, name, description):
+    def __init__(self, name):
         """
         Instantiates a spell item.
         """
-        super().__init__(name, description)
+        spells = \
+            {"befriend": "The befriend spell allows you to befriend rats and dogs that "
+            "will help defend you from cats.", "hide": "The hide spell allows you to hide "
+            "from everyone in the room.", "scare": "The scare spell will scare people and cats "
+            "out of the room."}
+        super().__init__(name, description = spells[name])
 
 
-
-class Scare(Spell):
-    """
-    This class represents the Scare Spell.
-    """
-    def __init__(self):
-        """
-        Instantiates a spell item.
-        """
-        super().__init__("scare", "This spell scares everyone fearful out of the room.")
-
-    def cast_spell(self, player, target, destination):
-        """
-        If the target's aggression level is low enough, it escapes into another room.
-        If the target's aggression level is too high, the mouse looses health points.
-        """
-        if target.aggression <= 2:  # if the target's aggression level is low, it escapes
-            target.move(destination)
-        else:
-            player.inventory.owner.health -= target.agression * 3
-
-
-class Hide(Spell):
-    """
-    This class represents Hide Spell.
-    """
-    def __init__(self):
-        """
-        Instantiates a spell item.
-        """
-        super().__init__("hide", "This spell allows you to hide from everyone in the room.")
-
-    def cast_spell(self, player, destination):
-        """
-        Once this spell is casted, the mouse escapes into another room.
-        """
-        player.move(destination)
-
-
-
-class Befriend(Spell):
-    """
-    This class represents Befriend Spell.
-    """
-    def __init__(self):
-        """
-        Instantiates a spell item.
-        """
-        super().__init__("befriend", "This spell allows befriend everyone in the room.")
-
-    def cast_spell(self, player, target):
-        """
-        If the target's aggression level is low enough, the mouse and the character both gain health points.
-        If the target's aggression level is too high, the spell will not work.
-        """
-        if target.agression <= 2:
-            player.inventory.owner.health += target.agression * 2
-            target.inventory.owner.health += target.agression * 2
-        else:
-            print("{} is not in the mood to make friends".format(target))
-
-
+a_spell = Spell("scare")
+print(a_spell)
+print(a_spell.description)
