@@ -18,11 +18,11 @@ def battle(player, npc):
         user_input = user_input.lower()
 
         if "1" in user_input or 'fight' in user_input:
-
+            print('Select an item:')
             for thing in danger_mouse.inventory.bag_of_holding:
                 if thing.name != "befriend" and thing.name != "hide" and thing.name != "scare":
                     print(thing.name)
-            item_select = input('Select an item:\n')
+            item_select = input()
             item_select = item_select.lower()
 
             for thing in player.inventory.bag_of_holding:
@@ -43,7 +43,7 @@ def battle(player, npc):
         elif '2' in user_input or 'magic' in user_input:
             pass
         elif '3' in user_input or 'flee' in user_input:
-            pass
+            return 'flee'
 
 
 

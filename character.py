@@ -147,7 +147,7 @@ class Cat(Character):
         """
         Instantiates a Cat character.
         """
-        super().__init__("cat", "a cat", inventory, loc)
+        super().__init__(name, description, loc)
         self.aggression = aggression
         self.turns_until_move = randrange(3, 6)
         self.destination = ""
