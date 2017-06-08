@@ -3,21 +3,21 @@ import csv
 import character
 from character import Mouse
 
-room_map = {'nest': ['mouse_hole'],
-            'library': ['mouse_hole', 'library_door'],
-            'east_hall': ['library_door', 'swinging_door', 'servant_door', 'master_door', 'guest_door'],
-            'serv_chamber': ['servant_door', 'servant_passage'],
-            'gallery': ['gallery_door'],
-            'guest_bedroom': ['guest_door'],
-            'master_bedroom': ['master_door'],
-            'grand_hall': ['swinging_door', 'grand_arch'],
-            'living_room': ['grand_arch', 'chapel_door'],
-            'chapel': ['chapel_door', 'fsm_door'],
-            'west_hall': ['fsm_door', 'kitchen_entry'],
-            'kitchen': ['west_hall', 'servant_hall', 'buttery_entry'],
-            'servant_hall': ['serv_chamber', 'serv_kitchen'],
-            'dresser': ['dresser_drawer'],
-            'buttery': ['buttery_entry']
+room_map = {'nest': ['mouse hole'],
+            'library': ['mouse hole', 'library door'],
+            'east hall': ['library door', 'swinging_door', 'servant door', 'master door', 'guest door'],
+            'serv chamber': ['servant door', 'servant passage'],
+            'gallery': ['gallery door'],
+            'guest_bedroom': ['guest door'],
+            'master bedroom': ['master door'],
+            'grand hall': ['swinging door', 'grand arch'],
+            'living room': ['grand arch', 'chapel door'],
+            'chapel': ['chapel door', 'fsm door'],
+            'west hall': ['fsm door', 'kitchen entry'],
+            'kitchen': ['west hall', 'servant hall', 'buttery entry'],
+            'servant_hall': ['serv chamber', 'serv kitchen'],
+            'dresser': ['dresser drawer'],
+            'buttery': ['buttery entry']
             }
 
 
@@ -25,69 +25,69 @@ room_map = {'nest': ['mouse_hole'],
 # name, description, doors[], characters[]
 nest = room.Room('nest', "You are in your mouse nest, in a large castle. The belongings in the nest are yours and you recognize all of them. You see your mouse family, hungry and waiting patiently for you to bring home enough food for everyone to eat.", room_map['nest'], [])
 library = room.Room('library', 'You are in the library. It once occured to you to read them all, but a mouse like you need not concern itself with such things.', room_map['library'], [])
-east_hall = room.Room('east_hall', "You are in the east hallway, it's very dark in here. You look around for light leaking under doorways to find your exits.", room_map['east_hall'], [])
-serv_chamber = room.Room('serv_chamber', "The room for the help. They sneak your family cheese sometimes, but they appear busy today.", room_map['serv_chamber'], [])
+east_hall = room.Room('east hall', "You are in the east hallway, it's very dark in here. You look around for light leaking under doorways to find your exits.", room_map['east_hall'], [])
+serv_chamber = room.Room('serv chamber', "The room for the help. They sneak your family cheese sometimes, but they appear busy today.", room_map['serv_chamber'], [])
 gallery = room.Room('gallery', "You enter the castle art gallery. Its most prized pieces include paintings by Monet, however you've always been more of a Dali fan yourself.", room_map['gallery'], [])
-guest_bedroom = room.Room('guest_bedroom', "The guest bedroom. You tried to sleep in there once but APPARENTLY don't qualify as a guest.", room_map['guest_bedroom'], [])
-master_bedroom = room.Room('master_bedroom', "The master bedroom. Not a bedroom for the common mouse.", room_map['master_bedroom'], [])
-grand_hall = room.Room('grand_hall', "You enter the grand entry hall. It's pillars and golden statues boast of a life lived in luxury, a red cloth banner on the ceiling reads \"There are no god's or kings, only men.\"", room_map['grand_hall'], [])
-living_room = room.Room('living_room', "You enter the livingroom. Mostly just for show and guests, otherwise the room is rarely used.", room_map['living_room'], [])
+guest_bedroom = room.Room('guest bedroom', "The guest bedroom. You tried to sleep in there once but APPARENTLY don't qualify as a guest.", room_map['guest_bedroom'], [])
+master_bedroom = room.Room('master bedroom', "The master bedroom. Not a bedroom for the common mouse.", room_map['master_bedroom'], [])
+grand_hall = room.Room('grand hall', "You enter the grand entry hall. It's pillars and golden statues boast of a life lived in luxury, a red cloth banner on the ceiling reads \"There are no god's or kings, only men.\"", room_map['grand_hall'], [])
+living_room = room.Room('living room', "You enter the livingroom. Mostly just for show and guests, otherwise the room is rarely used.", room_map['living_room'], [])
 chapel = room.Room('chapel', "You enter the Chapel room. However Dave doesn't appear to be here at the moment 'man'.", room_map['chapel'], [])
-west_hall = room.Room('west_hall', "This is the western hallway. The windows allow the sun to illuminate the hall with its shining brilliance, much better hallway than that other one.", room_map['west_hall'], [])
+west_hall = room.Room('west hall', "This is the western hallway. The windows allow the sun to illuminate the hall with its shining brilliance, much better hallway than that other one.", room_map['west_hall'], [])
 kitchen = room.Room('kitchen', "Kitchen, there must be cheese somewhere.", room_map['kitchen'], [])
-servant_hall = room.Room('servant_hall', "The servants hall. You can't just have your servants walking around the castle like they own the place, right?", room_map['servant_hall'], [])
+servant_hall = room.Room('servant hall', "The servants hall. You can't just have your servants walking around the castle like they own the place, right?", room_map['servant_hall'], [])
 dresser = room.Room('dresser', "You find yourself in a dresser, and much to your own surprise it's filled with clothes! You make a note to come back during winter.", room_map['dresser'], [])
 buttery = room.Room('buttery', "The buttery, there's wine and cheese everywhere!", room_map['buttery'], [])
 
 # Door initializations
 # name, description, room1, room2, is_locked, key_name
-mouse_hole = room.Door('mouse_hole', 'A hole in the baseboard of the castle library, the entry way to your humble home.', nest, library, False, 'mouse_hole_key')
-library_door = room.Door('library_door', 'A crack under the door', library, east_hall, False, 'library_door_key')
-swinging_door = room.Door('swinging_door', 'A swinging door', east_hall, grand_hall, False, 'swinging_door_key')
-servant_door = room.Door('servant_door', 'A wooden door', east_hall, serv_chamber, True, 'servant_door_key')
-gallery_door = room.Door('gallery_door', 'It looks like you can squeze through the door', east_hall, gallery, False, 'gallery_door_key')
-guest_door = room.Door('guest_door', 'A wooden door', east_hall, guest_bedroom, False, 'guest_door_key')
-master_door = room.Door('master_door', 'A wooden door', east_hall, master_bedroom, True, 'master_door_key')
-grand_arch = room.Door('grand_arch', 'A large archway', grand_hall, living_room, False, 'grand_arch_key')
-chapel_door = room.Door('chapel_door', 'A thick door', living_room, chapel, False, 'chapel_door_key')
-fsm_door = room.Door('fsm_door', 'The flying speghetti monster rests on the door', chapel, west_hall, False, 'fsm_door_key')
-kitchen_entry = room.Door('kitchen_entry', 'A swinging double door', west_hall, kitchen, False, 'kitchen_door_key')
-buttery_entry = room.Door('butter_entry', 'One more door', kitchen, buttery, True, 'buttery_door_key')
-serv_kitchen = room.Door('serv_kitchen', 'Servants kitchen entrance', kitchen, servant_hall, False, 'serv_door_key')
-servant_passage = room.Door('servant_passage', 'Secret door', serv_chamber, servant_hall, True, 'servant_passage_key')
-dresser_drawer = room.Door('dresser_drawer', 'A dresser drawer', master_bedroom, dresser, False, 'dresser_drawer_key')
+mouse_hole = room.Door('mouse hole', 'A hole in the baseboard of the castle library, the entry way to your humble home.', nest, library, False, 'mouse hole key')
+library_door = room.Door('library door', 'A crack under the door', library, east_hall, False, 'library door key')
+swinging_door = room.Door('swinging door', 'A swinging door', east_hall, grand_hall, False, 'swinging door key')
+servant_door = room.Door('servant door', 'A wooden door', east_hall, serv_chamber, True, 'servant door key')
+gallery_door = room.Door('gallery door', 'It looks like you can squeze through the door', east_hall, gallery, False, 'gallery door key')
+guest_door = room.Door('guest door', 'A wooden door', east_hall, guest_bedroom, False, 'guest door key')
+master_door = room.Door('master door', 'A wooden door', east_hall, master_bedroom, True, 'master door key')
+grand_arch = room.Door('grand arch', 'A large archway', grand_hall, living_room, False, 'grand arch key')
+chapel_door = room.Door('chapel door', 'A thick door', living_room, chapel, False, 'chapel door key')
+fsm_door = room.Door('fsm door', 'The flying speghetti monster rests on the door', chapel, west_hall, False, 'fsm door key')
+kitchen_entry = room.Door('kitchen entry', 'A swinging double door', west_hall, kitchen, False, 'kitchen door key')
+buttery_entry = room.Door('butter entry', 'One more door', kitchen, buttery, True, 'buttery door key')
+serv_kitchen = room.Door('serv kitchen', 'Servants kitchen entrance', kitchen, servant_hall, False, 'serv door key')
+servant_passage = room.Door('servant passage', 'Secret door', serv_chamber, servant_hall, True, 'servant passage key')
+dresser_drawer = room.Door('dresser drawer', 'A dresser drawer', master_bedroom, dresser, False, 'dresser drawer key')
 
 
 
-door_dict ={'mouse_hole': mouse_hole,
-            'library_door': library_door,
-            'swinging_door': swinging_door,
-            'servant_door': servant_door,
-            'gallery_door': gallery_door,
-            'guest_door': guest_door,
-            'master_door': master_door,
-            'grand_arch': grand_arch,
-            'chapel_door': chapel_door,
-            'fsm_door': fsm_door,
-            'kitchen_entry': kitchen_entry,
-            'buttery_entry': buttery_entry,
-            'serv_kitchen': serv_kitchen,
-            'servant_passage': servant_passage,
-            'dresser_drawer': dresser_drawer}
+door_dict ={'mouse hole': mouse_hole,
+            'library door': library_door,
+            'swinging door': swinging_door,
+            'servant door': servant_door,
+            'gallery door': gallery_door,
+            'guest door': guest_door,
+            'master door': master_door,
+            'grand arch': grand_arch,
+            'chapel door': chapel_door,
+            'fsm door': fsm_door,
+            'kitchen entry': kitchen_entry,
+            'buttery entry': buttery_entry,
+            'serv kitchen': serv_kitchen,
+            'servant passage': servant_passage,
+            'dresser drawer': dresser_drawer}
 
 room_dict ={'nest': nest,
             'library': library,
-            'east_hall': east_hall,
-            'serv_chamber': serv_chamber,
+            'east hall': east_hall,
+            'serv chamber': serv_chamber,
             'gallery': gallery,
-            'guest_bedroom': guest_bedroom,
-            'master_bedroom': master_bedroom,
-            'grand_hall': grand_hall,
-            'living_room': living_room,
+            'guest bedroom': guest_bedroom,
+            'master bedroom': master_bedroom,
+            'grand hall': grand_hall,
+            'living room': living_room,
             'chapel': chapel,
-            'west_hall': west_hall,
+            'west hall': west_hall,
             'kitchen': kitchen,
-            'servant_hall': servant_hall,
+            'servant hall': servant_hall,
             'dresser': dresser
             }
 
