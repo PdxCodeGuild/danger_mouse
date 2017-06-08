@@ -53,11 +53,27 @@ class Food(Item):
 
 
 class Spell(Item):
-    def __init__(self, name, description):
+    def __init__(self, name):
         """
         Instantiates a spell item.
         """
+
         super().__init__(name, description)
+
+
+
+        spells = \
+            {"befriend": "The befriend spell allows you to befriend rats and dogs that "
+            "will help defend you from cats.", "hide": "The hide spell allows you to hide "
+            "from everyone in the room.", "scare": "The scare spell will scare people and cats "
+            "out of the room."}
+        super().__init__(name, description = spells[name])
+
+
+a_spell = Spell("scare")
+print(a_spell)
+print(a_spell.description)
+
 
 class Weapon(Item):
     def __init__(self, name, description, attack = 10):
