@@ -61,8 +61,10 @@ class Food(Item):
         when called on a food item it will decrement the item food value by 5
         takes input character
         """
-
-        amount_food = 5
+        if self.score >= 5:
+            amount_food = 5
+        else:
+            amount_food = self.score
         self.score -= amount_food
         character_who_eats.health += amount_food
         if self.score <= 0:
