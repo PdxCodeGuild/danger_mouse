@@ -5,7 +5,10 @@ import character
 from random import randrange
 
 
-
+# This takes in the player and another character, and then
+# it starts a battle. It runs in a while loop. The player
+# chooses to fight, use magic, or flee
+# {{
 def battle(player, npc):
     fighting = True
     print("You are now battling " + npc.name + ". " + npc.description)
@@ -17,6 +20,13 @@ def battle(player, npc):
         user_input = input()
         user_input = user_input.lower()
 
+
+        # This will allow the user to select anything in their inventory,
+        # except for a spell. The thing will do damage according to it's
+        # attack value (item.attack)
+        # It prints damage taken, and then it checks if you've killed
+        # the NPC
+        # {{
         if "1" in user_input or 'fight' in user_input:
 
             for thing in danger_mouse.inventory.bag_of_holding:
@@ -32,7 +42,7 @@ def battle(player, npc):
                     if npc.health <= 0:
                         print("You have defeated " + npc.name)
                         fighting = False
-
+        # }}
 
 
             # npc.take_damage(player.attack)
@@ -47,6 +57,8 @@ def battle(player, npc):
 
 
 
+
+# }}
 
 
 danger_mouse = character_profile.create_character()

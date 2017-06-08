@@ -62,8 +62,7 @@ class Inventory:
         return ""
     # }}
 
-
-
+    # {{
     def list_inventory(self):
         """Displays inventory of object to console, excludes spells that have been cast."""
 
@@ -80,7 +79,9 @@ class Inventory:
                 #inv_dict[str(i)] = item
                 #i += 1
         #return inv_dict
+    # }}
 
+    # {{
     def poplar(self, item_to_be_popped):
         """Checks for existence of item in inventory, if item exists poplar pops that item and returns
         as als_lament"""
@@ -96,10 +97,14 @@ class Inventory:
             print(" {} was not found in bag of holding.".format(item_to_be_popped))
             return None
         return als_lament
+    # }}
 
+
+    # {{
     def look(self, item_to_be_described):
         """This method simply displays the description attached to an item when supplied
         with the item."""
         for item in self.bag_of_holding:
             if item_to_be_described == item.name:
                 print('{}'.format(item.description))
+    # }}
