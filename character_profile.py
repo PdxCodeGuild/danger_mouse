@@ -1,4 +1,17 @@
 """
+This portion of code begins the game play.
+The user gets an introduction to the game
+and chooses a major player character.
+
+The code instantiates a Mouse object.
+This instantiates an Inventory object
+for the Mouse.  And the code then adds
+two Spell objects to the Mouse's
+inventory.
+
+Because the Spells each Mouse character
+starts with differ, the choice changes
+the game play.
 
 """
 
