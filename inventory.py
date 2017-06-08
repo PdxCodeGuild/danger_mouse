@@ -1,3 +1,5 @@
+# Creates an inventory with a list and an owner
+# {{
 class Inventory:
     def __init__(self, owner):
         """The most complex object in this game is the inventory object as seen below.
@@ -6,6 +8,9 @@ class Inventory:
         self.bag_of_holding = []
         self.owner = owner
 
+    
+    # Tries to put an item into the list, and prints a message
+    # {{
     def put_in(self, item):
         """This method will add an item object to inventory, although"""
         try:
@@ -13,14 +18,20 @@ class Inventory:
             print("You have added {} to your inventory.".format(item))
         except:
             print('Error in Inventory method: put_in')
+    # }}
 
+
+    # Tries to put in without printing anything. Will print on error
+    # {{
     def put_in_quiet(self, item):
         """This method will add an item object to inventory, although"""
         try:
             self.bag_of_holding.append(item)
         except:
             print('Error in Inventory method: put_in')
+    # }}
 
+    # 
     def check_inventory(self, check_word):
         """Quick method to check if an item exists in inventory, returns boolean
         value to call."""

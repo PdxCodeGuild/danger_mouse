@@ -1,7 +1,8 @@
 import character
 import inventory
 """
-This document contains classes for the items in our Danger Mouse game.
+This document contains Item classes for the items in our Danger Mouse game.
+The parent class Item defines the subclasses Food and Spell.  
 """
 
 # This creates an item with a name and description. The default
@@ -60,6 +61,16 @@ class Food(Item):
     # }}
 
 
+    # This version of look prints the foods score in addition to the name
+    # the description
+    # {{
+    def look(self):
+        super().look()
+        print("Score: {}".format(self.score))
+    # }}
+
+
+
     # This is used to allow rats to nibble at food. The food wastes away
     # Until it's score is less than zero
     # {{
@@ -83,9 +94,14 @@ class Food(Item):
         """
 
         # When you eat food, it loses 5 score, and you gain 5 health.
-        # If the food's score goes under zero, the food is deleted
+        # If the food's score is 1, you get 1 more heath
+        # If the food's score goes to zero, the food is deleted
         # {{
         amount_food = 5
+        if self.score >= 5:
+            amount_food = 5
+        else:
+            amount_food = self.score
         self.score -= amount_food
         character_who_eats.health += amount_food
         if self.score <= 0:
@@ -97,7 +113,8 @@ class Food(Item):
 # TODO:  The inventory still needs a way to calculate
 #        the total store to win the game.
 
-
+# Creates a spell item. It creates the description based on the name
+# {{
 class Spell(Item):
     def __init__(self, name):
         """
@@ -109,8 +126,11 @@ class Spell(Item):
             "from everyone in the room.", "scare": "The scare spell will scare people and cats "
             "out of the room."}
         super().__init__(name, description = spells[name])
+# }}
 
-
+# Creates a weapon with an attack value of ten
+# {{
 class Weapon(Item):
     def __init__(self, name, description, attack = 10):
         super().__init__(name, description, attack)
+# }}
