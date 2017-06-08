@@ -11,7 +11,8 @@ spell_list = ["scare", "hide", "befriend"]
 
 """The Character class creates characters for our group game."""
 
-
+# Creates a character. Takes in name, description, location, and health
+# {{
 class Character:
     def __init__(self, name, description, loc, health=100):
         """
@@ -54,7 +55,10 @@ class Character:
 
     def action(self, room, player):
         print('You try to do something to {} but nothing happens'.format(self))
+# }}
 
+# Creates a mouse character
+# {{
 class Mouse(Character):
     """
     Instantiates a Mouse or player character.
@@ -65,13 +69,14 @@ class Mouse(Character):
         self.location = loc
         self.inventory = Inventory(name)
 
+    # {{
     def take_food(self, my_food):
 
         """
         This function works on food items and allows you to eat them and gain
         health or put them in inventory.
         """
-
+        
         choice = input("Add to health(h) or inventory(i)?")
         if choice == "h":
             self.health += my_food.score
@@ -79,6 +84,7 @@ class Mouse(Character):
         elif choice == "i":
             self.inventory.append(my_food)
             return self.inventory
+    # }}
 
     def take_item(self, my_item):
         """
@@ -99,6 +105,7 @@ class Mouse(Character):
 
     def attack(self, damage, source):
         health -= damage
+# }}
 
 class Rat(Character):
     """
