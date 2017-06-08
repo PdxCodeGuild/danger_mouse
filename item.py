@@ -67,11 +67,6 @@ class Spell(Item):
         super().__init__(name, description = spells[name])
 
 
-a_spell = Spell("scare")
-print(a_spell)
-print(a_spell.description)
-
-
 class Weapon(Item):
     def __init__(self, name, description, attack = 10):
         super().__init__(name, description)
