@@ -70,22 +70,29 @@ class Food(Item):
         score -= 2
         if score <= 0:
             del self
+    # }}
     
 # }}
 
+# input a character, that character eats food
+# {{
     def eat(self, character_who_eats):
         """
         when called on a food item it will decrement the item food value by 5
         takes input character
         """
 
+        # When you eat food, it loses 5 score, and you gain 5 health.
+        # If the food's score goes under zero, the food is deleted
+        # {{
         amount_food = 5
         self.score -= amount_food
         character_who_eats.health += amount_food
         if self.score <= 0:
             character_who_eats.inventory.poplar(self.name)
+        # }}
 
-
+# }}
 
 # TODO:  The inventory still needs a way to calculate
 #        the total store to win the game.
