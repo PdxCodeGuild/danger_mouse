@@ -38,7 +38,7 @@ class Room():
 
     def get_character_by_type(self, character_type):
         for c in character:
-            if type(c) = character_type:
+            if type(c) == character_type:
                 return c
         return ""
 
