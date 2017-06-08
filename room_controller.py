@@ -2,14 +2,23 @@ import room
 import csv
 import character
 from character import Mouse
-from item import Item
+from item import Item, Food
+#Items
 buttery_key = Item('buttery door key', 'unlocks the buttery')
+cheese_slice = Food('cheese slice', 'A slice of American cheese', 10)
+cheese_hunk = Food('cheese hunk', 'Hankering for a hunk of cheese, its so Ghouda', 15)
+cheese_crumb = Food('cheese crumb', 'A bite sized crumb of feta', 5)
+cheese_round = Food('cheese round', 'A round of Brie 86', 20)
+cheese_loaf = Food('cheese loaf', 'A loaf of Tillamook Cheddar', 30)
+
+
+
 room_map = {'nest': ['mouse hole'],
             'library': ['mouse hole', 'library door'],
             'east hall': ['library door', 'swinging door', 'servant door', 'master door', 'guest door', 'gallery door'],
             'serv chamber': ['servant door', 'servant passage'],
             'gallery': ['gallery door'],
-            'guest bedroom': ['guest door'],
+            'guest bedroom': ['guest door', 'dresser drawer'],
             'master bedroom': ['master door'],
             'grand hall': ['swinging door', 'grand arch','front door'],
             'living room': ['grand arch', 'chapel door'],
@@ -19,8 +28,10 @@ room_map = {'nest': ['mouse hole'],
             'servant hall': ['servant passage', 'serv kitchen'],
             'dresser': ['dresser drawer'],
             'buttery': ['buttery entry'],
-            'front lawn': ['front door']
+            'front lawn': ['front door'],
+            'chest': ['chest door']
             }
+
 
 
 # Room initializations
@@ -41,7 +52,7 @@ servant_hall = room.Room('servant hall', "The servants hall. You can't just have
 dresser = room.Room('dresser', "You find yourself in a dresser, and much to your own surprise it's filled with clothes! You make a note to come back during winter.", room_map['dresser'], [])
 buttery = room.Room('buttery', "The buttery, there's wine and cheese everywhere!", room_map['buttery'], [])
 outside = room.Room('front lawn', "You are on the front lawn. You peer upward towards the sky, into the void of infinity. It's a great big universe and you're just a small part of it. The sheer impact of this realization, of having grasped the nature of the cosmos and the universe has unfortunately so blown your mind that it has left you comatose, your family will surely perish. Game Over.",room_map['front lawn'],[])
-
+chest = room.Room('chest', 'It is dark in the chest, but you smell cheese', room_map['chest'], [])
 serv_chamber.add_item(buttery_key)
 # Door initializations
 # name, description, room1, room2, is_locked, key_name
@@ -59,9 +70,15 @@ kitchen_entry = room.Door('kitchen entry', 'A swinging double door', west_hall, 
 buttery_entry = room.Door('butter entry', 'One more door', kitchen, buttery, True, 'buttery door key')
 serv_kitchen = room.Door('serv kitchen', 'Servants kitchen entrance', kitchen, servant_hall, False, 'serv door key')
 servant_passage = room.Door('servant passage', 'Secret door', serv_chamber, servant_hall, True, 'servant passage_key')
-dresser_drawer = room.Door('dresser drawer', 'A dresser drawer', master_bedroom, dresser, False, 'dresser drawer key')
+dresser_drawer = room.Door('dresser drawer', 'A dresser drawer', guest_bedroom, dresser, False, 'dresser drawer key')
 front_door = room.Door('front door', 'The front entrance to the castle, really quite a beautiful doorway, not that the opinion of a mouse matters.',grand_hall, outside, False, 'front door key' )
+chest_door = room.Door('chest drawer', 'The keyhole appears large enough for you to crawl through', master_bedroom, chest, False, 'chest key')
 
+chest.add_item(cheese_hunk)
+buttery.add_item(cheese_loaf)
+kitchen.add_item(cheese_slice)
+dresser.add_item(cheese_crumb)
+gallery.add_item(cheese_round)
 
 door_dict ={'mouse hole': mouse_hole,
             'library door': library_door,
@@ -78,7 +95,8 @@ door_dict ={'mouse hole': mouse_hole,
             'serv kitchen': serv_kitchen,
             'servant passage': servant_passage,
             'dresser drawer': dresser_drawer,
-            'front door': front_door
+            'front door': front_door,
+            'chest drawer': chest_door
             }
 
 room_dict ={'nest': nest,
