@@ -49,15 +49,14 @@ while not game_over:
             i += 1
         valid_input = False
         while not valid_input:
-                try:
-                    for k in look_dict:
-                        print(k + '. ' + room_controller.door_dict[look_dict[k]])
-                    look_select = input()
-                    look_select = input()
-                    look_dict[look_select].look()
-                    valid_input = True
-                except KeyError:
-                    print("Not a valid input")
+            try:
+                pretty_print_dict(look_dict)
+                look_select = input('What do you want to look at?')
+                look_dict[look_select].look()
+                valid_input = True
+            except KeyError:
+                print("Not a valid input")
+
 
     elif '2' in action_select or 'move' in action_select:
         i = 1
