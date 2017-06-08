@@ -1,7 +1,7 @@
 import character
 import inventory
 """
-This document contains Classes for the items in our Danger Mouse game.
+This document contains classes for the items in our Danger Mouse game.
 """
 
 
@@ -120,7 +120,5 @@ class Befriend(Spell):
             target.inventory.owner.health += target.agression * 2
         else:
             print("{} is not in the mood to make friends".format(target))
-
-
 
 
