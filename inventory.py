@@ -31,7 +31,10 @@ class Inventory:
             print('Error in Inventory method: put_in')
     # }}
 
-    # 
+    # Takes in a search word. If the search word matches an inventory
+    # item's name string, then it returns true. Otherwise it returns
+    # false 
+    # {{
     def check_inventory(self, check_word):
         """Quick method to check if an item exists in inventory, returns boolean
         value to call."""
@@ -41,7 +44,14 @@ class Inventory:
                 is_there = True
 
         return is_there
+    # }}
 
+
+
+    # This will create an empty list. If there is food in the inventory,
+    # it adds it to the list. Then it randomly outputs one food
+    # object
+    # {{
     def look_for_food(self):
         food = []
         for item in self.bag_of_holding:
@@ -50,6 +60,9 @@ class Inventory:
         if food:
             return food[randrange(0, len(food))]
         return ""
+    # }}
+
+
 
     def list_inventory(self):
         """Displays inventory of object to console, excludes spells that have been cast."""
