@@ -4,6 +4,7 @@ import character
 import item
 import room
 import types
+from character_profile import create_character
 game_over = False
 
 # current_room = room.Room('Test Room', 'This is only a test', test_doors, test_characters)
@@ -24,8 +25,11 @@ map = item.Item('map', 'You found the map')
 current_room = room_controller.nest
 current_room.inventory.put_in(spoon)
 current_room.characters.append(baby_mouse)
-danger_mouse = character.Mouse('Ralph', 'Test Character', current_room)
+# danger_mouse = character.Mouse('Ralph', 'Test Character', current_room)
+danger_mouse = create_character()
 danger_mouse.inventory.put_in(map)
+
+
 print("You are a 🐭")
 while not game_over:
     current_room.look()
