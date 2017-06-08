@@ -15,9 +15,15 @@ the game play.
 
 """
 
+
+
 import character, item
 import room
 import inventory
+
+
+
+
 def create_character():
     run_again = True
     while run_again == True:
@@ -51,6 +57,8 @@ def create_character():
 
             """)
 
+        # Choose one of three possible characters
+        # {{
         try:
             choice = input("Do you choose character 1, 2, or 3?\n:")
             if choice == '1' or choice == '2' or choice == '3':
@@ -58,8 +66,10 @@ def create_character():
 
         except KeyError:
             continue
+        # }}
 
-
+    # Set the characters 'name', 'description', 'starting location', and starting spells based on character chosen
+    # {{
     if choice == '1':
         befriend_1 = item.Spell("befriend")
         befriend_2 = item.Spell("befriend")
@@ -74,8 +84,13 @@ def create_character():
         scare_1 = item.Spell("scare")
         scare_2 = item.Spell("scare")
         char_list = ['Aster', 'Your physical appearance is not notable, but you act with confidence that leaves others intimidated.', 'chapel', [scare_1, scare_2]]
+    # }}
 
+
+    # Set the first three variables, and then add a spell, and then add a second copy of that spell
+    # {{
     player = character.Mouse(char_list[0], char_list[1], char_list[2])
     player.inventory.put_in_quiet(char_list[3][0])
     player.inventory.put_in_quiet(char_list[3][1])
     return player
+    # }}

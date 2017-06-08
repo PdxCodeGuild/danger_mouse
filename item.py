@@ -4,7 +4,10 @@ import inventory
 This document contains classes for the items in our Danger Mouse game.
 """
 
-
+# This creates an item with a name and description. The default
+# 'attack' damage for non-weapons is 2. The only item that is in the
+# 'item' class is fish, everything else is in a child class
+# {{
 class Item:
     def __init__(self, name, description, attack = 2):
         """
@@ -26,23 +29,40 @@ class Item:
         """
         return self.__str__()
 
+    # Prints the item's name and description
+    # {{
     def look(self):
         print('{}: {}'.format(self.name, self.description))
+    # }}
 
-# Fish will be instantiated from the Item class, rather than being a class.
+    # 'action' takes an item from the room's inventory
+    # {{
     def action(self, room, character):
         character.inventory.put_in(room.inventory.poplar(self))
+    # }}
+# }}
 
+
+# Creates a food item
+# {{
 class Food(Item):
     """
     Instantiates a Food Item.
     """
+    # When creating a food item, it takes in the 'name' variable,
+    # and uses dictionaries to get information to create the super class
+    # {{
     def __init__(self, name):
         scores = {"cheese": 20, "bread": 10, "cake": 30}
         descriptions = {"cheese": "cheese", "bread": "bread", "cake": "cake"}
         super().__init__(name, description = descriptions[name])
         self.score = scores[name]
+    # }}
 
+
+    # This is used to allow rats to nibble at food. The food wastes away
+    # Until it's score is less than zero
+    # {{
     def rat_nibbling(self):
         """
         Allows a rat to nibble on food in a room.
@@ -51,6 +71,7 @@ class Food(Item):
         if score <= 0:
             del self
     
+# }}
 
 # TODO:  The inventory still needs a way to calculate
 #        the total store to win the game.
