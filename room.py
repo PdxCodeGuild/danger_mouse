@@ -54,9 +54,14 @@ class Room():
 
     def peek_room(self, door):
         '''Look around/examine/search room'''
-        print(door.back.name)
-        for character in self.characters:
-            print('characters in room: {}'.format(character))
+        if self.name == door.front.name:
+            print(door.back.name)
+            for character in door.front.characters:
+                print('characters in room: {}'.format(character))
+        if self.name == door.back.name:
+            print(door.fron.name)
+            for character in door.back.characters:
+                print('characters in room: {}'.format(character))
 
     # def look(self):
     #     '''Singular/specific inspection for items, doors, etc'''
