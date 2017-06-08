@@ -1,7 +1,8 @@
 import character
 import inventory
 """
-This document contains classes for the items in our Danger Mouse game.
+This document contains Item classes for the items in our Danger Mouse game.
+The parent class Item defines the subclasses Food and Spell.  
 """
 
 
