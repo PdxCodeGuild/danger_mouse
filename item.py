@@ -36,9 +36,11 @@ class Food(Item):
     """
     Instantiates a Food Item.
     """
-    def __init__(self, score,  *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.score = score
+    def __init__(self, name):
+        scores = {"cheese": 20, "bread": 10, "cake": 30}
+        descriptions = {"cheese": "cheese", "bread": "bread", "cake": "cake"}
+        super().__init__(name, description = descriptions[name])
+        self.score = scores[name]
 
     def rat_nibbling(self):
         """
@@ -68,3 +70,7 @@ class Spell(Item):
 a_spell = Spell("scare")
 print(a_spell)
 print(a_spell.description)
+a_food = Food("bread")
+print(a_food)
+print(a_food.score)
+print(a_food.description)
