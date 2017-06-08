@@ -44,6 +44,10 @@ class Food(Item):
         super().__init__(name, description = descriptions[name])
         self.score = scores[name]
 
+    def look(self):
+        super().look()
+        print("Score: {}".format(self.score))
+
     def rat_nibbling(self):
         """
         Allows a rat to nibble on food in a room.
