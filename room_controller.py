@@ -18,7 +18,7 @@ room_map = {'nest': ['mouse_hole'],
             'servant_hall': ['servant_passage', 'serv_kitchen'],
             'dresser': ['dresser_drawer'],
             'buttery': ['buttery_entry'],
-            'front_lawn':['front_door']
+            'front_lawn': ['front_door']
             }
 
 
@@ -46,17 +46,17 @@ outside = room.Room('front_lawn', "You are on the front lawn. You peer upward to
 mouse_hole = room.Door('mouse_hole', 'A hole in the baseboard of the castle library, the entry way to your humble home.', nest, library, False, 'mouse_hole_key')
 library_door = room.Door('library_door', 'A crack under the door', library, east_hall, False, 'library_door_key')
 swinging_door = room.Door('swinging_door', 'A swinging door', east_hall, grand_hall, False, 'swinging_door_key')
-servant_door = room.Door('servant_door', 'A wooden door', east_hall, serv_chamber, True, 'servant_door_key')
+servant_door = room.Door('servant_door', 'A wooden door', east_hall, serv_chamber, False, 'servant_door_key')
 gallery_door = room.Door('gallery_door', 'It looks like you can squeze through the door', east_hall, gallery, False, 'gallery_door_key')
 guest_door = room.Door('guest_door', 'A wooden door', east_hall, guest_bedroom, False, 'guest_door_key')
-master_door = room.Door('master_door', 'A wooden door', east_hall, master_bedroom, True, 'master_door_key')
+master_door = room.Door('master_door', 'A wooden door', east_hall, master_bedroom, False, 'master_door_key')
 grand_arch = room.Door('grand_arch', 'A large archway', grand_hall, living_room, False, 'grand_arch_key')
 chapel_door = room.Door('chapel_door', 'A thick door', living_room, chapel, False, 'chapel_door_key')
 fsm_door = room.Door('fsm_door', 'The flying speghetti monster rests on the door', chapel, west_hall, False, 'fsm_door_key')
 kitchen_entry = room.Door('kitchen_entry', 'A swinging double door', west_hall, kitchen, False, 'kitchen_door_key')
-buttery_entry = room.Door('butter_entry', 'One more door', kitchen, buttery, True, 'buttery_door_key')
+buttery_entry = room.Door('butter_entry', 'One more door', kitchen, buttery, False, 'buttery_door_key')
 serv_kitchen = room.Door('serv_kitchen', 'Servants kitchen entrance', kitchen, servant_hall, False, 'serv_door_key')
-servant_passage = room.Door('servant_passage', 'Secret door', serv_chamber, servant_hall, True, 'servant_passage_key')
+servant_passage = room.Door('servant_passage', 'Secret door', serv_chamber, servant_hall, False, 'servant_passage_key')
 dresser_drawer = room.Door('dresser_drawer', 'A dresser drawer', master_bedroom, dresser, False, 'dresser_drawer_key')
 front_door = room.Door('front_door', 'The front entrance to the castle, really quite a beautiful doorway, not that the opinion of a mouse matters.',grand_hall, outside, False, 'front_door_key' )
 
@@ -93,6 +93,8 @@ room_dict ={'nest': nest,
             'dresser': dresser
             }
 
+print(west_hall.find_path(gallery, door_dict))
+
 
 # when passed a list of all the characters and rooms, will sort through them and update the locations on each accordingly
 def update_all(characters, castle):
@@ -102,13 +104,6 @@ def update_all(characters, castle):
             if person.location == loc.name:
                 temp_list.append(person)
         loc.update_characters(temp_list)
-
-
-
-
-
-
-
 
 # game_over = False
 # current_room = nest
@@ -138,14 +133,14 @@ def update_all(characters, castle):
 
 
 
-    # if first == 'open':
-    #     current_room = current_room.open_door(door_dict[second])
-    # if first == 'look':
-    #     if second == 'room':
-    #         current_room.look()
-    #     if second in current_room.doors:
-    #         print("it is a door")
-    #     if second in current_room.characters:
-    #         print('this is a character')
-    # if first == 'peek':
-    #     current_room.peek_room(door_dict[second])
+# if first == 'open':
+#     current_room = current_room.open_door(door_dict[second])
+# if first == 'look':
+#     if second == 'room':
+#         current_room.look()
+#     if second in current_room.doors:
+#         print("it is a door")
+#     if second in current_room.characters:
+#         print('this is a character')
+# if first == 'peek':
+#     current_room.peek_room(door_dict[second])
