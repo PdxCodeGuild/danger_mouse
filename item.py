@@ -1,5 +1,6 @@
 import character
 import inventory
+from room_controller import room_dict
 """
 This document contains Item classes for the items in our Danger Mouse game.
 The parent class Item defines the subclasses Food and Spell.  
@@ -121,12 +122,27 @@ class Spell(Item):
         Instantiates a spell item.
         """
         spells = \
-            {"befriend": "The befriend spell allows you to befriend rats and dogs that "
-            "will help defend you from cats.", "hide": "The hide spell allows you to hide "
-            "from everyone in the room.", "scare": "The scare spell will scare people and cats "
-            "out of the room."}
+            {"befriend": "The befriend spell allows you to befriend rats and dogs that \
+             will help defend you from cats.", "hide": "The hide spell allows you to hide\
+            from everyone in the room.", "scare": "The scare spell will scare people and cats\
+            out of the room."}
         super().__init__(name, description = spells[name])
+
+    # Input the character who casts, print a message, and the
+    # spell moves from the player's inventory to the room's inventory
+    # {{
+    def cast(self, character_who_casts):
+        where_is = room_dict[character_who_casts.location]
+        print('You cast {}, so and so is impressed'.format(self.name))
+        cast_spell = 'casted_' + character_who_casts.inventory.poplar(self.name).name
+
+        where_is.inventory.put_in_quiet(Item(cast_spell, ""))
+    # }}
+
+
 # }}
+
+
 
 # Creates a weapon with an attack value of ten
 # {{
