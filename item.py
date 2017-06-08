@@ -53,8 +53,8 @@ class Food(Item):
         """
         Allows a rat to nibble on food in a room.
         """
-        score -= 2
-        if score <= 0:
+        self.score -= 2
+        if self.score <= 0:
             del self
     
 
