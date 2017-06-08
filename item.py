@@ -56,6 +56,20 @@ class Food(Item):
             del self
     
 
+    def eat(self, character_who_eats):
+        """
+        when called on a food item it will decrement the item food value by 5
+        takes input character
+        """
+
+        amount_food = 5
+        self.score -= amount_food
+        character_who_eats.health += amount_food
+        if self.score <= 0:
+            character_who_eats.inventory.poplar(self.name)
+
+
+
 # TODO:  The inventory still needs a way to calculate
 #        the total store to win the game.
 
