@@ -6,14 +6,14 @@ from random import randrange
 
 def pretty_print_dict(dict):
     for k in dict:
-        print('{}. {}'.format(k, dict[k]))
+        print('{}'.format(dict[k]))
 
 def battle(player, npc):
     fighting = True
     print("You are now battling " + npc.name + ". " + npc.description)
     while fighting:
         print("What would you like to do?")
-        print("1. Attack")
+        print("1. Fight")
         print("2. Magic")
         print("3. Flee")
         user_input = input()
@@ -22,16 +22,18 @@ def battle(player, npc):
         if "1" in user_input or 'fight' in user_input:
             inv_dict = danger_mouse.inventory.list_inventory()
             pretty_print_dict(inv_dict)
-            item_select = input('Select an item')
+            item_select = input('Select an item:\n')
             item_select = item_select.lower()
-            
+
             for thing in player.inventory.bag_of_holding:
                 if thing.name.lower() in item_select:
                     npc.health = npc.health - thing.attack
-                    print(npc.name + " took " + str(player.attack) + ' damage')
+                    print(npc.name + " took " + str(thing.attack) + ' damage')
                     if npc.health <= 0:
                         print("You have defeated " + npc.name)
                         fighting = False
+
+
 
             # npc.take_damage(player.attack)
             # print(npc.name + " took " + str(player.attack) + ' damage')
