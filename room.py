@@ -37,7 +37,7 @@ class Room():
         self.inventory.check_inventory(item)
 
     def get_character_by_type(self, character_type):
-        for c in character:
+        for c in self.characters:
             if type(c) == character_type:
                 return c
         return ""

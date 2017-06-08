@@ -4,12 +4,7 @@ import character
 from character import Mouse
 from item import Item, Food
 #Items
-buttery_key = Item('buttery door key', 'unlocks the buttery')
-cheese_slice = Food('cheese slice', 'A slice of American cheese', 10)
-cheese_hunk = Food('cheese hunk', 'Hankering for a hunk of cheese, its so Ghouda', 15)
-cheese_crumb = Food('cheese crumb', 'A bite sized crumb of feta', 5)
-cheese_round = Food('cheese round', 'A round of Brie 86', 20)
-cheese_loaf = Food('cheese loaf', 'A loaf of Tillamook Cheddar', 30)
+
 
 
 
@@ -53,7 +48,7 @@ dresser = room.Room('dresser', "You find yourself in a dresser, and much to your
 buttery = room.Room('buttery', "The buttery, there's wine and cheese everywhere!", room_map['buttery'], [])
 outside = room.Room('front lawn', "You are on the front lawn. You peer upward towards the sky, into the void of infinity. It's a great big universe and you're just a small part of it. The sheer impact of this realization, of having grasped the nature of the cosmos and the universe has unfortunately so blown your mind that it has left you comatose, your family will surely perish. Game Over.",room_map['front lawn'],[])
 chest = room.Room('chest', 'It is dark in the chest, but you smell cheese', room_map['chest'], [])
-serv_chamber.add_item(buttery_key)
+
 # Door initializations
 # name, description, room1, room2, is_locked, key_name
 mouse_hole = room.Door('mouse hole', 'A hole in the baseboard of the castle library, the entry way to your humble home.', nest, library, False, 'mouse hole key')
@@ -74,11 +69,6 @@ dresser_drawer = room.Door('dresser drawer', 'A dresser drawer', guest_bedroom, 
 front_door = room.Door('front door', 'The front entrance to the castle, really quite a beautiful doorway, not that the opinion of a mouse matters.',grand_hall, outside, False, 'front door key' )
 chest_door = room.Door('chest drawer', 'The keyhole appears large enough for you to crawl through', master_bedroom, chest, False, 'chest key')
 
-chest.add_item(cheese_hunk)
-buttery.add_item(cheese_loaf)
-kitchen.add_item(cheese_slice)
-dresser.add_item(cheese_crumb)
-gallery.add_item(cheese_round)
 
 door_dict ={'mouse hole': mouse_hole,
             'library door': library_door,
@@ -113,7 +103,9 @@ room_dict ={'nest': nest,
             'kitchen': kitchen,
             'servant hall': servant_hall,
             'dresser': dresser,
-            'front lawn': outside
+            'front lawn': outside,
+            'butter': buttery,
+            'chest': chest
             }
 
 print(west_hall.find_path(gallery, door_dict))

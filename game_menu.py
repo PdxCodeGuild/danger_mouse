@@ -5,13 +5,14 @@ import item
 import room
 import types
 from character_profile import create_character
+from item import Food
 game_over = False
 
 # current_room = room.Room('Test Room', 'This is only a test', test_doors, test_characters)
 # next_room = room.Room('next room', 'You have made it to the second room', test_doors, test_characters)
-spoon = item.Item('spoon', 'There is no spoon')
-
-baby_mouse = character.Character('baby', 'little rodent', room_controller.nest,)
+# spoon = item.Item('spoon', 'There is no spoon')
+#
+# baby_mouse = character.Character('baby', 'little rodent', room_controller.nest,)
 # red = room.Door('red', 'A door', current_room, next_room , False, 'no')
 # test_doors = [red]
 # cat = character.Character('cat', 'Putty Tat', [])
@@ -20,16 +21,24 @@ def pretty_print_dict(dict):
     for k in dict:
         print('{}. {}'.format(k, dict[k]))
 
+def check_score(player):
+    final_score = 0
+    for obj in player.inventory.bag_of_holding:
+        if type(obj) is type(Food):
+            final_score += obj.score
+    if final_score >= 50:
+        return True
 
-map = item.Item('map', 'You found the map')
-current_room = room_controller.nest
-current_room.inventory.put_in(spoon)
-current_room.characters.append(baby_mouse)
+# map = item.Item('map', 'You found the map')
+# current_room = room_controller.nest
+# current_room.inventory.put_in(spoon)
+# current_room.characters.append(baby_mouse)
 # danger_mouse = character.Mouse('Ralph', 'Test Character', current_room)
 danger_mouse = create_character()
 current_room = room_controller.nest
 print("You are a 🐭")
 while not game_over:
+    game_over = check_score(danger_mouse)
     current_room.look()
     action_select = str(input('1. Look \n'
                           '2. Move \n'
