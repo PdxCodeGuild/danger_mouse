@@ -19,6 +19,14 @@ import character, item
 import room
 import inventory
 def create_character():
+    """
+    This function will go at the beginning of the game play.
+    This function allows a user to choose a major player character from a menu.
+    :return:
+    """
+    """
+    :return: 
+    """
     run_again = True
     while run_again == True:
 
@@ -59,22 +67,34 @@ def create_character():
         except KeyError:
             continue
 
-
+    """
+    Creates character Mortimer.  
+    """
     if choice == '1':
         befriend_1 = item.Spell("befriend")
         befriend_2 = item.Spell("befriend")
         char_list = ['Mortimer', 'You are an elderly mouse who\'s body is worn, but who\'s smile is genuine.', 'library', [befriend_1, befriend_2]]
 
+    """
+    Creates character Sydney.
+    """
     if choice == '2':
         hide_1 = item.Spell("hide")
         hide_2 = item.Spell("hide")
         char_list = ['Sydney', 'You try to look at yourself, but you quickly dodge your own gaze and hide in the shadows.', 'nest', [hide_1, hide_2] ]
 
+    """
+    Creates character Aster.
+    """
     if choice == '3':
         scare_1 = item.Spell("scare")
         scare_2 = item.Spell("scare")
         char_list = ['Aster', 'Your physical appearance is not notable, but you act with confidence that leaves others intimidated.', 'chapel', [scare_1, scare_2]]
 
+    """
+    Uses variable player to instantiate a Mouse character and call the needed list of attributes.
+    Returns the Mouse character.  
+    """
     player = character.Mouse(char_list[0], char_list[1], char_list[2])
     player.inventory.put_in_quiet(char_list[3][0])
     player.inventory.put_in_quiet(char_list[3][1])
