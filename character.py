@@ -171,7 +171,7 @@ class Cat(Character):
         if room.check_inventory("casted_scare") and aggression < 3:
             turns_until_move = 0
         elif room.get_character_by_type(type(Dog)):
-            print(Dog chases cat away)
+            print("Dog chases cat away")
             turns_until_move = 0
             if room.get_character_by_type(type(Dog)).friend:
                 room.get_character_by_type(type(Dog)).resting = True
@@ -181,6 +181,7 @@ class Cat(Character):
         elif room.get_character_by_type(type(Rat)):
             room.get_character_by_type(type(Rat)).die()
         elif mouse in room.characters and not room.inventory.check_inventory(casted_hide):
+            pass
             # attack mouse
         else:
             turns_until_move -= 1
@@ -272,7 +273,8 @@ class Person(Character):
         room = room_controller.room_dict[self.location]
         room_dict = room_controller.room_dict
         if room.inventory.check_inventory(casted_scare) and self.aggression < 3:
-            set a random destination
+            # set a random destination
+            pass
         elif room.get_character_by_type(type(mouse)) and not room.check_inventory("casted_hide"):
             if self.aggression <= 2:
                 for key in room_dict.keys():
