@@ -58,8 +58,6 @@ class Spell(Item):
         Instantiates a spell item.
         """
 
-        super().__init__(name, description)
-
 
 
         spells = \
