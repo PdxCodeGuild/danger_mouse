@@ -30,6 +30,15 @@ class Inventory:
 
         return is_there
 
+    def look_for_food(self):
+        food = []
+        for item in self.bag_of_holding:
+            if type(item) is item.Food:
+                food.append(item)
+        if food:
+            return food[randrange(0, len(food))]
+        return ""
+
     def list_inventory(self):
         """Displays inventory of object to console, excludes spells that have been cast."""
 
