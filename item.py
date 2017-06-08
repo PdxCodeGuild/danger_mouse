@@ -6,12 +6,13 @@ This document contains classes for the items in our Danger Mouse game.
 
 
 class Item:
-    def __init__(self, name, description):
+    def __init__(self, name, description, attack = 2):
         """
         Instantiates new Item.
         """
         self.name = name
         self.description = description
+        self.attack = attack
 
     def __str__(self):
         """
@@ -49,6 +50,7 @@ class Food(Item):
         score -= 2
         if score <= 0:
             del self
+    
 
 # TODO:  The inventory still needs a way to calculate
 #        the total store to win the game.
@@ -69,5 +71,4 @@ class Spell(Item):
 
 class Weapon(Item):
     def __init__(self, name, description, attack = 10):
-        super().__init__(name, description)
-        self.attack = attack
+        super().__init__(name, description, attack)
