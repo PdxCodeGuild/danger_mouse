@@ -46,7 +46,7 @@ class Room():
             print("You can exit through {}".format(door))
 
     def use_key(self, door, player):
-        if door.is_locked == True and player.check_inventory(door.key):
+        if door.is_locked == True and player.inventory.check_inventory(door.key):
             print('The door is unlocked.')
             door.is_locked = False
         if door.is_locked == False:
@@ -145,5 +145,11 @@ class Door():
     def look(self):
         print(self.name + '/n' + self.description)
 
-    def action(self, room, player):
-        room.use_key(self, player)
+    def action(self, room ,player):
+        if self.is_locked == True and player.inventory.check_inventory(self.key):
+            print('The door is unlocked.')
+            self.is_locked = False
+        elif self.is_locked == False:
+            print('The door is already unlocked')
+        else:
+            print('You need a key to unlock this door')

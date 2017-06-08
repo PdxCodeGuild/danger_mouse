@@ -122,3 +122,5 @@ class Befriend(Spell):
             print("{} is not in the mood to make friends".format(target))
 
 
+
+
