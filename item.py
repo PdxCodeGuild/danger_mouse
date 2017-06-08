@@ -1,7 +1,8 @@
 import character
 import inventory
 """
-This document contains classes for the items in our Danger Mouse game.
+This document contains Item classes for the items in our Danger Mouse game.
+The parent class Item defines the subclasses Food and Spell.  
 """
 
 
@@ -39,6 +40,10 @@ class Food(Item):
     def __init__(self, score,  *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.score = score
+
+    def look(self):
+        super().look()
+        print("Score: {}".format(self.score))
 
     def rat_nibbling(self):
         """
