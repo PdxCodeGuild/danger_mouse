@@ -7,29 +7,13 @@ import types
 from character_profile import create_character
 game_over = False
 
-# current_room = room.Room('Test Room', 'This is only a test', test_doors, test_characters)
-# next_room = room.Room('next room', 'You have made it to the second room', test_doors, test_characters)
-spoon = item.Item('spoon', 'There is no spoon')
 
-baby_mouse = character.Character('baby', 'little rodent', room_controller.nest,)
-# red = room.Door('red', 'A door', current_room, next_room , False, 'no')
-# test_doors = [red]
-# cat = character.Character('cat', 'Putty Tat', [])
-# test_characters = [cat]
 def pretty_print_dict(dict):
     for k in dict:
         print('{}. {}'.format(k, dict[k]))
 
-
-map = item.Item('map', 'You found the map')
-current_room = room_controller.nest
-current_room.inventory.put_in(spoon)
-current_room.characters.append(baby_mouse)
-# danger_mouse = character.Mouse('Ralph', 'Test Character', current_room)
 danger_mouse = create_character()
-danger_mouse.inventory.put_in(map)
-
-
+current_room = room_controller.nest
 print("You are a 🐭")
 while not game_over:
     current_room.look()
@@ -60,7 +44,6 @@ while not game_over:
                 valid_input = True
             except KeyError:
                 print("Not a valid input")
-
 
     elif '2' in action_select or 'move' in action_select:
         i = 1
