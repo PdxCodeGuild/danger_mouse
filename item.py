@@ -70,7 +70,9 @@ class Spell(Item):
 a_spell = Spell("scare")
 print(a_spell)
 print(a_spell.description)
-a_food = Food("bread")
-print(a_food)
-print(a_food.score)
-print(a_food.description)
+
+
+class Weapon(Item):
+    def __init__(self, name, description, attack = 10):
+        super().__init__(name, description)
+        self.attack = attack
