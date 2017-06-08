@@ -83,7 +83,6 @@ class Room():
 
             level = next_level
             next_level = []
-        print(nav_tree)
         result = self.look_for_destination(nav_tree, self, destination)
         if result:
             return result
@@ -94,16 +93,15 @@ class Room():
         if location in tree.keys():
             for r in tree[location]:
                 if r == destination:
-                    return destination
+                    return destination.name
                 else:
                     t = self.look_for_destination(tree, r, destination)
                     if t:
-                        path = [r]
                         try:
-                            path.extend(t)
-                        except TypeError:
-                            path.append(t)
-                        return path
+                            t.insert(0, r.name)
+                        except AttributeError:
+                            t = [r.name, t]
+                        return t
 
     def generate_tree_level(self, tree, room, door_dict, checked):
         temp = room.get_adjacent(door_dict, checked)
@@ -144,4 +142,3 @@ class Door():
 
     def action(self, room, player):
         room.use_key(self, player)
-
