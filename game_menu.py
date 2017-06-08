@@ -53,6 +53,7 @@ while not game_over:
                     for k in look_dict:
                         print(k + '. ' + room_controller.door_dict[look_dict[k]])
                     look_select = input()
+                    look_select = input()
                     look_dict[look_select].look()
                     valid_input = True
                 except KeyError:
