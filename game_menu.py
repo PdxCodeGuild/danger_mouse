@@ -98,21 +98,25 @@ while not game_over:
                     print("Not a valid input")
 
     elif '4' in action_select or 'inventory' in action_select:
-        inv_dict = danger_mouse.inventory.list_inventory()
-        pretty_print_dict(inv_dict)
-        item_select = input('Select an item')
-        item_action = input('What do you wish to do with this item? \n'
+        #inv_dict = danger_mouse.inventory.list_inventory()
+       ##  pretty_print_dict(inv_dict)
+        danger_mouse.inventory.list_inventory()
+        item_select = input('Enter the name of the item you wish to select')
+        if danger_mouse.inventory.check_inventory(item_select):
+            item_action = input('What do you wish to do with this item? \n'
                             '1. Look at item \n'
-                            '2. Use item \n'
+                            #'2. Use item \n'
                             '3. Drop item\n')
+        else:
+            print('That item doesn\'t appear to be here.')
 
         if '1' in item_action:
-            inv_dict[item_select].look()
+            danger_mouse.inventory.look(item_select)
             print('\n')
-        if '2' in item_action:
-            print('You attempt to use the {}, but nothing happens'.format(inv_dict[item_select]))
+        #if '2' in item_action:
+            #print('You attempt to use the {}, but nothing happens'.format(inv_dict[item_select]))
         if '3' in item_action:
-            current_room.inventory.put_in(danger_mouse.inventory.poplar(inv_dict[item_select]))
+            current_room.inventory.put_in(danger_mouse.inventory.poplar(item_select))
 
     elif '5' in action_select or 'interact' in action_select:
         action_dict = {}
