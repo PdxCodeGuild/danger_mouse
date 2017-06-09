@@ -5,13 +5,22 @@ import item
 import room
 import types
 from character_profile import create_character
+import os
+
+
+def cls():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
 game_over = False
 
 # current_room = room.Room('Test Room', 'This is only a test', test_doors, test_characters)
 # next_room = room.Room('next room', 'You have made it to the second room', test_doors, test_characters)
 spoon = item.Item('spoon', 'There is no spoon')
 
-baby_mouse = character.Character('baby', 'little rodent', room_controller.nest,)
+baby_mouse = character.Character('baby', 'little rodent', room_controller.nest, )
+
+
 # red = room.Door('red', 'A door', current_room, next_room , False, 'no')
 # test_doors = [red]
 # cat = character.Character('cat', 'Putty Tat', [])
@@ -29,15 +38,14 @@ current_room.characters.append(baby_mouse)
 danger_mouse = create_character()
 danger_mouse.inventory.put_in(map)
 
-
 print("You are a 🐭")
 while not game_over:
     current_room.look()
     action_select = str(input('1. Look \n'
-                          '2. Move \n'
-                          '3. Peek through a door \n'
-                          '4. Inventory \n'
-                          '5. Interact\n')).lower()
+                              '2. Move \n'
+                              '3. Peek through a door \n'
+                              '4. Inventory \n'
+                              '5. Interact\n')).lower()
 
     if '1' in action_select or 'look' in action_select:
         i = 1
@@ -61,7 +69,6 @@ while not game_over:
             except KeyError:
                 print("Not a valid input")
 
-
     elif '2' in action_select or 'move' in action_select:
         i = 1
         move_dict = {}
@@ -70,14 +77,14 @@ while not game_over:
             i += 1
         valid_input = False
         while not valid_input:
-                try:
-                    for k in move_dict:
-                        print(k + '. ' + move_dict[k])
-                    move_select = input()
-                    current_room = current_room.open_door(room_controller.door_dict[move_dict[move_select]])
-                    valid_input = True
-                except KeyError:
-                    print("Not a valid input")
+            try:
+                for k in move_dict:
+                    print(k + '. ' + move_dict[k])
+                move_select = input()
+                current_room = current_room.open_door(room_controller.door_dict[move_dict[move_select]])
+                valid_input = True
+            except KeyError:
+                print("Not a valid input")
 
     elif '3' in action_select or 'peek' in action_select:
         i = 1
@@ -88,18 +95,18 @@ while not game_over:
 
         valid_input = False
         while not valid_input:
-                try:
-                    for k in peek_dict:
-                        print(k + '. ' + peek_dict[k])
-                    peek_select = input()
-                    current_room.peek_room(room_controller.door_dict[peek_dict[peek_select]])
-                    valid_input = True
-                except KeyError:
-                    print("Not a valid input")
+            try:
+                for k in peek_dict:
+                    print(k + '. ' + peek_dict[k])
+                peek_select = input()
+                current_room.peek_room(room_controller.door_dict[peek_dict[peek_select]])
+                valid_input = True
+            except KeyError:
+                print("Not a valid input")
 
     elif '4' in action_select or 'inventory' in action_select:
-        #inv_dict = danger_mouse.inventory.list_inventory()
-       ##  pretty_print_dict(inv_dict)
+        # inv_dict = danger_mouse.inventory.list_inventory()
+        # pretty_print_dict(inv_dict)
         danger_mouse.inventory.list_inventory()
         item_select = input('Enter the name of the item you wish to select: \n:')
         if danger_mouse.inventory.check_inventory(item_select):

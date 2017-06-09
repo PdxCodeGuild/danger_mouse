@@ -8,7 +8,7 @@ The parent class Item defines the subclasses Food and Spell.
 
 
 class Item:
-    def __init__(self, name, description, attack = 2):
+    def __init__(self, name, description, attack=2):
         """
         Instantiates new Item.
         """
@@ -31,7 +31,7 @@ class Item:
     def look(self):
         print('{}: {}'.format(self.name, self.description))
 
-# Fish will be instantiated from the Item class, rather than being a class.
+    # Fish will be instantiated from the Item class, rather than being a class.
     def action(self, room, character):
         character.inventory.put_in(room.inventory.poplar(self))
 
@@ -44,10 +44,11 @@ class Food(Item):
     """
     Instantiates a Food Item.
     """
+
     def __init__(self, name):
         scores = {"cheese": 20, "bread": 10, "cake": 30}
         descriptions = {"cheese": "cheese", "bread": "bread", "cake": "cake"}
-        super().__init__(name, description = descriptions[name])
+        super().__init__(name, description=descriptions[name])
         self.score = scores[name]
 
     def look(self):
@@ -58,10 +59,9 @@ class Food(Item):
         """
         Allows a rat to nibble on food in a room.
         """
-        score -= 2
-        if score <= 0:
+        self.score -= 2
+        if self.score <= 0:
             del self
-    
 
     def eat(self, character_who_eats):
         """
@@ -94,7 +94,7 @@ class Spell(Item):
              will help defend you from cats.", "hide": "The hide spell allows you to hide\
             from everyone in the room.", "scare": "The scare spell will scare people and cats\
             out of the room."}
-        super().__init__(name, description = spells[name])
+        super().__init__(name, description=spells[name])
 
     def cast(self, character_who_casts):
         where_is = room_dict[character_who_casts.location]
@@ -109,5 +109,5 @@ class Spell(Item):
 
 
 class Weapon(Item):
-    def __init__(self, name, description, attack = 10):
+    def __init__(self, name, description, attack=10):
         super().__init__(name, description, attack)
