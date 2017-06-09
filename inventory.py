@@ -43,7 +43,7 @@ class Inventory:
     def list_inventory(self):
         """Displays inventory of object to console, excludes spells that have been cast."""
 
-        print('You\'re inventory contains:')
+        print('Your inventory contains:')
         #i = 1
         #inv_dict = {}
         for item in self.bag_of_holding:

@@ -16,7 +16,7 @@ class Room():
 
     def open_door(self, door): #character.inventory
         if door.is_locked == True:
-            print('Door is locked.')
+            pass
         else:
             if self.name == door.front.name:
                 return door.back
@@ -37,7 +37,7 @@ class Room():
         self.inventory.check_inventory(item)
 
     def get_character_by_type(self, character_type):
-        for c in character:
+        for c in self.characters:
             if type(c) == character_type:
                 return c
         return ""
@@ -80,12 +80,11 @@ class Room():
         # generate dict tree
         nav_tree = {}
         checked = [self]
-        level = []
+        level = [self]
         next_level = []
-        nav_tree, checked = self.generate_tree_level(nav_tree, self, door_dict, checked)
-        for t in nav_tree[self]:
-            level.append(t)
-
+        # nav_tree, checked = self.generate_tree_level(nav_tree, self, door_dict, checked)
+        # for t in nav_tree[self]:
+        #     level.append(t)
         while level:
             for r in level:
                 nav_tree, checked = self.generate_tree_level(nav_tree, r, door_dict, checked)
@@ -103,8 +102,8 @@ class Room():
     def look_for_destination(self, tree, location, destination):
         if location in tree.keys():
             for r in tree[location]:
-                if r == destination:
-                    return destination.name
+                if r.name == destination:
+                    return destination
                 else:
                     t = self.look_for_destination(tree, r, destination)
                     if t:

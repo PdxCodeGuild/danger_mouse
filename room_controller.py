@@ -1,11 +1,11 @@
 import room
 import csv
 import character
-from character import Mouse
+
 
 room_map = {'nest': ['mouse hole'],
             'library': ['mouse hole', 'library door'],
-            'east hall': ['library door', 'swinging door', 'servant door', 'master door', 'guest door'],
+            'east hall': ['library door', 'swinging door', 'servant door', 'master door', 'guest door', "gallery door"],
             'serv chamber': ['servant door', 'servant passage'],
             'gallery': ['gallery door'],
             'guest bedroom': ['guest door'],
@@ -96,15 +96,37 @@ room_dict ={'nest': nest,
             'dresser': dresser
             }
 
+class Level:
+    pass
 
-# when passed a list of all the characters and rooms, will sort through them and update the locations on each accordingly
+level = Level()
+
+level.room_dict = room_dict
+level.door_dict = door_dict
+
+# when passed a list of all the characters and rooms, will sort through them
+# and update the locations on each accordingly
 def update_all(characters, castle):
-    for loc in castle.values():
+    for c in characters:
+        c.activate(level)
+    for loc in castle:
         temp_list = []
+        # Strip spells out
         for person in characters:
             if person.location == loc.name:
                 temp_list.append(person)
         loc.update_characters(temp_list)
+
+# characters = []
+# characters.append(character.Person("serv_chamber"))
+# characters.append(character.Dog("gallery"))
+# characters.append(character.Mouse("Martin", "of Redwall", "gallery"))
+#
+# while input("(C)ontinue? ").upper() == "C":
+#     update_all(characters, room_dict.values())
+#     for c in characters:
+#         print(c.name, ":", c.location)
+
 
 # game_over = False
 # current_room = nest
@@ -143,9 +165,3 @@ def update_all(characters, castle):
     #         print('this is a character')
     # if first == 'peek':
     #     current_room.peek_room(door_dict[second])
-
-
-
-
-
-
