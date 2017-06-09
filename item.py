@@ -30,7 +30,7 @@ class Item:
 
 # Fish will be instantiated from the Item class, rather than being a class.
     def action(self, room, character):
-        character.inventory.put_in(room.inventory.poplar(self))
+        character.inventory.put_in(room.inventory.poplar(self.name))
 
 class Food(Item):
     """

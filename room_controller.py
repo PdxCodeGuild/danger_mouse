@@ -1,4 +1,5 @@
 import room
+import item
 import csv
 import character
 from character import Mouse

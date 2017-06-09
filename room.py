@@ -25,7 +25,7 @@ class Room():
         return self
 
     def add_item(self, item):
-        self.inventory.put_in(item)
+        self.inventory.put_in_quiet(item)
 
     def update_characters(self, characters):
         self.characters = list(characters)

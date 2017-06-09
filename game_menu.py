@@ -14,12 +14,30 @@ def pretty_print_dict(dict):
     for k in dict:
         print('{}. {}'.format(k, dict[k]))
 
+def check_win(player):
+    score = 0
+    for item in player.inventory:
+        if item.isinstanceof(item.Food):
+            score += item.score
+    if score >= 60:
+        print('You win!')
+        return True
+    else:
+        return False
 
 
 danger_mouse = create_character()
 current_room = room_controller.room_dict[danger_mouse.location]
 current_room.look()
+cheese = item.Food('cheese')
+cake = item.Food('cake')
+bread = item.Food('bread')
 
+room_controller.nest.add_item(cheese)
+room_controller.nest.add_item(cake)
+room_controller.nest.add_item(bread)
+
+danger_dict = {'Danger mouse': danger_mouse}
 
 print("You are a 🐭")
 while not game_over:
@@ -33,6 +51,8 @@ while not game_over:
     if '1' in action_select or 'look' in action_select:
         i = 1
         look_dict = {}
+        look_dict[str(i)] = danger_dict['Danger mouse']
+        i += 1
         for door in current_room.doors:
             look_dict[str(i)] = room_controller.door_dict[door]
             i += 1
