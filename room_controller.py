@@ -1,7 +1,7 @@
 import room
 import csv
 import character
-from character import Mouse
+
 
 room_map = {'nest': ['mouse_hole'],
             'library': ['mouse_hole', 'library_door'],
@@ -44,8 +44,8 @@ outside = room.Room('front_lawn', "You are on the front lawn. You peer upward to
 # Door initializations
 # name, description, room1, room2, is_locked, key_name
 mouse_hole = room.Door('mouse_hole', 'A hole in the baseboard of the castle library, the entry way to your humble home.', nest, library, False, 'mouse_hole_key')
-library_door = room.Door('library_door', 'A crack under the door', library, east_hall, False, 'library_door_key')
-swinging_door = room.Door('swinging_door', 'A swinging door', east_hall, grand_hall, False, 'swinging_door_key')
+library_door = room.Door('library_door', 'A crack under the door', library, east_hall, True, 'library_door_key')
+swinging_door = room.Door('swinging_door', 'A swinging door', east_hall, grand_hall, True, 'swinging_door_key')
 servant_door = room.Door('servant_door', 'A wooden door', east_hall, serv_chamber, False, 'servant_door_key')
 gallery_door = room.Door('gallery_door', 'It looks like you can squeze through the door', east_hall, gallery, False, 'gallery_door_key')
 guest_door = room.Door('guest_door', 'A wooden door', east_hall, guest_bedroom, False, 'guest_door_key')
@@ -56,7 +56,7 @@ fsm_door = room.Door('fsm_door', 'The flying speghetti monster rests on the door
 kitchen_entry = room.Door('kitchen_entry', 'A swinging double door', west_hall, kitchen, False, 'kitchen_door_key')
 buttery_entry = room.Door('butter_entry', 'One more door', kitchen, buttery, False, 'buttery_door_key')
 serv_kitchen = room.Door('serv_kitchen', 'Servants kitchen entrance', kitchen, servant_hall, False, 'serv_door_key')
-servant_passage = room.Door('servant_passage', 'Secret door', serv_chamber, servant_hall, False, 'servant_passage_key')
+servant_passage = room.Door('servant_passage', 'Secret door', serv_chamber, servant_hall, True, 'servant_passage_key')
 dresser_drawer = room.Door('dresser_drawer', 'A dresser drawer', master_bedroom, dresser, False, 'dresser_drawer_key')
 front_door = room.Door('front_door', 'The front entrance to the castle, really quite a beautiful doorway, not that the opinion of a mouse matters.',grand_hall, outside, False, 'front_door_key' )
 
@@ -96,17 +96,37 @@ room_dict ={'nest': nest,
             'front_lawn': outside
             }
 
-print(west_hall.find_path(gallery, door_dict))
+class Level:
+    pass
 
+level = Level()
 
-# when passed a list of all the characters and rooms, will sort through them and update the locations on each accordingly
+level.room_dict = room_dict
+level.door_dict = door_dict
+
+# when passed a list of all the characters and rooms, will sort through them
+# and update the locations on each accordingly
 def update_all(characters, castle):
+    for c in characters:
+        c.activate(level)
     for loc in castle:
         temp_list = []
+        # Strip spells out
         for person in characters:
             if person.location == loc.name:
                 temp_list.append(person)
         loc.update_characters(temp_list)
+
+characters = []
+characters.append(character.Person("serv_chamber"))
+characters.append(character.Dog("gallery"))
+characters.append(character.Mouse("Martin", "of Redwall", "gallery"))
+
+while input("(C)ontinue? ").upper() == "C":
+    update_all(characters, room_dict.values())
+    for c in characters:
+        print(c.name, ":", c.location)
+
 
 # game_over = False
 # current_room = nest
