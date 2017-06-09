@@ -46,11 +46,11 @@ class Food(Item):
     """
 
     def __init__(self, name):
-        scores = {"cheese": 20, "bread": 10, "cake": 30}
-        descriptions = {"cheese": "cheese", "bread": "bread", "cake": "cake"}
-        super().__init__(name, description=descriptions[name])
-        self.score = scores[name]
-
+        scores = {"cheese": 20, "bread": 10, "cake": 30, "loaf": 40, "round": 50, "wedge": 20, "crumb": 10, "slice": 5,
+                  "piece": 0}
+        descriptions = {"Cheese": "cheese", "bread": "bread", "cake": "cake", "loaf": "A loaf of Tillamook Cheddar",
+                        "round": "A partially eaten round of oh so ghouda", "wedge": "A wedge of Brie '86", "crumb": "A small crumb of feta",
+                        "slice": "A slice of Amercian cheese", "piece": "A piece of government cheese"}
     def look(self):
         super().look()
         print("Score: {}".format(self.score))

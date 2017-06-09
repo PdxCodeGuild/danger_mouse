@@ -32,13 +32,9 @@ danger_mouse = create_character()
 
 current_room = room_controller.room_dict[danger_mouse.location]
 
-cheese = item.Food('cheese')
-cake = item.Food('cake')
-bread = item.Food('bread')
 
-room_controller.nest.add_item(cheese)
-room_controller.nest.add_item(cake)
-room_controller.nest.add_item(bread)
+
+
 
 danger_dict = {'Danger mouse': danger_mouse}
 current_room.look()

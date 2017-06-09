@@ -1,5 +1,5 @@
 import room
-# import item
+import item
 # import csv
 # import character
 # from character import Mouse
@@ -98,6 +98,21 @@ room_dict ={'nest': nest,
             'buttery': buttery,
             'outside': outside
             }
+loaf = item.Food('loaf')
+round = item.Food('round')
+wedge = item.Food('wedge')
+crumb = item.Food('crumb')
+slice = item.Food('slice')
+piece = item.Food('piece')
+
+buttery.add_item(round)
+chapel.add_item(piece)
+kitchen.add_item(loaf)
+master_bedroom.add_item(slice)
+guest_bedroom.add_item(crumb)
+gallery.add_item(wedge)
+
+
 
 characters = []
 characters.append(character.Person("serv chamber"))
