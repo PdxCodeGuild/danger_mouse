@@ -1,9 +1,9 @@
 import room_controller
-import inventory
-import character
+# import inventory
+# import character
 import item
-import room
-import types
+# import room
+# import types
 from character_profile import create_character
 import os
 
@@ -15,33 +15,27 @@ def cls():
 game_over = False
 
 
-
-
 def pretty_print_dict(dict):
     for k in dict:
         print('{}. {}'.format(k, dict[k]))
 
+
 def check_win(player):
     score = 0
-    for item in player.inventory:
-        if item.isinstanceof(item.Food):
-            score += item.score
+    for thing in player.inventory.bag_of_holding:
+        if type(thing) is item.Food:
+            score += thing.score
     if score >= 60:
         print('You win!')
         return True
     else:
         return False
 
-# map = item.Item('map', 'You found the map')
-# current_room = room_controller.nest
-# current_room.inventory.put_in(spoon)
-# current_room.characters.append(baby_mouse)
-# # danger_mouse = character.Mouse('Ralph', 'Test Character', current_room)
 
 danger_mouse = create_character()
-# danger_mouse.inventory.put_in(map)
+
 current_room = room_controller.room_dict[danger_mouse.location]
-current_room.look()
+
 cheese = item.Food('cheese')
 cake = item.Food('cake')
 bread = item.Food('bread')
@@ -51,7 +45,7 @@ room_controller.nest.add_item(cake)
 room_controller.nest.add_item(bread)
 
 danger_dict = {'Danger mouse': danger_mouse}
-
+current_room.look()
 print("You are a 🐭")
 while not game_over:
 
@@ -124,15 +118,21 @@ while not game_over:
     elif '4' in action_select or 'inventory' in action_select:
         # inv_dict = danger_mouse.inventory.list_inventory()
         # pretty_print_dict(inv_dict)
-        danger_mouse.inventory.list_inventory()
+        item_dict = {}
+        i = 1
+        for item in danger_mouse.inventory.bag_of_holding:
+            item_dict[str(i)] = item
+            i += 1
+        pretty_print_dict(item_dict)
+
+
         item_select = input('Enter the name of the item you wish to select: \n:')
-        if danger_mouse.inventory.check_inventory(item_select):
-            item_action = input('What do you wish to do with this item? \n'
+
+        item_action = input('What do you wish to do with this item? \n'
                             '1. Look at item \n'
                             '2. Use item \n'
                             '3. Drop item\n')
-        else:
-            print('That item doesn\'t appear to be here.')
+
 
         if '1' in item_action:
             danger_mouse.inventory.look(item_select)
@@ -151,8 +151,8 @@ while not game_over:
         for door in current_room.doors:
             action_dict[str(i)] = room_controller.door_dict[door]
             i += 1
-        for item in current_room.inventory.bag_of_holding:
-            action_dict[str(i)] = item
+        for stuff in current_room.inventory.bag_of_holding:
+            action_dict[str(i)] = stuff
             i += 1
         for character in current_room.characters:
             action_dict[str(i)] = character
@@ -163,3 +163,6 @@ while not game_over:
 
     else:
         print('Please enter a valid menu option.')
+    game_over = check_win(danger_mouse)
+
+print('Thanks for playing')
