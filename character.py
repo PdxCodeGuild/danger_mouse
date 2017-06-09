@@ -194,7 +194,7 @@ class Cat(Character):
         # if turns_until_move == 1 and self.inventory.check_inventory("bell"):  # And inventory includes bell
         #     # If the destination room is the room with mouse, alert player
         #     pass
-        if self.turns_until_move == 0 and self.destination:
+        if self.turns_until_move <= 0 and self.destination:
             self.location = self.destination
             self.destination = ""
             self.turns_until_move = randrange(3, 6)
