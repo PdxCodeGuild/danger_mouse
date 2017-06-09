@@ -139,10 +139,8 @@ class Rat(Character):
                 room.inventroy.look_for_food().rat_nibbling()
             else:
                 options = room.get_adjacent(level.door_dict)
-                print(room.name)
-                print(self.location)
-                print("Rat options are:", options)
-                self.location = options[randrange(0, len(options))].name
+                if options:
+                    self.location = options[randrange(0, len(options))].name
 
 
 class Cat(Character):
@@ -238,7 +236,8 @@ class Dog(Character):
                 self.searching = 1 + self.aggression
             elif self.searching:
                 self.searching -= 1
-                self.location = choice(room.get_adjacent()).name
+                if room.get_adjacent():
+                    self.location = choice(room.get_adjacent()).name
         elif not self.resting:
             for key in level.room_dict.keys():
                 if level.room_dict[key].get_character_by_type(Mouse):
