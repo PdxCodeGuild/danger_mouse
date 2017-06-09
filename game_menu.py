@@ -30,13 +30,14 @@ def pretty_print_dict(dict):
         print('{}. {}'.format(k, dict[k]))
 
 
-map = item.Item('map', 'You found the map')
-current_room = room_controller.nest
-current_room.inventory.put_in(spoon)
-current_room.characters.append(baby_mouse)
-# danger_mouse = character.Mouse('Ralph', 'Test Character', current_room)
+# map = item.Item('map', 'You found the map')
+# current_room = room_controller.nest
+# current_room.inventory.put_in(spoon)
+# current_room.characters.append(baby_mouse)
+# # danger_mouse = character.Mouse('Ralph', 'Test Character', current_room)
 danger_mouse = create_character()
-danger_mouse.inventory.put_in(map)
+# danger_mouse.inventory.put_in(map)
+current_room = room_controller.room_dict[danger_mouse.location]
 
 print("You are a 🐭")
 while not game_over:

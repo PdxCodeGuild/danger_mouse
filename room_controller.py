@@ -5,20 +5,20 @@ from character import Mouse
 
 room_map = {'nest': ['mouse hole'],
             'library': ['mouse hole', 'library door'],
-            'east hall': ['library door', 'swinging_door', 'servant door', 'master door', 'guest door'],
+            'east hall': ['library door', 'swinging door', 'servant door', 'master door', 'guest door'],
             'serv chamber': ['servant door', 'servant passage'],
             'gallery': ['gallery door'],
-            'guest_bedroom': ['guest door'],
+            'guest bedroom': ['guest door'],
             'master bedroom': ['master door'],
             'grand hall': ['swinging door', 'grand arch'],
             'living room': ['grand arch', 'chapel door'],
             'chapel': ['chapel door', 'fsm door'],
             'west hall': ['fsm door', 'kitchen entry'],
             'kitchen': ['west hall', 'servant hall', 'buttery entry'],
-            'servant_hall': ['serv chamber', 'serv kitchen'],
+            'servant hall': ['serv chamber', 'serv kitchen'],
             'dresser': ['dresser drawer'],
             'buttery': ['buttery entry'],
-            'front lawn': ['front_door']
+            'front lawn': ['front door']
             }
 
 
@@ -27,20 +27,20 @@ room_map = {'nest': ['mouse hole'],
 # name, description, doors[], characters[]
 nest = room.Room('nest', "You are in your mouse nest, in a large castle. The belongings in the nest are yours and you recognize all of them. You see your mouse family, hungry and waiting patiently for you to bring home enough food for everyone to eat.", room_map['nest'], [])
 library = room.Room('library', 'You are in the library. It once occured to you to read them all, but a mouse like you need not concern itself with such things.', room_map['library'], [])
-east_hall = room.Room('east hall', "You are in the east hallway, it's very dark in here. You look around for light leaking under doorways to find your exits.", room_map['east_hall'], [])
-serv_chamber = room.Room('serv chamber', "The room for the help. They sneak your family cheese sometimes, but they appear busy today.", room_map['serv_chamber'], [])
+east_hall = room.Room('east hall', "You are in the east hallway, it's very dark in here. You look around for light leaking under doorways to find your exits.", room_map['east hall'], [])
+serv_chamber = room.Room('serv chamber', "The room for the help. They sneak your family cheese sometimes, but they appear busy today.", room_map['serv chamber'], [])
 gallery = room.Room('gallery', "You enter the castle art gallery. Its most prized pieces include paintings by Monet, however you've always been more of a Dali fan yourself.", room_map['gallery'], [])
-guest_bedroom = room.Room('guest bedroom', "The guest bedroom. You tried to sleep in there once but APPARENTLY don't qualify as a guest.", room_map['guest_bedroom'], [])
-master_bedroom = room.Room('master bedroom', "The master bedroom. Not a bedroom for the common mouse.", room_map['master_bedroom'], [])
-grand_hall = room.Room('grand hall', "You enter the grand entry hall. It's pillars and golden statues boast of a life lived in luxury, a red cloth banner on the ceiling reads \"There are no god's or kings, only men.\"", room_map['grand_hall'], [])
-living_room = room.Room('living room', "You enter the livingroom. Mostly just for show and guests, otherwise the room is rarely used.", room_map['living_room'], [])
+guest_bedroom = room.Room('guest bedroom', "The guest bedroom. You tried to sleep in there once but APPARENTLY don't qualify as a guest.", room_map['guest bedroom'], [])
+master_bedroom = room.Room('master bedroom', "The master bedroom. Not a bedroom for the common mouse.", room_map['master bedroom'], [])
+grand_hall = room.Room('grand hall', "You enter the grand entry hall. It's pillars and golden statues boast of a life lived in luxury, a red cloth banner on the ceiling reads \"There are no god's or kings, only men.\"", room_map['grand hall'], [])
+living_room = room.Room('living room', "You enter the livingroom. Mostly just for show and guests, otherwise the room is rarely used.", room_map['living room'], [])
 chapel = room.Room('chapel', "You enter the Chapel room. However Dave doesn't appear to be here at the moment 'man'.", room_map['chapel'], [])
-west_hall = room.Room('west hall', "This is the western hallway. The windows allow the sun to illuminate the hall with its shining brilliance, much better hallway than that other one.", room_map['west_hall'], [])
+west_hall = room.Room('west hall', "This is the western hallway. The windows allow the sun to illuminate the hall with its shining brilliance, much better hallway than that other one.", room_map['west hall'], [])
 kitchen = room.Room('kitchen', "Kitchen, there must be cheese somewhere.", room_map['kitchen'], [])
-servant_hall = room.Room('servant hall', "The servants hall. You can't just have your servants walking around the castle like they own the place, right?", room_map['servant_hall'], [])
+servant_hall = room.Room('servant hall', "The servants hall. You can't just have your servants walking around the castle like they own the place, right?", room_map['servant hall'], [])
 dresser = room.Room('dresser', "You find yourself in a dresser, and much to your own surprise it's filled with clothes! You make a note to come back during winter.", room_map['dresser'], [])
 buttery = room.Room('buttery', "The buttery, there's wine and cheese everywhere!", room_map['buttery'], [])
-outside = room.Room('front lawn', "You are on the front lawn. You peer upward towards the sky, into the void of infinity. It's a great big universe and you're just a small part of it. The sheer impact of this realization, of having grasped the nature of the cosmos and the universe has unfortunately so blown your mind that it has left you comatose, your family will surely perish. Game Over.",room_map['front_lawn'],[])
+outside = room.Room('front lawn', "You are on the front lawn. You peer upward towards the sky, into the void of infinity. It's a great big universe and you're just a small part of it. The sheer impact of this realization, of having grasped the nature of the cosmos and the universe has unfortunately so blown your mind that it has left you comatose, your family will surely perish. Game Over.",room_map['front lawn'],[])
 
 # Door initializations
 # name, description, room1, room2, is_locked, key_name
@@ -59,7 +59,7 @@ buttery_entry = room.Door('butter entry', 'One more door', kitchen, buttery, Tru
 serv_kitchen = room.Door('serv kitchen', 'Servants kitchen entrance', kitchen, servant_hall, False, 'serv door key')
 servant_passage = room.Door('servant passage', 'Secret door', serv_chamber, servant_hall, True, 'servant passage key')
 dresser_drawer = room.Door('dresser drawer', 'A dresser drawer', master_bedroom, dresser, False, 'dresser drawer key')
-front_door = room.Door('front door', 'The front entrance to the castle, really quite a beautiful doorway, not that the opinion of a mouse matters.',grand_hall, outside, False, 'front_door_key' )
+front_door = room.Door('front door', 'The front entrance to the castle, really quite a beautiful doorway, not that the opinion of a mouse matters.',grand_hall, outside, False, 'front door key' )
 
 
 door_dict ={'mouse hole': mouse_hole,
@@ -99,7 +99,7 @@ room_dict ={'nest': nest,
 
 # when passed a list of all the characters and rooms, will sort through them and update the locations on each accordingly
 def update_all(characters, castle):
-    for loc in castle:
+    for loc in castle.values():
         temp_list = []
         for person in characters:
             if person.location == loc.name:
