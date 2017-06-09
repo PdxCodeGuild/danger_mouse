@@ -65,13 +65,14 @@ class Inventory:
             for an_item in self.bag_of_holding:     # here we are extracting an the index of the object in the list
                 if self.check_inventory(item_to_be_popped):
                     index = self.bag_of_holding.index(an_item)
+                    to_be_returned = self.bag_of_holding[index]
             # and here is where the majic happens and the item is removed from the list.
             self.bag_of_holding.remove(self.bag_of_holding[index])
         else:
             # for testing porpoises if the item is not in dah bag, remove later.
             print(" {} was not found in bag of holding.".format(item_to_be_popped))
             return None
-        return als_lament
+        return to_be_returned
 
     def look(self, item_to_be_described):
         """This method simply displays the description attached to an item when supplied

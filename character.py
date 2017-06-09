@@ -5,14 +5,13 @@ This document contains Classes for the Characters in our Danger Mouse game.
 from random import randrange
 from random import choice
 from inventory import Inventory
-
-
-spell_list = ["scare", "hide", "befriend"]
-
-"""The Character class creates characters for our group game."""
+import room_controller
+import random
 
 
 class Character:
+    """The Character class creates characters for our group game."""
+
     def __init__(self, name, description, loc, health=100):
         """
         Initiates a Character object.
@@ -55,18 +54,18 @@ class Character:
     def action(self, room, player):
         print('You try to do something to {} but nothing happens'.format(self))
 
+
 class Mouse(Character):
     """
     Instantiates a Mouse or player character.
     """
+
     def __init__(self, name, description, loc, health=100):
         """Initiates a Mouse object."""
         super().__init__(name, description, loc, health)
-        self.location = loc
         self.inventory = Inventory(name)
 
     def take_food(self, my_food):
-
         """
         This function works on food items and allows you to eat them and gain
         health or put them in inventory.
@@ -77,7 +76,7 @@ class Mouse(Character):
             self.health += my_food.score
             return self.health
         elif choice == "i":
-            self.inventory.append(my_food)
+            self.inventory.put_in(my_food)
             return self.inventory
 
     def take_item(self, my_item):
@@ -98,14 +97,15 @@ class Mouse(Character):
         # Remove my_spell from the mouse inventory.
 
     def attack(self, damage, source):
-        health -= damage
+        self.health -= damage
+
 
 class Rat(Character):
     """
     Instanties a Rat character.
     """
 
-    def __init__(self, name, description, aggression=randrange(0, 2)):
+    def __init__(self, aggression=randrange(0, 2)):
         super().__init__('rat', 'a rat')
         self.aggression = aggression
         self.friend = False
@@ -133,7 +133,7 @@ class Rat(Character):
                 if room_dict[key].get_character_by_type(type(Mouse)):
                     self.location = room_dict[key].get_character_by_type(type(Mouse)).location
         else:
-            if room.inventory.find_food() and random.randrange(aggression, 3) == 2:
+            if room.inventory.find_food() and random.randrange(self.aggression, 3) == 2:
                 room.inventroy.find_food().rat_nibbling()
             else:
                 options = room.get_adjacent()
@@ -168,28 +168,28 @@ class Cat(Character):
                 if room.find_path(self.destination, room_controller.door_dict):
                     self.destination = temp
 
-        if room.check_inventory("casted_scare") and aggression < 3:
-            turns_until_move = 0
+        if room.check_inventory("casted_scare") and self.aggression < 3:
+            self.turns_until_move = 0
         elif room.get_character_by_type(type(Dog)):
             print("Dog chases cat away")
-            turns_until_move = 0
+            self.turns_until_move = 0
             if room.get_character_by_type(type(Dog)).friend:
                 room.get_character_by_type(type(Dog)).resting = True
         elif room.check_inventory("fish"):
-            turns_until_move += 3
+            self.turns_until_move += 3
             room.inventory.poplar("fish")
         elif room.get_character_by_type(type(Rat)):
             room.get_character_by_type(type(Rat)).die()
-        elif mouse in room.characters and not room.inventory.check_inventory(casted_hide):
-            pass
+            # elif mouse in room.characters and not room.inventory.check_inventory(casted_hide):
+            #     pass
             # attack mouse
         else:
-            turns_until_move -= 1
+            self.turns_until_move -= 1
 
         # if turns_until_move == 1 and self.inventory.check_inventory("bell"):  # And inventory includes bell
         #     # If the destination room is the room with mouse, alert player
         #     pass
-        if turns_until_move == 0:
+        if self.turns_until_move == 0:
             self.location = self.destination
             self.destination = ""
             self.turns_until_move = randrange(3, 6)
@@ -202,11 +202,11 @@ class Dog(Character):
     searching = 0
     resting = False
 
-    def __init__(self, name, description, loc, aggression=randrange(1, 4)):
+    def __init__(self, loc, aggression=randrange(1, 4)):
         """
         Instantiates a Dog character.
         """
-        super().__init__("dog", "a dog", inventory, loc)
+        super().__init__("dog", "a dog", self.inventory, loc)
         self.aggression = aggression
         self.friend = False
         self.resting = False
@@ -229,9 +229,10 @@ class Dog(Character):
                 if self.searching:
                     # attack mouse
                     for key in room_dict.keys():
-                        if room_dict[key].get_character_by_type(type(Human)):
+                        if room_dict[key].get_character_by_type(type(Person)):
                             print("BARK")
-                            room_controller.room_dict[key].get_character_by_type(type(Human)).path = room_dict[key].find_path(room)
+                            room_controller.room_dict[key].get_character_by_type(type(Person)).path = room_dict[
+                                key].find_path(room)
                     searching = 1 + self.aggression
             elif self.searching:
                 self.searching -= 1
@@ -248,11 +249,11 @@ class Dog(Character):
 
 
 class Person(Character):
-    def __init__(self, name, description, inventory, loc, aggression=randrange(1, 5)):
+    def __init__(self, loc, aggression=randrange(1, 5)):
         """
         Instantiates a Person character.
         """
-        super().__init__("person", "a person", inventory, loc)
+        super().__init__("person", "a person", loc)
         self.aggression = aggression
         self.seen_mouse = False
         self.path = ""
@@ -272,26 +273,26 @@ class Person(Character):
         #
         room = room_controller.room_dict[self.location]
         room_dict = room_controller.room_dict
-        if room.inventory.check_inventory(casted_scare) and self.aggression < 3:
+        if room.inventory.check_inventory('casted_scare') and self.aggression < 3:
             # set a random destination
             pass
-        elif room.get_character_by_type(type(mouse)) and not room.check_inventory("casted_hide"):
+        elif room.get_character_by_type(type(Mouse)) and not room.check_inventory("casted_hide"):
             if self.aggression <= 2:
                 for key in room_dict.keys():
                     if room_dict[key].get_character_by_type(type(Cat)):
                         print("SCREAM")
-                        room_controller.room_dict[key].get_character_by_type(type(Cat)).destination = location
+                        room_controller.room_dict[key].get_character_by_type(type(Cat)).destination = self.location
                         room_controller.room_dict[key].get_character_by_type(type(Cat)).turns_until_move = 0
                     else:
                         # attack mouse
-                        path = location
+                        path = self.location
                         seen_mouse = True
         elif self.path:
             self.location = self.path.pop(0)
         else:
-            if seen_mouse:
+            if self.seen_mouse:
                 # set trap
                 seen_mouse = False
             else:
-                self.path = room_dict[self.location].find_path(room_dict[home_room], room_controller.door_dict)
+                self.path = room_dict[self.location].find_path(room_dict['home_room'], room_controller.door_dict)
         room_controller.room_dict[self.location] = room

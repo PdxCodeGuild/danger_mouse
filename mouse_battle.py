@@ -4,7 +4,11 @@ from inventory import Inventory
 import character
 from random import randrange
 
+def head_shot():
+    while True:
+        print("BOOM HEADSHOT"*randrange(0,33))
 
+head_shot()
 
 def battle(player, npc):
     fighting = True

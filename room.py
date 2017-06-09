@@ -149,7 +149,7 @@ class Door():
         return self.name
 
     def look(self):
-        print(self.name + '/n' + self.description)
+        print(self.name + '\n' + self.description)
 
     def action(self, room, player):
         room.use_key(self, player)

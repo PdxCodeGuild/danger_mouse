@@ -6,7 +6,7 @@ from character import Mouse
 
 room_map = {'nest': ['mouse hole'],
             'library': ['mouse hole', 'library door'],
-            'east hall': ['library door', 'swinging_door', 'servant door', 'master door', 'guest door'],
+            'east hall': ['library door', 'swinging door', 'servant door', 'master door', 'guest door'],
             'serv chamber': ['servant door', 'servant passage'],
             'gallery': ['gallery door'],
             'guest bedroom': ['guest door'],
@@ -21,7 +21,6 @@ room_map = {'nest': ['mouse hole'],
             'buttery': ['buttery entry'],
             'front lawn': ['front door']
             }
-
 
 
 
@@ -101,7 +100,7 @@ room_dict ={'nest': nest,
 
 # when passed a list of all the characters and rooms, will sort through them and update the locations on each accordingly
 def update_all(characters, castle):
-    for loc in castle:
+    for loc in castle.values():
         temp_list = []
         for person in characters:
             if person.location == loc.name:
