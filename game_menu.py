@@ -101,7 +101,7 @@ while not game_over:
         #inv_dict = danger_mouse.inventory.list_inventory()
        ##  pretty_print_dict(inv_dict)
         danger_mouse.inventory.list_inventory()
-        item_select = input('Enter the name of the item you wish to select')
+        item_select = input('Enter the name of the item you wish to select: \n:')
         if danger_mouse.inventory.check_inventory(item_select):
             item_action = input('What do you wish to do with this item? \n'
                             '1. Look at item \n'

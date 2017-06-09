@@ -35,6 +35,11 @@ class Item:
     def action(self, room, character):
         character.inventory.put_in(room.inventory.poplar(self))
 
+    def use_item(self):
+        return self.name
+
+
+
 class Food(Item):
     """
     Instantiates a Food Item.
@@ -72,7 +77,8 @@ class Food(Item):
         if self.score <= 0:
             character_who_eats.inventory.poplar(self.name)
 
-
+    def use_item(self, character_who_eats):
+        self.eat(self, character_who_eats)
 
 # TODO:  The inventory still needs a way to calculate
 #        the total store to win the game.
@@ -97,7 +103,8 @@ class Spell(Item):
 
         where_is.inventory.put_in_quiet(Item(cast_spell, ""))
 
-
+    def use_item(self, character_who_casts):
+        self.cast(self, character_who_casts)
 
 
 
