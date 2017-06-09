@@ -1,7 +1,8 @@
 import room
-import csv
-import character
-
+# import item
+# import csv
+# import character
+# from character import Mouse
 
 room_map = {'nest': ['mouse hole'],
             'library': ['mouse hole', 'library door'],
