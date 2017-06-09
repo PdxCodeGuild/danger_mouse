@@ -94,8 +94,28 @@ room_dict ={'nest': nest,
             'west hall': west_hall,
             'kitchen': kitchen,
             'servant hall': servant_hall,
-            'dresser': dresser
+            'dresser': dresser,
+            'buttery': buttery,
+            'outside': outside
             }
+
+characters = []
+characters.append(character.Person("serv chamber"))
+characters.append(character.Dog("servant hall"))
+characters.append(character.Cat("master bedroom"))
+characters.append(character.Rat("buttery"))
+
+
+
+
+
+
+
+
+
+
+
+
 
 class Level:
     pass
@@ -107,10 +127,10 @@ level.door_dict = door_dict
 
 # when passed a list of all the characters and rooms, will sort through them
 # and update the locations on each accordingly
-def update_all(characters, castle):
+def update_all():
     for c in characters:
         c.activate(level)
-    for loc in castle:
+    for loc in room_dict.values():
         temp_list = []
         # Strip spells out
         for person in characters:

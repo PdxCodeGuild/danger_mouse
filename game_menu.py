@@ -1,9 +1,5 @@
 import room_controller
-# import inventory
-# import character
 import item
-# import room
-# import types
 from character_profile import create_character
 import os
 
