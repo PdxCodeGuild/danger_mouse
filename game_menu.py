@@ -30,16 +30,16 @@ def check_win(player):
 
 danger_mouse = create_character()
 
+room_controller.characters.append(danger_mouse)
+
 current_room = room_controller.room_dict[danger_mouse.location]
-
-
-
-
 
 danger_dict = {'Danger mouse': danger_mouse}
 current_room.look()
 print("You are a 🐭")
 while not game_over:
+
+    room_controller.update_all()
 
     action_select = str(input('1. Look \n'
                               '2. Move \n'
@@ -133,7 +133,7 @@ while not game_over:
             for an_item_to_be_actioned in danger_mouse.inventory.bag_of_holding:
                 if danger_mouse.inventory.check_inventory(item_select):
                     index = danger_mouse.inventory.bag_of_holding.index(an_item_to_be_actioned)
-                    danger_mouse.inventory.bag_of_holding[index].use_item(danger_mouse)
+                    danger_mouse.inventory.bag_of_holding[index].use_item(danger_mouse, room_controller.room_dict)
         if '3' in item_action:
             current_room.inventory.put_in(danger_mouse.inventory.poplar(item_select))
 

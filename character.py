@@ -5,6 +5,7 @@ This document contains Classes for the Characters in our Danger Mouse game.
 from random import randrange
 from random import choice
 from inventory import Inventory
+import item
 
 spell_list = ["scare", "hide", "befriend"]
 
@@ -135,8 +136,8 @@ class Rat(Character):
                 if level.room_dict[key].get_character_by_type(Mouse):
                     self.location = level.room_dict[key].get_character_by_type(Mouse).location
         else:
-            if room.inventory.look_for_food() and random.randrange(aggression, 3) == 2:
-                room.inventroy.look_for_food().rat_nibbling()
+            if room.inventory.look_for_type(item.Food) and randrange(self.aggression, 3) == 2:
+                room.inventory.look_for_type(item.Food).rat_nibbling()
             else:
                 options = room.get_adjacent(level.door_dict)
                 if options:
@@ -182,8 +183,9 @@ class Cat(Character):
             self.turns_until_move += 3
             room.inventory.poplar("fish")
         elif room.get_character_by_type(Rat):
-            print("A rat!")
             room.get_character_by_type(Rat).die()
+            room.get_character_by_type(Rat).location = "Rat Heaven"
+            room.characters.remove(room.get_character_by_type(Rat))
         elif room.get_character_by_type(Mouse) and not room.inventory.check_inventory(casted_hide):
             room.get_character_by_type(Mouse).damage(20, "the claws of a cat")
         else:

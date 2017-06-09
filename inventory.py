@@ -1,3 +1,5 @@
+from random import choice
+
 class Inventory:
     def __init__(self, owner):
         """The most complex object in this game is the inventory object as seen below.
@@ -31,13 +33,13 @@ class Inventory:
 
         return is_there
 
-    def look_for_food(self):
-        food = []
-        for item in self.bag_of_holding:
-            if type(item) is item.Food:
-                food.append(item)
-        if food:
-            return food[randrange(0, len(food))]
+    def look_for_type(self, t):
+        results = []
+        for i in self.bag_of_holding:
+            if type(i) is t:
+                results.append(i)
+        if results:
+            return choice(results)
         return ""
 
     def list_inventory(self):

@@ -1,9 +1,8 @@
-import character
+# import character
 import inventory
-from room_controller import room_dict
 """
 This document contains Item classes for the items in our Danger Mouse game.
-The parent class Item defines the subclasses Food and Spell.  
+The parent class Item defines the subclasses Food and Spell.
 """
 
 
@@ -35,7 +34,7 @@ class Item:
     def action(self, room, character):
         character.inventory.put_in(room.inventory.poplar(self.name))
 
-    def use_item(self):
+    def use_item(self, room_dict):
         return self.name
 
 
@@ -51,6 +50,11 @@ class Food(Item):
         descriptions = {"Cheese": "cheese", "bread": "bread", "cake": "cake", "loaf": "A loaf of Tillamook Cheddar",
                         "round": "A partially eaten round of oh so ghouda", "wedge": "A wedge of Brie '86", "crumb": "A small crumb of feta",
                         "slice": "A slice of Amercian cheese", "piece": "A piece of government cheese"}
+
+        self.score = scores[name]
+        super().__init__(name, descriptions[name])
+
+
     def look(self):
         super().look()
         print("Score: {}".format(self.score))
@@ -77,7 +81,7 @@ class Food(Item):
         if self.score <= 0:
             character_who_eats.inventory.poplar(self.name)
 
-    def use_item(self, character_who_eats):
+    def use_item(self, character_who_eats, room_dict):
         self.eat(character_who_eats)
 
 # TODO:  The inventory still needs a way to calculate
@@ -96,14 +100,14 @@ class Spell(Item):
             out of the room."}
         super().__init__(name, description=spells[name])
 
-    def cast(self, character_who_casts):
+    def cast(self, character_who_casts, room_dict):
         where_is = room_dict[character_who_casts.location]
         print('You cast {}, so and so is impressed'.format(self.name))
         cast_spell = 'casted_' + character_who_casts.inventory.poplar(self.name).name
 
         where_is.inventory.put_in_quiet(Item(cast_spell, ""))
 
-    def use_item(self, character_who_casts):
+    def use_item(self, character_who_casts, room_dict):
         self.cast(character_who_casts)
 
 

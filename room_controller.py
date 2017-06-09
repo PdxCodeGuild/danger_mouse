@@ -1,7 +1,7 @@
 import room
 import item
 # import csv
-# import character
+import character
 # from character import Mouse
 
 room_map = {'nest': ['mouse hole'],
@@ -15,8 +15,8 @@ room_map = {'nest': ['mouse hole'],
             'living room': ['grand arch', 'chapel door'],
             'chapel': ['chapel door', 'fsm door'],
             'west hall': ['fsm door', 'kitchen entry'],
-            'kitchen': ['west hall', 'servant hall', 'buttery entry'],
-            'servant hall': ['serv chamber', 'serv kitchen'],
+            'kitchen': ['kitchen entry', 'serv kitchen', 'buttery entry'],
+            'servant hall': ['servant passage', 'serv kitchen'],
             'dresser': ['dresser drawer'],
             'buttery': ['buttery entry'],
             'front lawn': ['front door']
@@ -51,7 +51,7 @@ swinging_door = room.Door('swinging door', 'A swinging door', east_hall, grand_h
 servant_door = room.Door('servant door', 'A wooden door', east_hall, serv_chamber, True, 'servant door key')
 gallery_door = room.Door('gallery door', 'It looks like you can squeze through the door', east_hall, gallery, False, 'gallery door key')
 guest_door = room.Door('guest door', 'A wooden door', east_hall, guest_bedroom, False, 'guest door key')
-master_door = room.Door('master door', 'A wooden door', east_hall, master_bedroom, True, 'master door key')
+master_door = room.Door('master door', 'A wooden door', east_hall, master_bedroom, False, 'master door key')
 grand_arch = room.Door('grand arch', 'A large archway', grand_hall, living_room, False, 'grand arch key')
 chapel_door = room.Door('chapel door', 'A thick door', living_room, chapel, False, 'chapel door key')
 fsm_door = room.Door('fsm door', 'The flying speghetti monster rests on the door', chapel, west_hall, False, 'fsm door key')
@@ -98,21 +98,15 @@ room_dict ={'nest': nest,
             'buttery': buttery,
             'outside': outside
             }
-loaf = item.Food('loaf')
-round = item.Food('round')
-wedge = item.Food('wedge')
-crumb = item.Food('crumb')
-slice = item.Food('slice')
-piece = item.Food('piece')
 
-buttery.add_item(round)
-chapel.add_item(piece)
-kitchen.add_item(loaf)
-master_bedroom.add_item(slice)
-guest_bedroom.add_item(crumb)
-gallery.add_item(wedge)
-
-
+buttery.add_item(item.Food('round'))
+buttery.add_item(item.Food('slice'))
+buttery.add_item(item.Food('slice'))
+chapel.add_item(item.Food('piece'))
+kitchen.add_item(item.Food('loaf'))
+master_bedroom.add_item(item.Food('slice'))
+guest_bedroom.add_item(item.Food('crumb'))
+gallery.add_item(item.Food('wedge'))
 
 characters = []
 characters.append(character.Person("serv chamber"))
@@ -121,19 +115,9 @@ characters.append(character.Cat("master bedroom"))
 characters.append(character.Rat("buttery"))
 
 
-
-
-
-
-
-
-
-
-
-
-
 class Level:
     pass
+
 
 level = Level()
 
@@ -144,7 +128,8 @@ level.door_dict = door_dict
 # and update the locations on each accordingly
 def update_all():
     for c in characters:
-        c.activate(level)
+        if c.location != "Rat Heaven":
+            c.activate(level)
     for loc in room_dict.values():
         temp_list = []
         # Strip spells out
@@ -152,7 +137,8 @@ def update_all():
             if person.location == loc.name:
                 temp_list.append(person)
         loc.update_characters(temp_list)
-
+    for c in characters:
+        print(c.name, ":", c.location)
 # characters = []
 # characters.append(character.Person("serv_chamber"))
 # characters.append(character.Dog("gallery"))
