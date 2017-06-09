@@ -1,23 +1,25 @@
 import character
 import inventory
 """
-This document contains Classes for the items in our Danger Mouse game.
+This document contains Item classes for the items in our Danger Mouse game.
+The parent class Item defines the subclasses Food and Spell.  
 """
 
 
 class Item:
-    def __init__(self, name, description):
+    def __init__(self, name, description, attack = 2):
         """
         Instantiates new Item.
         """
         self.name = name
         self.description = description
+        self.attack = attack
+
     def __str__(self):
         """
         Overloads print function.
         """
         return self.name
-        # this puts those values into a string, which you need
 
     def __repr__(self):
         """
@@ -27,6 +29,7 @@ class Item:
 
     def look(self):
         print('{}: {}'.format(self.name, self.description))
+
 # Fish will be instantiated from the Item class, rather than being a class.
     def action(self, room, character):
         character.inventory.put_in(room.inventory.poplar(self))
@@ -35,9 +38,15 @@ class Food(Item):
     """
     Instantiates a Food Item.
     """
-    def __init__(self, score,  *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.score = score
+    def __init__(self, name):
+        scores = {"cheese": 20, "bread": 10, "cake": 30}
+        descriptions = {"cheese": "cheese", "bread": "bread", "cake": "cake"}
+        super().__init__(name, description = descriptions[name])
+        self.score = scores[name]
+
+    def look(self):
+        super().look()
+        print("Score: {}".format(self.score))
 
     def rat_nibbling(self):
         """
@@ -46,6 +55,23 @@ class Food(Item):
         score -= 2
         if score <= 0:
             del self
+    
+
+    def eat(self, character_who_eats):
+        """
+        when called on a food item it will decrement the item food value by 5
+        takes input character
+        """
+        if self.score >= 5:
+            amount_food = 5
+        else:
+            amount_food = self.score
+        self.score -= amount_food
+        character_who_eats.health += amount_food
+        if self.score <= 0:
+            character_who_eats.inventory.poplar(self.name)
+
+
 
 # TODO:  The inventory still needs a way to calculate
 #        the total store to win the game.
@@ -56,37 +82,14 @@ class Spell(Item):
         """
         Instantiates a spell item.
         """
-        super().__init__(name)
+        spells = \
+            {"befriend": "The befriend spell allows you to befriend rats and dogs that "
+            "will help defend you from cats.", "hide": "The hide spell allows you to hide "
+            "from everyone in the room.", "scare": "The scare spell will scare people and cats "
+            "out of the room."}
+        super().__init__(name, description = spells[name])
 
 
-class Scare(Spell):
-    """
-    This class represents the Scare Spell.
-    """
-    def cast_spell(self, target):
-        if target.aggression <= 2:  # if the target's aggression level is low, it escapes
-            target.move(destination)
-        else:
-            self.inventory.owner.health -= target.agression * 3  # if character's aggression level is high, mouse loses health points.
-
-
-class Hide(Spell):
-    """
-    This class represents Hide Spell.
-    """
-    def cast_spell(self, character):
-        character.move(destination)
-
-
-
-class Befriend(Spell):
-    """
-    This class represents Befriend Spell.
-    """
-    def cast_spell(self, target):
-        if target.agression <= 2:
-            self.inventory.owner.health += target.agression * 3  # if character's aggression level is low, mouse gains health points.
-        else:
-            print("{} is not in the mood to make friends".format(target))
-
-
+class Weapon(Item):
+    def __init__(self, name, description, attack = 10):
+        super().__init__(name, description, attack)

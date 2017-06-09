@@ -4,8 +4,8 @@ class Room():
     def __init__(self, name,  description, doors, characters):
         self.name = name
         self.description = description
-        self.doors = list(doors)
-        self.characters = list(characters)
+        self.doors = doors
+        self.characters = characters
         self.inventory = Inventory(name)
 
     def __str__(self):
@@ -36,14 +36,20 @@ class Room():
     def check_inventory(self, item):
         self.inventory.check_inventory(item)
 
-    def surroundings(self):
+    def get_character_by_type(self, character_type):
+        for c in character:
+            if type(c) == character_type:
+                return c
+        return ""
+
+    def look(self):
         print(self.description)
         for character in self.characters:
-            print(character.name + " is in the room")
+            print("{} is in the room".format(character))
         for item in self.inventory.bag_of_holding:
-            print(item + " is in the room")
+            print("{} is in the room".format(item))
         for door in self.doors:
-            print("You can exit through " + door)
+            print("You can exit through {}".format(door))
 
     def use_key(self, door, player):
         if door.is_locked == True and player.check_inventory(door.key):
@@ -54,16 +60,74 @@ class Room():
 
     def peek_room(self, door):
         '''Look around/examine/search room'''
-        print(door.back.description)
-        print(self.characters)
+        if self.name == door.front.name:
+            print(door.back.name)
+            for character in door.front.characters:
+                print('characters in room: {}'.format(character))
+        if self.name == door.back.name:
+            print(door.fron.name)
+            for character in door.back.characters:
+                print('characters in room: {}'.format(character))
 
-    def look(self):
-        '''Singular/specific inspection for items, doors, etc'''
-        print(self.name + '\n' +self.description + '\n')
-        print('Exits')
+    # def look(self):
+    #     '''Singular/specific inspection for items, doors, etc'''
+    #     print(self.name + '\n' +self.description + '\n')
+    #     print('Exits')
+    #     for door in self.doors:
+    #         print(door)
+
+    def find_path(self, destination, door_dict):
+        # generate dict tree
+        nav_tree = {}
+        checked = [self]
+        level = []
+        next_level = []
+        nav_tree, checked = self.generate_tree_level(nav_tree, self, door_dict, checked)
+        for t in nav_tree[self]:
+            level.append(t)
+
+        while level:
+            for r in level:
+                nav_tree, checked = self.generate_tree_level(nav_tree, r, door_dict, checked)
+                for t in nav_tree[r]:
+                    next_level.append(t)
+
+            level = next_level
+            next_level = []
+        result = self.look_for_destination(nav_tree, self, destination)
+        if result:
+            return result
+        else:
+            return ""
+
+    def look_for_destination(self, tree, location, destination):
+        if location in tree.keys():
+            for r in tree[location]:
+                if r == destination:
+                    return destination.name
+                else:
+                    t = self.look_for_destination(tree, r, destination)
+                    if t:
+                        try:
+                            t.insert(0, r.name)
+                        except AttributeError:
+                            t = [r.name, t]
+                        return t
+
+    def generate_tree_level(self, tree, room, door_dict, checked):
+        temp = room.get_adjacent(door_dict, checked)
+        for t in temp:
+            checked.append(t)
+        tree[room] = temp
+        return tree, checked
+
+    def get_adjacent(self, door_dict, ignore=[]):
+        results = []
         for door in self.doors:
-            print(door)
-
+            result = self.open_door(door_dict[door])
+            if result != self and result not in ignore:
+                results.append(result)
+        return results
 
 #We can add time to add a dificulty to some doors, say like the one to the treasure chest.
 #and opening size, maybe the cat can't fit through some. We could also change the front and back room
@@ -89,4 +153,3 @@ class Door():
 
     def action(self, room, player):
         room.use_key(self, player)
-

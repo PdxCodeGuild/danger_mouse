@@ -17,8 +17,11 @@ room_map = {'nest': ['mouse hole'],
             'kitchen': ['west hall', 'servant hall', 'buttery entry'],
             'servant_hall': ['serv chamber', 'serv kitchen'],
             'dresser': ['dresser drawer'],
-            'buttery': ['buttery entry']
+            'buttery': ['buttery entry'],
+            'front lawn': ['front_door']
             }
+
+
 
 
 # Room initializations
@@ -38,6 +41,7 @@ kitchen = room.Room('kitchen', "Kitchen, there must be cheese somewhere.", room_
 servant_hall = room.Room('servant hall', "The servants hall. You can't just have your servants walking around the castle like they own the place, right?", room_map['servant_hall'], [])
 dresser = room.Room('dresser', "You find yourself in a dresser, and much to your own surprise it's filled with clothes! You make a note to come back during winter.", room_map['dresser'], [])
 buttery = room.Room('buttery', "The buttery, there's wine and cheese everywhere!", room_map['buttery'], [])
+outside = room.Room('front_lawn', "You are on the front lawn. You peer upward towards the sky, into the void of infinity. It's a great big universe and you're just a small part of it. The sheer impact of this realization, of having grasped the nature of the cosmos and the universe has unfortunately so blown your mind that it has left you comatose, your family will surely perish. Game Over.",room_map['front_lawn'],[])
 
 # Door initializations
 # name, description, room1, room2, is_locked, key_name
@@ -56,7 +60,7 @@ buttery_entry = room.Door('butter entry', 'One more door', kitchen, buttery, Tru
 serv_kitchen = room.Door('serv kitchen', 'Servants kitchen entrance', kitchen, servant_hall, False, 'serv door key')
 servant_passage = room.Door('servant passage', 'Secret door', serv_chamber, servant_hall, True, 'servant passage key')
 dresser_drawer = room.Door('dresser drawer', 'A dresser drawer', master_bedroom, dresser, False, 'dresser drawer key')
-
+front_door = room.Door('front_door', 'The front entrance to the castle, really quite a beautiful doorway, not that the opinion of a mouse matters.',grand_hall, outside, False, 'front_door_key' )
 
 
 door_dict ={'mouse hole': mouse_hole,
@@ -73,7 +77,9 @@ door_dict ={'mouse hole': mouse_hole,
             'buttery entry': buttery_entry,
             'serv kitchen': serv_kitchen,
             'servant passage': servant_passage,
-            'dresser drawer': dresser_drawer}
+            'dresser drawer': dresser_drawer,
+            'front door': front_door
+            }
 
 room_dict ={'nest': nest,
             'library': library,
@@ -100,12 +106,6 @@ def update_all(characters, castle):
             if person.location == loc.name:
                 temp_list.append(person)
         loc.update_characters(temp_list)
-
-
-
-
-
-
 
 # game_over = False
 # current_room = nest
