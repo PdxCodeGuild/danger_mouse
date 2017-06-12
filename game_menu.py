@@ -19,7 +19,7 @@ def pretty_print_dict(dict):
 def check_win(player):
     score = 0
     for thing in player.inventory.bag_of_holding:
-        if type(thing) is item.Food:
+        if thing.type == 'food':
             score += thing.score
     if score >= 60:
         print('You win!')
@@ -27,6 +27,11 @@ def check_win(player):
     else:
         return False
 
+
+def check_death(player):
+    if player.health <= 0:
+        print('You have died')
+        return True
 
 danger_mouse = create_character()
 
@@ -38,7 +43,7 @@ danger_dict = {'Danger mouse': danger_mouse}
 current_room.look()
 print("You are a 🐭")
 while not game_over:
-
+    print('HP: {}'.format(danger_mouse.health))
     room_controller.update_all()
 
     action_select = str(input('1. Look \n'
@@ -79,15 +84,16 @@ while not game_over:
             i += 1
         valid_input = False
         while not valid_input:
-                try:
-                    for k in move_dict:
-                        print(k + '. ' + move_dict[k])
-                    move_select = input()
-                    current_room = current_room.open_door(room_controller.door_dict[move_dict[move_select]])
-                    current_room.look()
-                    valid_input = True
-                except KeyError:
-                    print("Not a valid input")
+            try:
+                for k in move_dict:
+                    print(k + '. ' + move_dict[k])
+                move_select = input()
+                current_room = current_room.open_door(room_controller.door_dict[move_dict[move_select]])
+                danger_mouse.location = current_room.name
+                current_room.look()
+                valid_input = True
+            except KeyError:
+                print("Not a valid input")
 
     elif '3' in action_select or 'peek' in action_select:
         i = 1
@@ -117,23 +123,17 @@ while not game_over:
             i += 1
         pretty_print_dict(item_dict)
 
-
         item_select = input('Enter the name of the item you wish to select: \n:')
 
         item_action = input('What do you wish to do with this item? \n'
                             '1. Look at item \n'
-                            '2. Use item \n'
-                            '3. Drop item\n')
-
+                            '2. Use item \n')  # '3. Drop item\n')
 
         if '1' in item_action:
             danger_mouse.inventory.look(item_select)
             print('\n')
         if '2' in item_action:
-            for an_item_to_be_actioned in danger_mouse.inventory.bag_of_holding:
-                if danger_mouse.inventory.check_inventory(item_select):
-                    index = danger_mouse.inventory.bag_of_holding.index(an_item_to_be_actioned)
-                    danger_mouse.inventory.bag_of_holding[index].use_item(danger_mouse, room_controller.room_dict)
+            item_dict[item_select].use_item(danger_mouse, room_controller.room_dict)
         if '3' in item_action:
             current_room.inventory.put_in(danger_mouse.inventory.poplar(item_select))
 
@@ -155,6 +155,9 @@ while not game_over:
 
     else:
         print('Please enter a valid menu option.')
-    game_over = check_win(danger_mouse)
+
+    game_over = check_death(danger_mouse)
+    if not game_over:
+        game_over = check_win(danger_mouse)
 
 print('Thanks for playing')

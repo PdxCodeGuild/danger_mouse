@@ -27,8 +27,8 @@ class Inventory:
         """Quick method to check if an item exists in inventory, returns boolean
         value to call."""
         is_there = False
-        for item in self.bag_of_holding:
-            if check_word == item.name:
+        for thing in self.bag_of_holding:
+            if check_word == thing.name:
                 is_there = True
 
         return is_there
@@ -65,7 +65,7 @@ class Inventory:
         if self.check_inventory(item_to_be_popped): # Basic check to see if it's in the list
             als_lament = item_to_be_popped# ;P
             for an_item in self.bag_of_holding:     # here we are extracting an the index of the object in the list
-                if self.check_inventory(item_to_be_popped):
+                if an_item.name == item_to_be_popped:
                     index = self.bag_of_holding.index(an_item)
                     to_be_returned = self.bag_of_holding[index]
             # and here is where the majic happens and the item is removed from the list.

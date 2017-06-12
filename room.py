@@ -47,7 +47,7 @@ class Room():
         for character in self.characters:
             print("{} is in the room".format(character))
         for item in self.inventory.bag_of_holding:
-            print("{} is in the room".format(item))
+            print("{} is in the room".format(item.description))
         for door in self.doors:
             print("You can exit through {}".format(door))
 

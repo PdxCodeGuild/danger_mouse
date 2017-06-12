@@ -172,7 +172,7 @@ class Cat(Character):
                 else:
                     destinations.pop(temp)
 
-        if room.check_inventory("casted_scare") and aggression < 3:
+        if room.check_inventory("casted_scare") and self.aggression < 3:
             self.turns_until_move = 0
         elif room.get_character_by_type(Dog):
             print("Dog chases cat away")
@@ -186,7 +186,7 @@ class Cat(Character):
             room.get_character_by_type(Rat).die()
             room.get_character_by_type(Rat).location = "Rat Heaven"
             room.characters.remove(room.get_character_by_type(Rat))
-        elif room.get_character_by_type(Mouse) and not room.inventory.check_inventory(casted_hide):
+        elif room.get_character_by_type(Mouse) and not room.inventory.check_inventory('casted_hide'):
             room.get_character_by_type(Mouse).damage(20, "the claws of a cat")
         else:
             self.turns_until_move -= 1
@@ -238,8 +238,8 @@ class Dog(Character):
                 self.searching = 1 + self.aggression
             elif self.searching:
                 self.searching -= 1
-                if room.get_adjacent():
-                    self.location = choice(room.get_adjacent()).name
+                if room.get_adjacent(level.door_dict):
+                    self.location = choice(room.get_adjacent(level.door_dict)).name
         elif not self.resting:
             for key in level.room_dict.keys():
                 if level.room_dict[key].get_character_by_type(Mouse):

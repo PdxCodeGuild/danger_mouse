@@ -7,13 +7,14 @@ The parent class Item defines the subclasses Food and Spell.
 
 
 class Item:
-    def __init__(self, name, description, attack=2):
+    def __init__(self, name, description, type, attack=2):
         """
         Instantiates new Item.
         """
         self.name = name
         self.description = description
         self.attack = attack
+        self.type = type
 
     def __str__(self):
         """
@@ -52,7 +53,7 @@ class Food(Item):
                         "slice": "A slice of Amercian cheese", "piece": "A piece of government cheese"}
 
         self.score = scores[name]
-        super().__init__(name, descriptions[name])
+        super().__init__(name, descriptions[name], type='food')
 
 
     def look(self):
@@ -98,20 +99,20 @@ class Spell(Item):
              will help defend you from cats.", "hide": "The hide spell allows you to hide\
             from everyone in the room.", "scare": "The scare spell will scare people and cats\
             out of the room."}
-        super().__init__(name, description=spells[name])
+        super().__init__(name, spells[name], 'spell')
 
     def cast(self, character_who_casts, room_dict):
         where_is = room_dict[character_who_casts.location]
         print('You cast {}, so and so is impressed'.format(self.name))
         cast_spell = 'casted_' + character_who_casts.inventory.poplar(self.name).name
 
-        where_is.inventory.put_in_quiet(Item(cast_spell, ""))
+        where_is.inventory.put_in_quiet(Item(cast_spell, "", 'casted'))
 
     def use_item(self, character_who_casts, room_dict):
-        self.cast(character_who_casts)
+        self.cast(character_who_casts, room_dict)
 
 
 
 class Weapon(Item):
     def __init__(self, name, description, attack=10):
-        super().__init__(name, description, attack)
+        super().__init__(name, description, 'weapon', attack)
