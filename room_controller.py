@@ -1,21 +1,17 @@
 import room
-import csv
+import item
+# import csv
 import character
-from character import Mouse
-from item import Item, Food
-#Items
-
-
-
+# from character import Mouse
 
 room_map = {'nest': ['mouse hole'],
             'library': ['mouse hole', 'library door'],
-            'east hall': ['library door', 'swinging door', 'servant door', 'master door', 'guest door', 'gallery door'],
+            'east hall': ['library door', 'swinging door', 'servant door', 'master door', 'guest door', "gallery door"],
             'serv chamber': ['servant door', 'servant passage'],
             'gallery': ['gallery door'],
-            'guest bedroom': ['guest door', 'dresser drawer'],
+            'guest bedroom': ['guest door'],
             'master bedroom': ['master door'],
-            'grand hall': ['swinging door', 'grand arch','front door'],
+            'grand hall': ['swinging door', 'grand arch'],
             'living room': ['grand arch', 'chapel door'],
             'chapel': ['chapel door', 'fsm door'],
             'west hall': ['fsm door', 'kitchen entry'],
@@ -23,8 +19,7 @@ room_map = {'nest': ['mouse hole'],
             'servant hall': ['servant passage', 'serv kitchen'],
             'dresser': ['dresser drawer'],
             'buttery': ['buttery entry'],
-            'front lawn': ['front door'],
-            'chest': ['chest door']
+            'front lawn': ['front door']
             }
 
 
@@ -47,14 +42,13 @@ servant_hall = room.Room('servant hall', "The servants hall. You can't just have
 dresser = room.Room('dresser', "You find yourself in a dresser, and much to your own surprise it's filled with clothes! You make a note to come back during winter.", room_map['dresser'], [])
 buttery = room.Room('buttery', "The buttery, there's wine and cheese everywhere!", room_map['buttery'], [])
 outside = room.Room('front lawn', "You are on the front lawn. You peer upward towards the sky, into the void of infinity. It's a great big universe and you're just a small part of it. The sheer impact of this realization, of having grasped the nature of the cosmos and the universe has unfortunately so blown your mind that it has left you comatose, your family will surely perish. Game Over.",room_map['front lawn'],[])
-chest = room.Room('chest', 'It is dark in the chest, but you smell cheese', room_map['chest'], [])
 
 # Door initializations
 # name, description, room1, room2, is_locked, key_name
 mouse_hole = room.Door('mouse hole', 'A hole in the baseboard of the castle library, the entry way to your humble home.', nest, library, False, 'mouse hole key')
 library_door = room.Door('library door', 'A crack under the door', library, east_hall, False, 'library door key')
 swinging_door = room.Door('swinging door', 'A swinging door', east_hall, grand_hall, False, 'swinging door key')
-servant_door = room.Door('servant door', 'A wooden door', east_hall, serv_chamber, False, 'servant door key')
+servant_door = room.Door('servant door', 'A wooden door', east_hall, serv_chamber, True, 'servant door key')
 gallery_door = room.Door('gallery door', 'It looks like you can squeze through the door', east_hall, gallery, False, 'gallery door key')
 guest_door = room.Door('guest door', 'A wooden door', east_hall, guest_bedroom, False, 'guest door key')
 master_door = room.Door('master door', 'A wooden door', east_hall, master_bedroom, False, 'master door key')
@@ -64,10 +58,9 @@ fsm_door = room.Door('fsm door', 'The flying speghetti monster rests on the door
 kitchen_entry = room.Door('kitchen entry', 'A swinging double door', west_hall, kitchen, False, 'kitchen door key')
 buttery_entry = room.Door('butter entry', 'One more door', kitchen, buttery, True, 'buttery door key')
 serv_kitchen = room.Door('serv kitchen', 'Servants kitchen entrance', kitchen, servant_hall, False, 'serv door key')
-servant_passage = room.Door('servant passage', 'Secret door', serv_chamber, servant_hall, True, 'servant passage_key')
-dresser_drawer = room.Door('dresser drawer', 'A dresser drawer', guest_bedroom, dresser, False, 'dresser drawer key')
+servant_passage = room.Door('servant passage', 'Secret door', serv_chamber, servant_hall, True, 'servant passage key')
+dresser_drawer = room.Door('dresser drawer', 'A dresser drawer', master_bedroom, dresser, False, 'dresser drawer key')
 front_door = room.Door('front door', 'The front entrance to the castle, really quite a beautiful doorway, not that the opinion of a mouse matters.',grand_hall, outside, False, 'front door key' )
-chest_door = room.Door('chest drawer', 'The keyhole appears large enough for you to crawl through', master_bedroom, chest, False, 'chest key')
 
 
 door_dict ={'mouse hole': mouse_hole,
@@ -85,8 +78,7 @@ door_dict ={'mouse hole': mouse_hole,
             'serv kitchen': serv_kitchen,
             'servant passage': servant_passage,
             'dresser drawer': dresser_drawer,
-            'front door': front_door,
-            'chest drawer': chest_door
+            'front door': front_door
             }
 
 room_dict ={'nest': nest,
@@ -103,22 +95,60 @@ room_dict ={'nest': nest,
             'kitchen': kitchen,
             'servant hall': servant_hall,
             'dresser': dresser,
-            'front lawn': outside,
-            'butter': buttery,
-            'chest': chest
+            'buttery': buttery,
+            'outside': outside
             }
 
-print(west_hall.find_path(gallery, door_dict))
+buttery.add_item(item.Food('round'))
+buttery.add_item(item.Food('slice'))
+buttery.add_item(item.Food('slice'))
+chapel.add_item(item.Food('piece'))
+kitchen.add_item(item.Food('loaf'))
+master_bedroom.add_item(item.Food('slice'))
+guest_bedroom.add_item(item.Food('crumb'))
+gallery.add_item(item.Food('wedge'))
+
+characters = []
+characters.append(character.Person("serv chamber"))
+characters.append(character.Dog("servant hall"))
+characters.append(character.Cat("master bedroom"))
+characters.append(character.Rat("buttery"))
 
 
-# when passed a list of all the characters and rooms, will sort through them and update the locations on each accordingly
-def update_all(characters, castle):
-    for loc in castle:
+class Level:
+    pass
+
+
+level = Level()
+
+level.room_dict = room_dict
+level.door_dict = door_dict
+
+# when passed a list of all the characters and rooms, will sort through them
+# and update the locations on each accordingly
+def update_all():
+    for c in characters:
+        if c.location != "Rat Heaven":
+            c.activate(level)
+    for loc in room_dict.values():
         temp_list = []
+        # Strip spells out
         for person in characters:
             if person.location == loc.name:
                 temp_list.append(person)
         loc.update_characters(temp_list)
+    for c in characters:
+        print(c.name, ":", c.location)
+# characters = []
+# characters.append(character.Person("serv_chamber"))
+# characters.append(character.Dog("gallery"))
+# characters.append(character.Mouse("Martin", "of Redwall", "gallery"))
+#
+# while input("(C)ontinue? ").upper() == "C":
+#     update_all(characters, room_dict.values())
+#     for c in characters:
+#         print(c.name, ":", c.location)
+
 
 # game_over = False
 # current_room = nest
@@ -146,16 +176,14 @@ def update_all(characters, castle):
 
 
 
-
-
-# if first == 'open':
-#     current_room = current_room.open_door(door_dict[second])
-# if first == 'look':
-#     if second == 'room':
-#         current_room.look()
-#     if second in current_room.doors:
-#         print("it is a door")
-#     if second in current_room.characters:
-#         print('this is a character')
-# if first == 'peek':
-#     current_room.peek_room(door_dict[second])
+    # if first == 'open':
+    #     current_room = current_room.open_door(door_dict[second])
+    # if first == 'look':
+    #     if second == 'room':
+    #         current_room.look()
+    #     if second in current_room.doors:
+    #         print("it is a door")
+    #     if second in current_room.characters:
+    #         print('this is a character')
+    # if first == 'peek':
+    #     current_room.peek_room(door_dict[second])

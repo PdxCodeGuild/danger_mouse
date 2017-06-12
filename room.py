@@ -16,7 +16,7 @@ class Room():
 
     def open_door(self, door): #character.inventory
         if door.is_locked == True:
-            print('Door is locked.')
+            pass
         else:
             if self.name == door.front.name:
                 return door.back
@@ -25,7 +25,7 @@ class Room():
         return self
 
     def add_item(self, item):
-        self.inventory.put_in(item)
+        self.inventory.put_in_quiet(item)
 
     def update_characters(self, characters):
         self.characters = list(characters)
@@ -80,12 +80,11 @@ class Room():
         # generate dict tree
         nav_tree = {}
         checked = [self]
-        level = []
+        level = [self]
         next_level = []
-        nav_tree, checked = self.generate_tree_level(nav_tree, self, door_dict, checked)
-        for t in nav_tree[self]:
-            level.append(t)
-
+        # nav_tree, checked = self.generate_tree_level(nav_tree, self, door_dict, checked)
+        # for t in nav_tree[self]:
+        #     level.append(t)
         while level:
             for r in level:
                 nav_tree, checked = self.generate_tree_level(nav_tree, r, door_dict, checked)
@@ -103,8 +102,8 @@ class Room():
     def look_for_destination(self, tree, location, destination):
         if location in tree.keys():
             for r in tree[location]:
-                if r == destination:
-                    return destination.name
+                if r.name == destination:
+                    return destination
                 else:
                     t = self.look_for_destination(tree, r, destination)
                     if t:
@@ -149,7 +148,7 @@ class Door():
         return self.name
 
     def look(self):
-        print(self.name + '/n' + self.description)
+        print(self.name + '\n' + self.description)
 
     def action(self, room ,player):
         if self.is_locked == True and player.inventory.check_inventory(self.key):
